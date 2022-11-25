@@ -2,5 +2,5 @@
 
 Neste repositório estão armazenados alguns projetos desenvolvidos através do ecosistema ReactJS para fins de estudo e aprendizado. 
 
-Os projetos aqui desenvolvidos tiveram como base desafios e projetos encontrados em Bootcamps, cursos, repositórios e afins.
+Os projetos aqui desenvolvidos se basearam em exercícios e desafios encontrados em Bootcamps, cursos e repoistórios do GitHub.
 
