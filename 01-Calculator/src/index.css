@@ -1,0 +1,49 @@
+/*Início - Estilos gerais*/
+@font-face {
+    font-family: "Roboto Mono", monospace;
+    src: url("./fonts/RobotoMono-Thin.ttf");
+}
+
+:root {
+    --bg-button: #e0e0e0;
+    --bg-border-color: #888;
+    --bg-op-button: #eb9648;
+    --bg-ac-button: #d6d6d6;
+    --bg-display: #4b4b4c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Mono", monospace;
+}
+
+html {
+    font-size: 125%;
+    min-width: fit-content;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(to right, rgb(154, 165, 173), rgb(44, 62, 80));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+h1 {
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+/*Fim - Estilos gerais*/
