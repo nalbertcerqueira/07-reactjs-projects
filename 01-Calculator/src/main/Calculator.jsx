@@ -6,7 +6,7 @@ import Display from "../components/display/Display.jsx"
 import Macbar from "../components/macos-bar/Macbar.jsx"
 import "./Calculator.css"
 
-/*Declarando estado inicial da aplicação*/
+/*Declarando o estado inicial da aplicação*/
 const initialState = {
     display: "0",
     clearDisplay: false,
@@ -29,7 +29,7 @@ export default function Calculator() {
         setState({ ...initialState, values: [...initialState.values] })
     }
 
-    // Adicionando dígitos e ponto ao display
+    // Adicionando dígitos ao display
     function addDigit(digit) {
         if (digit === "." && state.display.includes(digit)) return
 
@@ -52,7 +52,7 @@ export default function Calculator() {
         })
     }
 
-    // Adicionando o perador ao estado da calculadora
+    // Adicionando operadores ao estado da calculadora
     function setOperation(operation) {
         if (state.current === 0) {
             setState({

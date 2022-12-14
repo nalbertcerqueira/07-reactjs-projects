@@ -1,5 +1,6 @@
-import React from "react"
+//Componente Macbar utilizado em Calculator.jsx
 
+import React from "react"
 import "./Macbar.css"
 
 export default function Macbar() {
