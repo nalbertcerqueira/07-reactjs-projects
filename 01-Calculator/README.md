@@ -20,7 +20,7 @@
 1. Clone este repositório;
 2. Com o terminal aberto, navege até o diretório deste projeto;
 3. Baixe as dependências deste projeto com npm install;
-4. Inicie a aplicação com npm start (modo desenvolvimento) ou npm build (modo produção);
+4. Inicie a aplicação com npm run start (modo desenvolvimento) ou npm run build (modo produção);
 5. Em seu navegador utilize a url http://localhost:3000/ para visualizar o projeto.
 ```
 
