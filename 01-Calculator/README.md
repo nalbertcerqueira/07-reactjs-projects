@@ -9,7 +9,7 @@
 <h2>📋 Descrição</h2>
 <p>
     Uma simples calculadora desenvolvida com objetivo de masterizar alguns conhecimentos sobre ReactJS, tais como: gerenciamento de estado, props, comunicação entre componentes e fluxo unidirecional de informações.
-    O design do projeto teve como inspiração o modelo de calculadora utilizada pelo sitema MacOS.
+    O design do projeto teve como inspiração o modelo de calculadora utilizado pelo sitema MacOS.
 <p>
 
 <img width="800px" src="https://user-images.githubusercontent.com/105606295/207495559-8af5be81-9cce-496b-a5e6-eda51d208e02.png">
