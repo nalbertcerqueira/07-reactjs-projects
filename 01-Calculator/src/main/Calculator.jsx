@@ -1,10 +1,14 @@
 /*Componente principal*/
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 
 import Button from "../components/button/Button.jsx"
 import Display from "../components/display/Display.jsx"
 import Macbar from "../components/macos-bar/Macbar.jsx"
 import "./Calculator.css"
+
+/*Memorizando componentes que não dependem do estado*/
+const MemoMacbar = React.memo(Macbar)
+const MemoButton = React.memo(Button)
 
 /*Declarando o estado inicial da aplicação*/
 const initialState = {
@@ -25,9 +29,9 @@ export default function Calculator() {
     })
 
     // Zerando/limpando o estado da calculadora
-    function clearDisplay() {
+    const clearDisplay = useCallback(() => {
         setState({ ...initialState, values: [...initialState.values] })
-    }
+    }, [])
 
     // Adicionando dígitos ao display
     function addDigit(digit) {
@@ -85,10 +89,10 @@ export default function Calculator() {
 
     return (
         <div className="calculator">
-            <Macbar />
+            <MemoMacbar />
             <Display value={state.display} />
             <div className="buttons-wrapper">
-                <Button onclick={clearDisplay} id="ac-button" label="AC" />
+                <MemoButton onclick={clearDisplay} id="ac-button" label="AC" />
                 <Button onclick={setOperation} class="op-button" label="/" />
                 <Button onclick={addDigit} class="number" label="7" />
                 <Button onclick={addDigit} class="number" label="8" />
