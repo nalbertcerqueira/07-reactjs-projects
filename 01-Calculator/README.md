@@ -8,7 +8,7 @@
 
 <h2>📋 Descrição</h2>
 <p>
-    Uma simples calculadora desenvolvida com objetivo de masterizar alguns conhecimentos sobre ReactJS, tais como: gerenciamento de estado, props, comunicação entre componentes e fluxo unidirecional de informações.
+    Uma simples calculadora desenvolvida com objetivo de masterizar alguns conhecimentos sobre ReactJS, tais como: gerenciamento de estado, props, comunicação entre componentes fluxo unidirecional de informações, e memorização de componentes.
     O design do projeto teve como inspiração o modelo de calculadora utilizado pelo sitema MacOS.
 <p>
 
