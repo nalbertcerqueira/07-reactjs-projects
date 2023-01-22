@@ -2,6 +2,16 @@
     "name": "costumers-crud",
     "version": "0.1.0",
     "private": true,
+    "files": [
+        "json",
+        "src",
+        "jsconfig.json",
+        "LICENSE",
+        "next.config.js",
+        "postcss.config.js",
+        "README.md",
+        "tailwind.config.js"
+    ],
     "scripts": {
         "dev": "next dev",
         "build": "next build",
