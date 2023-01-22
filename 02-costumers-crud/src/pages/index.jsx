@@ -40,7 +40,7 @@ export default function Home() {
                 className="text-xl min-h-screen flex justify-center items-center
                 p-6 bg-gradient-to-r from-purple-500 to-sky-500"
             >
-                <Layout title="Cadastro Simples">
+                <Layout title="Cadastro de clientes">
                     {tableVisible && (
                         <>
                             <div className="text-right">
