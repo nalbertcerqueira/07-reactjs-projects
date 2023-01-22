@@ -1,0 +1,19 @@
+{
+    "costumers": [
+        {
+            "id": "crmsOiDbO5eC3afVR4q7",
+            "name": "Cliente 1",
+            "age": 22
+        },
+        {
+            "id": "khQzrHOd8aSibF5X9BZr",
+            "name": "Cliente 2",
+            "age": 24
+        },
+        {
+            "id": "fVlSCqakrMn3hdDZ2cFh",
+            "name": "Cliente 3",
+            "age": 26
+        }
+    ]
+}
