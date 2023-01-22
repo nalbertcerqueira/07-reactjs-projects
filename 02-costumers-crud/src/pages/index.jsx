@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import propTypes from "prop-types"
 import { useEffect } from "react"
 import useCostumers from "../hooks/useCostumers.jsx"
 
@@ -9,7 +10,22 @@ import Layout from "../components/Layout.jsx"
 import Modal from "../components/Modal.jsx"
 import Table from "../components/Table.jsx"
 
-export default function Home() {
+//Obtendo os dados do servidor para a primeira renderização
+export async function getServerSideProps() {
+    try {
+        const response = await fetch("http://localhost:3000/api/data")
+        let costumers = (await response.json()).costumers
+        return {
+            props: {
+                costumers
+            }
+        }
+    } catch (error) {
+        console.log(error)
+        return
+    }
+}
+export default function Home(props) {
     //Importando métodos e propriedades do hook personalizado useCostumer
     const {
         getCostumersData,
@@ -25,13 +41,13 @@ export default function Home() {
         modalVisible,
         tableVisible,
         formVisible
-    } = useCostumers([])
+    } = useCostumers(null)
 
     /*Atualizando os dados da tabela de clientes cada vez que a tabela
     é exibida. Seria equivalente a uma sincronização de dados*/
     useEffect(() => {
         getCostumersData()
-    }, [formVisible])
+    }, [tableVisible])
 
     return (
         <>
@@ -51,7 +67,7 @@ export default function Home() {
                             <Table
                                 editCostumer={editCostumerInfo}
                                 deleteCostumer={openModal}
-                                costumers={costumers}
+                                costumers={costumers || props.costumers}
                             />
                         </>
                     )}
@@ -69,4 +85,8 @@ export default function Home() {
             </main>
         </>
     )
+}
+
+Home.propTypes = {
+    costumers: propTypes.array
 }
