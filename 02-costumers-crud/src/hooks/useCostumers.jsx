@@ -38,7 +38,7 @@ export default function useCostumers(initialState) {
     }
     async function deleteCostumer() {
         try {
-            const response = await fetch(`http://localhost:3000/api/data?id=${currentId}`, {
+            const response = await fetch(`http://localhost:3000/api/data/${currentId}`, {
                 method: "DELETE"
             })
             console.log(await response.json())
@@ -56,14 +56,20 @@ export default function useCostumers(initialState) {
     //Ações relacionadas ao formulário de edição/cadastro de clientes
     async function saveForm(costumer, method) {
         if (costumer.name === "" || costumer.age === "") return
+        if (method !== "POST" && method !== "PUT") return
 
-        const body = { id: costumer.id, name: costumer.name, age: costumer.age }
+        const URLs = {
+            POST: "http://localhost:3000/api/data",
+            PUT: `http://localhost:3000/api/data/${costumer.id}`
+        }
+        const body = JSON.stringify({
+            name: costumer.name,
+            age: costumer.age
+        })
+        const headers = { "Content-Type": "application/json" }
+
         try {
-            const response = await fetch("http://localhost:3000/api/data", {
-                method,
-                body: JSON.stringify(body),
-                headers: { "Content-Type": "application/json" }
-            })
+            const response = await fetch(URLs[method], { method, body, headers })
             console.log(await response.json())
             response.status === 200 && displayTable()
         } catch (error) {
