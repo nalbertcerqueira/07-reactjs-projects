@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
+import Title from "./components/title/Title.jsx"
 import Calculator from "./main/Calculator.jsx"
 
 import "./index.css"
@@ -8,7 +9,7 @@ import "./index.css"
 const root = ReactDOM.createRoot(document.querySelector(".root"))
 root.render(
     <React.Fragment>
-        <h1>Calculator</h1>
+        <Title title="Calculator" />
         <Calculator />
     </React.Fragment>
 )
