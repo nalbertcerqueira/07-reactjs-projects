@@ -22,7 +22,7 @@ async function handleGET(res) {
     try {
         res.status(200).json(data)
     } catch (error) {
-        res.status(500).json({ error: "Server error" })
+        res.status(500).json({ message: "Error 500: Server error", status: 500 })
     }
 }
 async function handlePOST(req, res) {
@@ -31,9 +31,10 @@ async function handlePOST(req, res) {
 
     //Se houver um ID, não será um cadastro de cliente (POST) e portanto um erro é retornado
     if (costumer.id) {
-        return res
-            .status(400)
-            .send({ error: "only costumer registration is allowed in POST method" })
+        return res.status(400).send({
+            message: "Error 400: only costumer registration is allowed in POST method",
+            status: 400
+        })
     }
 
     //Gerando um ID para o novo cliente e verificando se o mesmo ja existe em data.json
@@ -51,8 +52,12 @@ async function handlePOST(req, res) {
     //Rescrevendo o arquivo data.json com o novo cliente cadastrado
     try {
         await writeFile(filePath, JSON.stringify(newData, null, 4), { encoding: "utf-8" })
-        return res.status(200).json({ message: "Costumer registered with success!" })
+        return res
+            .status(200)
+            .json({ message: "Costumer registered with success!", status: 200 })
     } catch (error) {
-        return res.status(500).json({ error: "Error during the writing file" })
+        return res
+            .status(500)
+            .json({ message: "Error 500: Error during the writing file", status: 500 })
     }
 }

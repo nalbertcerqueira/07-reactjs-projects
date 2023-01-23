@@ -23,7 +23,8 @@ async function handlePUT(req, res) {
 
     //Buscando o cliente em data.json e devolvendo um erro em caso negativo
     let foundIndex = data.costumers.findIndex((costumer) => costumer.id === costumerId)
-    if (foundIndex < 0) return res.status(404).json({ error: "Costumer not found" })
+    if (foundIndex < 0)
+        return res.status(404).json({ message: "Error 404: Costumer not found", status: 404 })
 
     //Alterando os dados do cliente encontrado
     let foundCostumer = { ...data.costumers[foundIndex] }
@@ -35,9 +36,13 @@ async function handlePUT(req, res) {
     //Rescrevendo o arquivo data.json
     try {
         await writeFile(filePath, JSON.stringify(newData, null, 4), { encoding: "utf-8" })
-        return res.status(200).json({ message: "Costumer data updated with success!" })
+        return res
+            .status(200)
+            .json({ message: "Costumer data updated with success!", status: 200 })
     } catch (error) {
-        return res.status(500).json({ error: "Error during the writing file" })
+        return res
+            .status(500)
+            .json({ message: "Error 500: Error during the writing file", status: 500 })
     }
 }
 async function handleDELETE(req, res) {
@@ -47,7 +52,7 @@ async function handleDELETE(req, res) {
     //Buscando o cliente em data.json e devolvendo um erro em caso negativo
     let foundIndex = data.costumers.findIndex((costumer) => costumer.id === costumerId)
     if (!costumerId || foundIndex < 0) {
-        return res.status(404).json({ error: "Costumer not found" })
+        return res.status(404).json({ message: "Error 404: Costumer not found", status: 404 })
     }
 
     //Filtrando a lista de clientes de modo a não incluir o cliente com id === costumerId
@@ -57,8 +62,10 @@ async function handleDELETE(req, res) {
     //Rescrevendo o arquivo data.json com a nova lista de clientes
     try {
         await writeFile(filePath, filteredCostumers, { encoding: "utf-8" })
-        return res.status(200).json({ message: "Costumer deleted with success!" })
+        return res.status(200).json({ message: "Costumer deleted with success!", status: 200 })
     } catch (error) {
-        return res.status(500).json({ error: "Error during the writing file" })
+        return res
+            .status(500)
+            .json({ message: "Error 500: Error during the writing file", status: 500 })
     }
 }
