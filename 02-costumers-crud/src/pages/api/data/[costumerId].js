@@ -35,7 +35,7 @@ async function handlePUT(req, res) {
     //Rescrevendo o arquivo data.json
     try {
         await writeFile(filePath, JSON.stringify(newData, null, 4), { encoding: "utf-8" })
-        return res.status(200).json({ response: "PUT data sucessful!" })
+        return res.status(200).json({ message: "Costumer data updated with success!" })
     } catch (error) {
         return res.status(500).json({ error: "Error during the writing file" })
     }
@@ -57,7 +57,7 @@ async function handleDELETE(req, res) {
     //Rescrevendo o arquivo data.json com a nova lista de clientes
     try {
         await writeFile(filePath, filteredCostumers, { encoding: "utf-8" })
-        return res.status(200).json({ response: "Costumer deleted!" })
+        return res.status(200).json({ message: "Costumer deleted with success!" })
     } catch (error) {
         return res.status(500).json({ error: "Error during the writing file" })
     }

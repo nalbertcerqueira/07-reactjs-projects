@@ -31,7 +31,9 @@ async function handlePOST(req, res) {
 
     //Se houver um ID, não será um cadastro de cliente (POST) e portanto um erro é retornado
     if (costumer.id) {
-        return res.status(400).send({ error: "only new costumers are allowed in POST method" })
+        return res
+            .status(400)
+            .send({ error: "only costumer registration is allowed in POST method" })
     }
 
     //Gerando um ID para o novo cliente e verificando se o mesmo ja existe em data.json
@@ -49,7 +51,7 @@ async function handlePOST(req, res) {
     //Rescrevendo o arquivo data.json com o novo cliente cadastrado
     try {
         await writeFile(filePath, JSON.stringify(newData, null, 4), { encoding: "utf-8" })
-        return res.status(200).json({ response: "POST data sucessful!" })
+        return res.status(200).json({ message: "Costumer registered with success!" })
     } catch (error) {
         return res.status(500).json({ error: "Error during the writing file" })
     }
