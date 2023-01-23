@@ -25,7 +25,7 @@ export default function useCostumers(initialState) {
     }
     async function getCostumersData() {
         if (formVisible) return
-        fetch("http://localhost:3000/api/data")
+        fetch("http://localhost:3000/api/costumers")
             .then(async (response) => {
                 return response.json()
             })
@@ -38,12 +38,12 @@ export default function useCostumers(initialState) {
     }
     async function deleteCostumer() {
         try {
-            const response = await fetch(`http://localhost:3000/api/data/${currentId}`, {
+            const response = await fetch(`http://localhost:3000/api/costumers/${currentId}`, {
                 method: "DELETE"
             })
             console.log(await response.json())
             closeModal()
-            await getCostumersData("http://localhost:3000/api/data")
+            await getCostumersData("http://localhost:3000/api/costumers")
         } catch (error) {
             console.log(error)
         }
@@ -59,8 +59,8 @@ export default function useCostumers(initialState) {
         if (method !== "POST" && method !== "PUT") return
 
         const URLs = {
-            POST: "http://localhost:3000/api/data",
-            PUT: `http://localhost:3000/api/data/${costumer.id}`
+            POST: "http://localhost:3000/api/costumers",
+            PUT: `http://localhost:3000/api/costumers/${costumer.id}`
         }
         const body = JSON.stringify({
             name: costumer.name,

@@ -13,7 +13,7 @@ import Table from "../components/Table.jsx"
 //Obtendo os dados do servidor para a primeira renderização
 export async function getServerSideProps() {
     try {
-        const response = await fetch("http://localhost:3000/api/data")
+        const response = await fetch("http://localhost:3000/api/costumers")
         let costumers = (await response.json()).costumers
         return {
             props: {
