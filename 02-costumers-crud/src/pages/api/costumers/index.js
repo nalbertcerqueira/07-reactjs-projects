@@ -11,14 +11,14 @@ export default async function handler(req, res) {
         case "GET":
             return handleGET(res)
         case "POST":
-            return handlePOST(req, res)
+            return await handlePOST(req, res)
         default:
             return res.status(405).json({ error: `Method ${method} not allowed` })
     }
 }
 
 //Manipuladores específicos por método HTTP
-async function handleGET(res) {
+function handleGET(res) {
     try {
         res.status(200).json(data)
     } catch (error) {

@@ -8,9 +8,9 @@ export default async function handler(req, res) {
     const method = req.method
     switch (method) {
         case "PUT":
-            return handlePUT(req, res)
+            return await handlePUT(req, res)
         case "DELETE":
-            return handleDELETE(req, res)
+            return await handleDELETE(req, res)
         default:
             return res.status(405).json({ error: `Method ${method} not allowed` })
     }
