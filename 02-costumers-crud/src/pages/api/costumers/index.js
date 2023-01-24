@@ -28,6 +28,16 @@ function handleGET(res) {
 async function handlePOST(req, res) {
     const filePath = join(process.cwd(), "json/data.json")
     const costumer = { ...req.body }
+    const keys = Object.keys(req.body)
+
+    //Validando entradas vazias no corpo da requisição
+    for (let key of keys) {
+        if (req.body[key] === "" || req.body[key] === null) {
+            return res
+                .status(400)
+                .json({ message: "Error 400: Empty fields not allowed", status: 400 })
+        }
+    }
 
     //Se houver um ID, não será um cadastro de cliente (POST) e portanto um erro é retornado
     if (costumer.id) {

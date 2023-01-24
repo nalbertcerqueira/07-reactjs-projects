@@ -20,6 +20,16 @@ export default async function handler(req, res) {
 async function handlePUT(req, res) {
     const filePath = join(process.cwd(), "json/data.json")
     const costumerId = req.query.costumerId
+    const keys = Object.keys(req.body)
+
+    //Validando entradas vazias no corpo da requisição
+    for (let key of keys) {
+        if (req.body[key] === "" || req.body[key] === null) {
+            return res
+                .status(400)
+                .json({ message: "Error 400: Empty fields not allowed", status: 400 })
+        }
+    }
 
     //Buscando o cliente em data.json e devolvendo um erro em caso negativo
     let foundIndex = data.costumers.findIndex((costumer) => costumer.id === costumerId)
