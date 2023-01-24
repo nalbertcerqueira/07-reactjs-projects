@@ -20,14 +20,20 @@ export default async function handler(req, res) {
 async function handlePUT(req, res) {
     const filePath = join(process.cwd(), "json/data.json")
     const costumerId = req.query.costumerId
+    const costumer = { ...req.body }
     const keys = Object.keys(req.body)
 
     //Validando entradas vazias no corpo da requisição
+    if (keys.length === 0 || costumer.name === undefined || costumer.age === undefined) {
+        res.status(400).json({ message: "Error 400: Wrong request", status: 400 })
+    }
     for (let key of keys) {
-        if (req.body[key] === "" || req.body[key] === null) {
-            return res
-                .status(400)
-                .json({ message: "Error 400: Empty fields not allowed", status: 400 })
+        if (
+            req.body[key] === "" ||
+            req.body[key] === null ||
+            (key !== "age" && key !== "name")
+        ) {
+            return res.status(400).json({ message: "Error 400: Wrong request", status: 400 })
         }
     }
 
@@ -41,7 +47,7 @@ async function handlePUT(req, res) {
     const newData = {
         costumers: [...data.costumers]
     }
-    newData.costumers[foundIndex] = { ...foundCostumer, ...req.body }
+    newData.costumers[foundIndex] = { ...foundCostumer, ...costumer }
 
     //Rescrevendo o arquivo data.json
     try {
