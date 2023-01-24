@@ -4,7 +4,7 @@ import propTypes from "prop-types"
 
 export default function Input(props) {
     //Criando estilos estilos personalizados
-    const invalidStyle = !props.isValid ? "border-red-500" : ""
+    const invalidStyle = props.isValid ? "border-gray-400" : "border-red-500"
     const readOnlyStyles = props.readOnly
         ? "bg-gray-100 text-gray-600 focus:border-purple-500 focus:border-gray-400"
         : "focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
@@ -16,8 +16,8 @@ export default function Input(props) {
             </label>
             <input
                 onChange={props.onchange}
-                className={`block w-full border border-gray-400 rounded-md outline-none
-                px-4 py-2 transition-all ${invalidStyle} ${readOnlyStyles}`}
+                className={`block w-full border ${invalidStyle} rounded-md outline-none
+                px-4 py-2 transition-all  ${readOnlyStyles}`}
                 value={props.value}
                 id={props.inputId}
                 type={props.type || "text"}
