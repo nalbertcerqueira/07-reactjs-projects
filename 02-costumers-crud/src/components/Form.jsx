@@ -1,9 +1,9 @@
 //Componente Form utilizado em index.jsx
-
 import propTypes from "prop-types"
-import { useState } from "react"
+import { useEffect } from "react"
 
 import Costumer from "../core/Costumer"
+import useForm from "../hooks/useForm"
 import Button from "./Button"
 import Input from "./Input"
 
@@ -13,15 +13,19 @@ export default function Form(props) {
     const id = props.costumer?.id
     const method = id ? "PUT" : "POST"
 
-    const [name, setName] = useState(props.costumer?.name || "")
-    const [age, setAge] = useState(props.costumer?.age || 0)
+    const {
+        changeName,
+        validateName,
+        changeAge,
+        validateAge,
+        nameValid,
+        ageValid,
+        name,
+        age
+    } = useForm(props.costumer)
 
-    function changeName(event) {
-        setName(event.target.value)
-    }
-    function changeAge(event) {
-        setAge(parseInt(event.target.value))
-    }
+    useEffect(validateName, [name, validateName])
+    useEffect(validateAge, [age, validateAge])
 
     return (
         <section>
@@ -39,6 +43,7 @@ export default function Form(props) {
                 <Input
                     classname="mb-4"
                     onchange={changeName}
+                    isValid={nameValid}
                     value={name}
                     inputId="name"
                     label="Nome"
@@ -46,9 +51,10 @@ export default function Form(props) {
                 />
                 <Input
                     onchange={changeAge}
+                    isValid={ageValid}
                     value={age}
                     inputId="idade"
-                    label="idade"
+                    label="Idade"
                     type="number"
                 />
                 <div className="mt-7 text-right">

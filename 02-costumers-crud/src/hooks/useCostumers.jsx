@@ -55,7 +55,7 @@ export default function useCostumers(initialState) {
 
     //Ações relacionadas ao formulário de edição/cadastro de clientes
     async function saveForm(costumer, method) {
-        if (costumer.name === "" || costumer.age === "") return
+        if (costumer.name === "" || isNaN(costumer.age)) return
         if (method !== "POST" && method !== "PUT") return
 
         const URLs = {
