@@ -12,7 +12,7 @@
     O projeto teve como principal objetivo desenvolver uma CRUD de clientes, envolvendo as operações de create, read, update e delete.
     <br>
     A CRUD foi desenvolvida em NextJS e TailwindCSS e permite a persistência de dados em um arquivo JSON atuando como uma <i>fake database</i>.
-    Para atigir a persistência dos dados, o projeto utilizou o gerenciado nativo de APIs do NextJS, a qual foram feitas solicitações assícronas do lado do cliente.
+    Para atigir a persistência dos dados, o projeto utilizou o gerenciamento nativo de APIs do NextJS, para qual foram feitas solicitações assícronas do lado do cliente.
 <p>
 
 <img width="800px" src="https://user-images.githubusercontent.com/105606295/213928229-eb245c2f-00db-4300-b9af-816fca2904c3.png">
