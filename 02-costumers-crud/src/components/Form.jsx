@@ -32,6 +32,7 @@ export default function Form(props) {
             <form className="p-4 bg-gray-200 rounded-xl">
                 {id ? (
                     <Input
+                        isValid={true}
                         classname="mb-4"
                         readOnly
                         value={id}
