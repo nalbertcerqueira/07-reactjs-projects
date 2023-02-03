@@ -43,7 +43,6 @@ export default function useCostumers(initialState) {
             })
             console.log(await response.json())
             closeModal()
-            await getCostumersData("http://localhost:3000/api/costumers")
         } catch (error) {
             console.log(error)
         }
