@@ -20,19 +20,16 @@ export default async function handler(req, res) {
 async function handlePUT(req, res) {
     const filePath = join(process.cwd(), "json/data.json")
     const costumerId = req.query.costumerId
-    const costumer = { ...req.body }
-    const keys = Object.keys(req.body)
+    const costumer = req.body
+    const keysScheme = ["name", "age"]
 
     //Validando entradas vazias no corpo da requisição
-    if (keys.length === 0 || costumer.name === undefined || costumer.age === undefined) {
-        res.status(400).json({ message: "Error 400: Wrong request", status: 400 })
+    if (Object.keys(req.body).length === 0) {
+        return res.status(400).json({ message: "Error 400: Wrong request", status: 400 })
     }
-    for (let key of keys) {
-        if (
-            req.body[key] === "" ||
-            req.body[key] === null ||
-            (key !== "age" && key !== "name")
-        ) {
+
+    for (let key of keysScheme) {
+        if (costumer[key] === "" || costumer[key] === null || costumer[key] === undefined) {
             return res.status(400).json({ message: "Error 400: Wrong request", status: 400 })
         }
     }
@@ -47,7 +44,11 @@ async function handlePUT(req, res) {
     const newData = {
         costumers: [...data.costumers]
     }
-    newData.costumers[foundIndex] = { ...foundCostumer, ...costumer }
+    newData.costumers[foundIndex] = {
+        ...foundCostumer,
+        name: costumer.name,
+        age: costumer.age
+    }
 
     //Rescrevendo o arquivo data.json
     try {

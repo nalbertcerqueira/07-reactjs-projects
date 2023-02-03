@@ -27,19 +27,16 @@ function handleGET(res) {
 }
 async function handlePOST(req, res) {
     const filePath = join(process.cwd(), "json/data.json")
-    const costumer = { ...req.body }
-    const keys = Object.keys(req.body)
+    const costumer = req.body
+    const keysScheme = ["name", "age"]
 
     //Validando entradas vazias no corpo da requisição
-    if (keys.length === 0 || costumer.name === undefined || costumer.age === undefined) {
+    if (Object.keys(costumer).length === 0) {
         res.status(400).json({ message: "Error 400: Wrong request", status: 400 })
     }
-    for (let key of keys) {
-        if (
-            req.body[key] === "" ||
-            req.body[key] === null ||
-            (key !== "age" && key !== "name")
-        ) {
+
+    for (let key of keysScheme) {
+        if (costumer[key] === "" || costumer[key] === null || costumer[key] === undefined) {
             return res.status(400).json({ message: "Error 400: Wrong request", status: 400 })
         }
     }
@@ -61,7 +58,7 @@ async function handlePOST(req, res) {
     }
 
     const newData = {
-        costumers: [...data.costumers, { ...costumer, id: newId }]
+        costumers: [...data.costumers, { id: newId, name: costumer.name, age: costumer.age }]
     }
 
     //Rescrevendo o arquivo data.json com o novo cliente cadastrado
