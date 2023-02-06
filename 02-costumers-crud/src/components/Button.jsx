@@ -21,7 +21,7 @@ export default function Button(props) {
             onClick={props.onClick}
             className={`text-lg bg-gradient-to-r ${colorsGradient[color]}
             text-white rounded-md px-4 py-2 font-medium mb-4
-            opacity-80 hover:opacity-100 transition-opacity ${props.className}`}
+            opacity-80 hover:opacity-100 transition-opacity ${props.className || ""}`}
         >
             {props.children}
         </button>
