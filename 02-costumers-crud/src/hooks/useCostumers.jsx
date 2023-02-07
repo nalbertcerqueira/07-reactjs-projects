@@ -42,6 +42,7 @@ export default function useCostumers(initialState) {
                 method: "DELETE"
             })
             console.log(await response.json())
+            await getCostumersData("http://localhost:3000/api/costumers")
             closeModal()
         } catch (error) {
             console.log(error)
