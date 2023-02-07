@@ -55,6 +55,7 @@ async function handlePOST(req, res) {
 
     while (isIdRepeated) {
         newId = generateId(20)
+        isIdRepeated = data.costumers.find((costumer) => costumer.id === newId)
     }
 
     const newData = {
