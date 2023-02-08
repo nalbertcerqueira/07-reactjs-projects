@@ -38,7 +38,7 @@ A CRUD foi desenvolvida em NextJS e TailwindCSS e permite a persistência de dad
 
 -   HTML
 -   CSS
--   Java Script
+-   JavaScript
 -   NextJS
 -   TailwindCSS
 
