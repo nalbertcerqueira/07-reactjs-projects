@@ -25,7 +25,7 @@ A persistência de dados é alcançada através de um arquivo JSON atuando como 
 </center>
 
 > **Note**
-> O projeto faz uso de cookies para criar um estado único para cada usuário.
+> O projeto faz uso de cookies para criar um estado único da aplicação para cada usuário.
 
 ## 🎮 Iniciando o projeto
 
