@@ -16,7 +16,7 @@ A persistência de dados é alcançada através de um arquivo JSON atuando como 
 **Algumas funcionalidades incluem:**
 
 -   Criação de tarefas;
--   Maracação de tarefas como concluídas ou pendentes;
+-   Marcação de tarefas como concluídas ou pendentes;
 -   Exclusão de tarefas concluídas;
 -   Filtragem das tarefas pela sua descrição.
 
