@@ -41,7 +41,7 @@ A persistência de dados é alcançada através de um arquivo JSON atuando como 
 
 -   HTML
 -   CSS
--   Java Script
+-   JavaScript
 -   ReactJS
 -   TailwindCSS
 -   ExpressJS
