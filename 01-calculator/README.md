@@ -26,7 +26,7 @@ O design do projeto teve como inspiração o modelo de calculadora utilizado pel
 
 -   HTML
 -   CSS
--   Java Script
+-   JavaScript
 -   ReactJS
 
 ## 💵 Licença
