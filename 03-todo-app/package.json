@@ -2,7 +2,7 @@
     "name": "todo-app",
     "version": "1.0.0",
     "description": "",
-    "main": "./src/server/server.js",
+    "main": "./build/server.js",
     "files": [
         "data",
         "public",
