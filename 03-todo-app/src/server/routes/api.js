@@ -213,4 +213,13 @@ apiRoutes.delete("/tasks/:id", async (req, res) => {
     }
 })
 
+//Adicionando um middleware para rotas inválidas da API
+apiRoutes.use(function (req, res) {
+    const allowedMethods = ["GET", "POST", "PUT", "DELETE"]
+    if (!allowedMethods.includes(req.method)) {
+        return res.status(405).json({ status: 405, message: "Error 405: method not allowed" })
+    }
+    return res.status(400).json({ status: 400, message: "Error 400: route not found" })
+})
+
 module.exports = apiRoutes
