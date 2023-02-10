@@ -33,7 +33,7 @@ A persistência de dados é alcançada através de um arquivo JSON atuando como 
 1. Clone este repositório;
 2. Com o terminal aberto, navege até o diretório deste projeto;
 3. Baixe as dependências deste projeto com npm install;
-4. Inicie a aplicação com npm run dev-server (modo desenvolvimento) ou npm run build-prod (modo produção) seguido de npm start;
+4. Inicie a aplicação com npm run dev-server (modo desenvolvimento) ou npm run build-prod (modo produção) seguido de npm run start-prod;
 5. Em seu navegador utilize a url http://localhost:3000/ para visualizar o projeto.
 ```
 
