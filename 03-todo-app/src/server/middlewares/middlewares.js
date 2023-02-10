@@ -5,9 +5,11 @@ const { resolve } = require("path")
 //Middleware responsável por verificar se o client já possui ou não um cookie.
 module.exports.cookieHandler = async function (req, res, next) {
     //Caso exista um cookie, o middleware é finalizado, pulando para o endpoint
-    const prettyCookies = cookieParser(req.headers.cookie)
-    if (prettyCookies.user_id_todo) {
-        return next()
+    if (req.headers.cookie) {
+        const prettyCookies = cookieParser(req.headers.cookie)
+        if (prettyCookies.user_id_todo) {
+            return next()
+        }
     }
 
     //Caso não exista, é nescessário ler o arquivo data.json para criar os dados
