@@ -22,7 +22,7 @@ export default function TodoForm(props) {
     }
 
     return (
-        <section className={`mt-8 ${props.className}`}>
+        <section className={`px-3 sm:px-0 mt-8 ${props.className}`}>
             <form className="flex gap-6 pr-1">
                 <input
                     className={`form-input ${inputBorder}`}

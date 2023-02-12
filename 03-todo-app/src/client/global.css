@@ -30,12 +30,12 @@ body,
 
 /*Início - Estilos do tailwind*/
 .page-header {
-    @apply mt-8 pb-4 border-b-2 border-neutral-200 shadow-bottom
+    @apply px-3 sm:px-0 mt-8 pb-4 border-b-2 border-neutral-200 shadow-bottom
     shadow-neutral-50 animate-display;
 }
 
 .menu-header {
-    @apply bg-neutral-800 rounded-lg py-4 px-6 flex gap-6 text-gray-300
+    @apply bg-neutral-800 sm:rounded-lg py-4 px-6 flex gap-6 text-gray-300
     items-center min-w-fit;
 }
 
@@ -46,6 +46,10 @@ body,
     before:border-l-transparent before:border-r-8 before:border-r-transparent
     before:border-b-8 before:border-b-neutral-700 before:absolute
     before:-top-1 before:right-2;
+}
+
+.form-section {
+    @apply px-2 sm:px-0 mt-6 max-h-70-screen overflow-x-hidden;
 }
 
 .form-input {

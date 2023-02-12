@@ -75,7 +75,7 @@ export default function TodoList(props) {
     }
 
     return (
-        <section className={`mt-6 max-h-70-screen overflow-x-hidden ${props.className}`}>
+        <section className={`form-section ${props.className}`}>
             <table className="w-full">
                 <thead>
                     <tr className="text-left text-neutral-700 border-b-2 border-neutral-300">

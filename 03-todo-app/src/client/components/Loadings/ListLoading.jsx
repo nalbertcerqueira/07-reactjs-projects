@@ -19,7 +19,7 @@ export default function ListLoading(props) {
         return rowsArray
     }
     return (
-        <div className={`mt-8 h-72 rounded-x w-full ${props.className}`}>
+        <div className={`px-3 sm:px-0 mt-8 h-72 rounded-x w-full ${props.className}`}>
             {renderRows(props.rows)}
         </div>
     )
