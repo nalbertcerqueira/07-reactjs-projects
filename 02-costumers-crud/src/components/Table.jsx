@@ -11,7 +11,9 @@ export default function Table(props) {
     function renderTableHead() {
         return (
             <tr className="bg-gradient-to-r from-purple-500 to-purple-800">
-                <th className="py-2 px-4 text-left text-gray-100">Código</th>
+                <th className="hidden sm:table-cell py-2 px-4 text-left text-gray-100">
+                    Código
+                </th>
                 <th className="py-2 px-4 text-left text-gray-100">Nome</th>
                 <th className="py-2 px-4 text-left text-gray-100">Idade</th>
                 {costumerAcions ? (
@@ -26,7 +28,7 @@ export default function Table(props) {
         return costumers?.map((costumer) => {
             return (
                 <tr className="odd:bg-purple-100 even:bg-purple-200" key={costumer.id}>
-                    <td className="p-4 max-w-9 text-ellipsis overflow-hidden">
+                    <td className="hidden sm:table-cell p-4 max-w-9 text-ellipsis overflow-hidden">
                         {costumer.id}
                     </td>
                     <td className="p-4 max-w-9 text-ellipsis overflow-hidden">

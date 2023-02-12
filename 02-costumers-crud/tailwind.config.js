@@ -2,10 +2,10 @@
 module.exports = {
     content: ["./src/**/*.{js,jsx,ts,tsx,html}"],
     theme: {
-        screens: {
-            xsm: "360px"
-        },
         extend: {
+            screens: {
+                xsm: "360px"
+            },
             maxWidth: {
                 9: "9rem"
             },
