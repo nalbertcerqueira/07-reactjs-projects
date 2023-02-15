@@ -45,7 +45,7 @@ module.exports.cookieHandler = async function (req, res, next) {
     //reescrevendo o arquivo data.json e redirecionando o client para o endpoint/url
     //que foi solicitado na requisição
     try {
-        await writeFile(filePath, JSON.stringify(usersData, null, 4), { encoding: "utf-8" })
+        await writeFile(filePath, JSON.stringify(usersData), { encoding: "utf-8" })
         return res.redirect(req.url)
     } catch (error) {
         return res

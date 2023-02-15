@@ -106,7 +106,7 @@ apiRoutes.post("/tasks", async (req, res) => {
 
     //Rescrevendo o arquivo data.json com o novo cliente cadastrado
     try {
-        await fs.writeFile(filePath, JSON.stringify(newData, null, 4), {
+        await fs.writeFile(filePath, JSON.stringify(newData), {
             encoding: "utf-8"
         })
         return res.status(200).json({ message: "Task added with success!", status: 200 })
@@ -158,7 +158,7 @@ apiRoutes.put("/tasks/:id", async (req, res) => {
 
     //Rescrevendo o arquivo data.json com os dados alterados
     try {
-        await fs.writeFile(filePath, JSON.stringify(data, null, 4), { encoding: "utf-8" })
+        await fs.writeFile(filePath, JSON.stringify(data), { encoding: "utf-8" })
         return res.status(200).json({ message: "Task updated with success!", status: 200 })
     } catch (error) {
         return res
@@ -204,7 +204,7 @@ apiRoutes.delete("/tasks/:id", async (req, res) => {
 
     //Rescrevendo o arquivo data.json com a nova lista de clientes
     try {
-        await fs.writeFile(filePath, JSON.stringify(data, null, 4), { encoding: "utf-8" })
+        await fs.writeFile(filePath, JSON.stringify(data), { encoding: "utf-8" })
         return res.status(200).json({ message: "Task deleted with success!", status: 200 })
     } catch (error) {
         return res
