@@ -52,7 +52,7 @@ async function handlePUT(req, res) {
 
     //Rescrevendo o arquivo data.json
     try {
-        await writeFile(filePath, JSON.stringify(newData, null, 4), { encoding: "utf-8" })
+        await writeFile(filePath, JSON.stringify(newData), { encoding: "utf-8" })
         return res
             .status(200)
             .json({ message: "Costumer data updated with success!", status: 200 })
@@ -74,7 +74,7 @@ async function handleDELETE(req, res) {
 
     //Filtrando a lista de clientes de modo a não incluir o cliente com id === costumerId
     const array = data.costumers.filter((costumer) => costumer.id !== costumerId)
-    const filteredCostumers = JSON.stringify({ costumers: array }, null, 4)
+    const filteredCostumers = JSON.stringify({ costumers: array })
 
     //Rescrevendo o arquivo data.json com a nova lista de clientes
     try {

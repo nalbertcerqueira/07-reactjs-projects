@@ -64,7 +64,7 @@ async function handlePOST(req, res) {
 
     //Rescrevendo o arquivo data.json com o novo cliente cadastrado
     try {
-        await writeFile(filePath, JSON.stringify(newData, null, 4), { encoding: "utf-8" })
+        await writeFile(filePath, JSON.stringify(newData), { encoding: "utf-8" })
         return res
             .status(200)
             .json({ message: "Costumer registered with success!", status: 200 })
