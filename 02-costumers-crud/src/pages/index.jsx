@@ -53,8 +53,8 @@ export default function Home(props) {
         <>
             <CustomHead title="Costumers CRUD"></CustomHead>
             <main
-                className="text-xl min-h-screen flex justify-center items-center
-                p-6 bg-gradient-to-r from-purple-500 to-sky-500"
+                className="text-xl min-h-screen flex justify-center sm:items-center p-2
+                sm:p-6 bg-gradient-to-r from-purple-500 to-sky-500"
             >
                 <Layout title="Cadastro de clientes">
                     {tableVisible && (

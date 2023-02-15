@@ -68,7 +68,7 @@ export default function Table(props) {
     }
 
     return (
-        <table className="text-lg w-full rounded-xl overflow-hidden">
+        <table className="text-lg w-full rounded-lg sm:rounded-xl overflow-hidden">
             <thead>{renderTableHead()}</thead>
             <tbody>{renderTableBody(props.costumers)}</tbody>
         </table>
