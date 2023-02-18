@@ -16,7 +16,7 @@ export default function Todo(props) {
     const [filterTag, setFilterTag] = useState("")
 
     useEffect(() => {
-        setTimeout(props.fetcher, 1000)
+        props.fetcher()
     }, [])
 
     //Manipulando o submit do formulário de cadstro (Form.jsx)
