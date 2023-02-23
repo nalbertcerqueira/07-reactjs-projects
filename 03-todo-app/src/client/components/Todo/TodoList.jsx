@@ -1,5 +1,5 @@
 import propTypes from "prop-types"
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import Button from "../Button.jsx"
 import { DoneIcon, TrashIcon, UndoIcon } from "../Icons.jsx"
@@ -7,13 +7,16 @@ import { DoneIcon, TrashIcon, UndoIcon } from "../Icons.jsx"
 //Lista de tarefas utilizada em TodoList.jsx
 export default function TodoList(props) {
     const [currentId, setCurrentId] = useState("")
+    const timeoutRef = useRef(null)
+
+    useEffect(() => {
+        return () => clearTimeout(timeoutRef.current)
+    }, [])
 
     //Animando a exclusão da tarefa antes dela ser removida
     function animateTaskDelete(task) {
-        setCurrentId(
-            () => task.id,
-            setTimeout(() => props.removeTask(task.id), 900)
-        )
+        setCurrentId(task.id)
+        timeoutRef.current = setTimeout(() => props.removeTask(task.id), 900)
     }
 
     //Rederizando os botões de ações de cada tarefa
