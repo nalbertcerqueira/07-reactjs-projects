@@ -1,5 +1,5 @@
 import propTypes from "prop-types"
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import Button from "../Button.jsx"
 import { PlusIcon, SearchIcon } from "../Icons.jsx"
@@ -9,16 +9,19 @@ import { FilterTag } from "../Tags.jsx"
 export default function TodoForm(props) {
     const inputBorder = props.isValid ? "border-neutral-300" : "border-red-500"
     const [animation, setAnimation] = useState("")
+    const timeoutRef = useRef(null)
+
+    useEffect(() => {
+        return () => clearTimeout(timeoutRef.current)
+    }, [])
 
     //Aplicando uma animação antes de fechar o filtro
     function closeFilter() {
-        setAnimation(
-            () => "animate-[slide_0.6s_forwards_ease-in-out]",
-            setTimeout(() => {
-                setAnimation("")
-                props.removeFilter()
-            }, 600)
-        )
+        setAnimation("animate-[slide_0.6s_forwards_ease-in-out]")
+        timeoutRef.current = setTimeout(() => {
+            setAnimation("")
+            props.removeFilter()
+        }, 600)
     }
 
     return (
