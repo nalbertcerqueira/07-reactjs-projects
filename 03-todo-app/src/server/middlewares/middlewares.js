@@ -38,7 +38,7 @@ module.exports.cookieHandler = async function (req, res, next) {
     //Adicionando o cookie na resposta da requisição http
     res.cookie("user_id_todo", newCookie, {
         httpOnly: true,
-        maxAge: 331536000000,
+        maxAge:	31536000000,
         sameSite: "strict"
     })
 
