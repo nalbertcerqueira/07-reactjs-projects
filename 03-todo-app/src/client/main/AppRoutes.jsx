@@ -10,7 +10,7 @@ import Todo from "../pages/Todo.jsx"
 export default function Routes() {
     const [taskList, setTaskList] = useState(null)
     const [error, setError] = useState(false)
-    console.log(error)
+
     //Função responsável por fazer a primeira busca de dados
     //como também, atulizar os dados da tabela para mantê-la sincronizada
     const refreshData = async function (description) {
