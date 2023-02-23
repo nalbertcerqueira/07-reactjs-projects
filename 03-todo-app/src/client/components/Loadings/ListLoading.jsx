@@ -4,9 +4,8 @@ import React from "react"
 //Loading da lista de tarefas utilizado em Todo.jsx
 export default function ListLoading(props) {
     function renderRows(rows) {
-        let rowsArray = []
-        for (let i = 0; i < rows; i++) {
-            rowsArray.push(
+        return new Array(rows).fill(1).map((row, i) => {
+            return (
                 <div key={i} className="list-loading-container">
                     <span className="block rounded-md w-32 sm:w-60 h-4 loading-gradient"></span>
                     <div className="flex gap-3">
@@ -15,8 +14,7 @@ export default function ListLoading(props) {
                     </div>
                 </div>
             )
-        }
-        return rowsArray
+        })
     }
     return (
         <div className={`px-3 sm:px-0 mt-8 h-72 rounded-x w-full ${props.className}`}>
