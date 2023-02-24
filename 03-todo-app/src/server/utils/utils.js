@@ -13,7 +13,7 @@ function generateHash(idLength) {
 
 //"Parseando" os cookies da requisição, e retornando um objeto JS
 function cookieParser(rawCookies) {
-    if (typeof rawCookies !== "string") throw new TypeError("Only strings allowed")
+    if (typeof rawCookies !== "string") return undefined
     const prettyCookies = rawCookies
         .replace(/ /g, "")
         .replace(/&/g, ";")
