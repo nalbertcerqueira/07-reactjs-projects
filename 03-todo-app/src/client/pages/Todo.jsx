@@ -37,7 +37,7 @@ export default function Todo(props) {
             await props.fetcher()
             setFilterTag("")
         } catch (error) {
-            return console.log(error)
+            return console.log(error.message)
         }
         setTaskDescription("")
     }
@@ -67,7 +67,7 @@ export default function Todo(props) {
             })
             props.fetcher(taskDescription)
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
         }
     }
     //Marcando uma tarefa como concluída ou pendente
@@ -82,7 +82,7 @@ export default function Todo(props) {
             })
             props.fetcher(taskDescription)
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
         }
     }
 

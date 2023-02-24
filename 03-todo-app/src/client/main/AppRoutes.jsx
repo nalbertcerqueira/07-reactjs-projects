@@ -23,7 +23,7 @@ export default function Routes() {
                 setTaskList(data)
             } else setError(true)
         } catch (error) {
-            console.log(error)
+            console.log(error.message)
             setError(true)
         }
     }
