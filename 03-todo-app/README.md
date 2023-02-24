@@ -11,7 +11,7 @@
 
 Uma lista de tarefas (Todo App) com design minimalista criada com ReactJS, Tailwindcss e ExpressJS. A ideia deste projeto foi criar uma aplicação com gerenciamento de estado e persistência de dados configurando tudo do zero, desde a configuração do webpack para gerar separadamente os bundles dos arquivos do client e servidor, até a configuração da API com ExpressJS.
 
-A persistência de dados é alcançada através de um arquivo JSON atuando como uma _fake database._, ao qual a API reescreve as informações durante as chamadas assícronas do lado do cliente.
+A persistência de dados é alcançada através de um arquivo JSON atuando como uma _fake database_, ao qual a API reescreve as informações durante as chamadas assícronas do lado do cliente.
 
 **Algumas funcionalidades incluem:**
 
