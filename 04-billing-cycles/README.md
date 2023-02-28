@@ -4,7 +4,7 @@
 ![NextJS badge](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![Tailwind badge](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-# <img src="https://user-images.githubusercontent.com/105606295/221874628-e371951e-5a17-4570-8ecc-dfac851f8f86.png" width="50px" height="50px" alt="internet banking icon"><img> App - Cíclo de Pagamentos
+# <img src="https://user-images.githubusercontent.com/105606295/221874628-e371951e-5a17-4570-8ecc-dfac851f8f86.png" width="40px" height="40px" alt="internet banking icon"><img> App - Cíclo de Pagamentos
 
 ## 📋 Descrição
 
