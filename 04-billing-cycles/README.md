@@ -10,7 +10,7 @@
 
 Esta aplicação foi desenvolvida principalmente com NextJS e Tailwindcss, sendo inspirada por um projeto existente em um dos cursos da Cod3r Brasil. Tendo como principal objetivo a construção de uma área para gerenciamento de cíclos de pagamentos mensais.
 
-Dentro da aplicação, um ciclo de pagamentos é definido por uma seríe de créditos e débitos lançados pelo usuário, gerando um balanço mensal com o total de créditos, débitos e o saldo resultante.
+Dentro da aplicação, um cíclo de pagamentos é definido por uma série de créditos e débitos lançados pelo usuário, gerando um balanço mensal com o total de créditos, débitos e o saldo resultante.
 
 **Principais funcionalidades:**
 
@@ -29,7 +29,7 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma seríe de cré
 <br>
 
 > **Note**
-> O projeto faz uso do gerenciamento nativo de APIs do NextJS para alcançar a persistência de dados através de arquivos .json atuando como _fake database_ para armazenar as informações de cada usuário.
+> O projeto faz uso do gerenciamento nativo de APIs do NextJS para alcançar a persistência de dados através de arquivos .json atuando como _fake database_ , e dessa forma armazenando as informações de cada usuário.
 
 <br>
 
@@ -45,9 +45,9 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma seríe de cré
 
 | Rota (Método)             | Funcionalidade              |
 | ------------------------- | --------------------------- |
-| api/login (POST)          | Eeftua o login do usuário   |
+| api/login (POST)          | Efetua o login do usuário   |
 | api/signup (POST)         | Cadastra um novo usuário    |
-| api/logout (GET)          | Encerra a sessão do usuário |
+| api/signout (GET)         | Encerra a sessão do usuário |
 | api/auth-validation (GET) | Valida o JWT do usuário     |
 
 </td>
@@ -60,7 +60,7 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma seríe de cré
 | api/billing-cycles (POST)        | Cria um novo cíclo          |
 | api/billing-cycles/1 (PUT)       | Altera o cíclo de ID=1      |
 | api/billing-cycles/1 (DELETE)    | Apaga o cíclo de ID=1       |
-| api/billing-cycles/summary (GET) | Obtem o o consolidado geral |
+| api/billing-cycles/summary (GET) | Obtém o consolidado geral   |
 
 </td>
 </tr>
@@ -72,7 +72,7 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma seríe de cré
 1. Clone este repositório;
 2. Com o terminal aberto, navege até o diretório deste projeto;
 3. Baixe as dependências deste projeto com npm install;
-4. Altere a chave privada (AUTH_SECRET) em .env.local na raiz do projeto para uma chave do seu gosto;
+4. Altere a chave privada (AUTH_SECRET) em .env.local na raiz do projeto para uma chave de seu gosto;
 4. Inicie a aplicação com npm run dev;
 5. Em seu navegador navega até http://localhost:3000/ para visualizar o projeto.
 ```
