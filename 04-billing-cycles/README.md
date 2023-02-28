@@ -19,9 +19,11 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma seríe de cré
 -   Visualização de todos os cíclos de pagamentos;
 -   Resumo contendo o consolidado geral de créditos, débitos e o saldo resultado.
 
+<br>
+
 <div align="left">
-    <img width="575px" src="https://user-images.githubusercontent.com/105606295/221878736-a432e707-8bf0-46b4-b6b3-d0b2ab039f14.png" alt="application dashbord"/>
-    <img width="480px" src="https://user-images.githubusercontent.com/105606295/221897219-4170596c-ea76-44bc-93f8-5f36ab09fcbd.png" alt="billing cycle register"/>
+    <img width="500px" src="https://user-images.githubusercontent.com/105606295/221878736-a432e707-8bf0-46b4-b6b3-d0b2ab039f14.png" alt="application dashbord"/>
+    <img width="420px" src="https://user-images.githubusercontent.com/105606295/221897219-4170596c-ea76-44bc-93f8-5f36ab09fcbd.png" alt="billing cycle register"/>
 </div>
 
 <br>
