@@ -1,0 +1,11 @@
+/*Início - Footer da aplicação*/
+.footer {
+    @apply px-4 py-3 text-zinc-800 flex flex-col sm:flex-row gap-1
+    text-sm border-t border-neutral-300 whitespace-nowrap;
+}
+
+.footer .footer-link {
+    @apply font-medium hover:text-sky-800 focus:text-sky-800 transition
+    duration-100;
+}
+/*Fim - Footer da aplicação*/

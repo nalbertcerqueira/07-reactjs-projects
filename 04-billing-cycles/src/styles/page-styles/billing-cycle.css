@@ -1,0 +1,57 @@
+/*Início - Página de cíclo de pagamentos*/
+.tabs-header {
+    @apply flex text-zinc-800 bg-white border-b border-b-zinc-300;
+}
+
+.tab-header {
+    @apply relative border-r border-l border-transparent before:content-['']
+    before:absolute before:top-0 before:left-0 before:h-1 before:bg-transparent
+    after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full
+    after:h-1 after:bg-transparent;
+    margin-left: -1px;
+}
+
+.tab-header-button {
+    @apply flex sm:gap-1 text-zinc-800 items-center hover:text-zinc-500
+    focus-visible:text-zinc-500 py-3 px-4 transition-[color] duration-100;
+}
+
+.tab-header:before {
+    transform: translateX(-1px);
+    width: calc(100% + 2px);
+}
+
+.tab-header:after {
+    transform: translateY(1px);
+}
+
+.tab-header.active {
+    @apply bg-slate-100 border-l-zinc-300 border-r-zinc-300 after:bg-slate-100
+    before:bg-sky-600;
+}
+
+.tab-header-icon {
+    @apply stroke-zinc-800 group-hover/icon:stroke-zinc-500 transition-all
+    group-focus-visible/icon:stroke-zinc-500 duration-100;
+}
+
+.tab-content {
+    @apply text-lg text-zinc-800 hidden;
+}
+
+.tab-content.active {
+    @apply block animate-[show_0.2s_forwards];
+}
+
+.default-input.credit {
+    @apply py-1 px-2;
+}
+
+.default-select {
+    @apply w-full py-1 px-1 border border-zinc-300 shadow-sm rounded-md outline-none
+    focus:ring-sky-600 focus-visible:ring-1 focus-visible:ring-sky-600
+    focus-visible:border-sky-600 transition-all duration-100 disabled:focus:ring-0
+    disabled:focus:border-zinc-300 disabled:focus-visible:outline-none
+    disabled:text-zinc-600 disabled:bg-slate-100;
+}
+/*Fim - Página de cíclo de pagamentos*/

@@ -1,0 +1,77 @@
+/* Início - Menu lateral */
+.sidebar {
+    @apply bg-[var(--sidebar-bg)] overflow-hidden shrink-0 transition-all
+    duration-500 shadow-xl md:shadow-[var(--sidebar-shadow)];
+    @apply fixed h-full left-0 -translate-x-full z-30
+    md:z-10 md:relative md:h-auto md:-translate-x-0;
+}
+
+.sidebar.open {
+    @apply -translate-x-full md:w-60 md:-translate-x-0;
+}
+
+.sidebar.closed {
+    @apply -translate-x-0 md:w-20;
+}
+
+.sidebar.open li span:not(:first-child) {
+    @apply md:opacity-100 md:transition-opacity md:duration-500;
+}
+
+.sidebar.closed li span:not(:first-child) {
+    @apply md:opacity-0 md:transition-opacity md:duration-500;
+}
+
+.sidebar.open .link {
+    @apply md:gap-2 md:transition-[gap] md:duration-500;
+}
+
+.sidebar.closed .link {
+    @apply md:gap-0 md:transition-[gap] md:duration-500;
+}
+
+.logo {
+    @apply w-full flex items-center bg-sky-800 transition-all duration-500
+    overflow-hidden h-14 px-4 border-b border-neutral-300 -outline-offset-4;
+}
+
+.logo-name {
+    @apply whitespace-nowrap text-2xl text-white font-source transition-all
+    duration-500 font-light;
+}
+
+.link {
+    @apply flex py-3 relative items-center w-full gap-2 px-4 transition-all
+    duration-100 overflow-hidden hover:text-white hover:bg-[var(--link-hover-bg)]
+    focus-visible:text-white focus-visible:bg-[var(--link-hover-bg)] text-zinc-300
+    whitespace-nowrap -outline-offset-4 before:absolute before:top-0 before:left-0
+    before:h-full before:w-1 before:bg-sky-700 before:opacity-0 hover:before:opacity-100 focus-visible:before:opacity-100 before:transition before:duration-100;
+}
+
+.icons {
+    @apply stroke-zinc-300 group-hover/icon:stroke-white duration-100
+    group-focus-visible/icon:stroke-white;
+}
+
+.menu-tree.active > .link {
+    @apply before:opacity-100 bg-[var(--link-hover-bg)];
+}
+
+.menu-tree > ul {
+    @apply overflow-hidden max-h-0 transition-[max-height] duration-300;
+}
+
+.menu-tree > ul .link {
+    @apply py-1 text-zinc-400 before:opacity-0 hover:text-zinc-300
+    focus-visible:text-zinc-300 hover:bg-[var(--link-hover-bg-light)]
+    focus-visible:bg-[var(--link-hover-bg-light)];
+}
+
+.menu-tree > ul .icons {
+    @apply stroke-zinc-400;
+}
+
+.menu-tree.active > ul {
+    @apply max-h-8;
+}
+/* Fim - Menu lateral */

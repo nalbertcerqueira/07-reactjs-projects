@@ -1,0 +1,23 @@
+/*Início - Template da página de login e registro*/
+.auth-container {
+    @apply min-h-screen w-screen bg-slate-100 text-zinc-800 p-4;
+}
+
+.auth-container > .form-container {
+    @apply m-auto shadow-md shadow-slate-300 p-4 bg-zinc-200
+    rounded-md max-w-sm border border-zinc-300;
+}
+
+.login-signup-link {
+    @apply text-sm font-medium text-sky-700 hover:text-sky-600
+    transition duration-100;
+}
+
+.auth-icon {
+    @apply absolute right-3 top-1/2 -translate-y-1/2;
+}
+
+.auth-icon-svg {
+    @apply w-5 h-5 stroke-zinc-500;
+}
+/*Fim - Template da página de login e registro*/

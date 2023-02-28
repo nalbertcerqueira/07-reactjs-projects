@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap");
+
+@import "./component-styles/AuthTemplate.css";
+@import "./component-styles/Header.css";
+@import "./component-styles/Sidebar.css";
+@import "./component-styles/Footer.css";
+@import "./component-styles/Modal.css";
+@import "./page-styles/billing-cycle.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    --sidebar-bg: #343a40;
+    --link-hover-bg: #293035;
+    --link-hover-bg-light: #3e454d;
+    --sidebar-shadow: #2e2e2e;
+}
+
+.shadow-base {
+    box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%);
+}
+
+/*Início - Estilo dos botões*/
+.create-form-button {
+    @apply block bg-sky-700 border border-zinc-300 text-white px-4 py-2
+    rounded-md hover:bg-sky-600 focus-visible:bg-sky-600 active:bg-sky-700
+    active:border-zinc-500 transition duration-100 shrink-0 shadow-zinc-300
+    shadow-md disabled:cursor-default disabled:pointer-events-none
+    disabled:bg-sky-600/30;
+}
+
+.clear-form-button {
+    @apply block bg-zinc-300 border border-neutral-400 text-zinc-800 px-4 py-2
+    rounded-md hover:bg-zinc-200 focus-visible:bg-zinc-200 active:bg-zinc-300
+    active:border-zinc-500 transition duration-100 shrink-0 shadow-zinc-300
+    shadow-md;
+}
+
+.delete-form-button {
+    @apply block bg-red-600 border border-zinc-300 text-white px-4 py-2
+    rounded-md hover:bg-red-500 focus-visible:bg-red-500 active:bg-red-600
+    active:border-zinc-500 transition duration-100 shrink-0 shadow-zinc-300
+    shadow-md;
+}
+
+.update-button {
+    @apply shrink-0 bg-amber-500 hover:bg-amber-600 focus-visible:bg-amber-600
+    transition duration-100 p-2 rounded shadow-sm shadow-zinc-300;
+}
+
+.delete-button {
+    @apply shrink-0 bg-red-500 hover:bg-red-600 focus-visible:bg-red-600
+    transition duration-100 p-2 rounded shadow-sm shadow-zinc-400;
+}
+
+.add-button {
+    @apply shrink-0 bg-sky-600 hover:bg-sky-700 focus-visible:bg-sky-700
+    transition duration-100 p-2 rounded shadow-sm shadow-zinc-300;
+}
+
+.copy-button {
+    @apply shrink-0 bg-amber-500 hover:bg-amber-600 focus-visible:bg-amber-600
+    transition duration-100 p-2 rounded shadow-sm shadow-zinc-300;
+}
+/*Fim - Estilo dos botões*/
+
+/*Início - Estilo dos inputs*/
+.default-input {
+    @apply block w-full border border-zinc-300 shadow-sm rounded-md p-1 px-3
+    outline-none focus:border-sky-600 focus:ring-1 focus:ring-sky-600
+    focus-visible:ring-1 focus-visible:ring-sky-600 focus-visible:border-sky-600
+    transition-all duration-100 placeholder:text-sm read-only:focus:ring-0
+    read-only:focus:border-zinc-300 read-only:focus-visible:outline-none
+    read-only:text-zinc-600 read-only:bg-slate-100;
+}
+
+.input-auth {
+    @apply shadow-zinc-300 bg-slate-50 pr-9;
+}
+
+.input-invalid {
+    @apply border-red-400 ring-1 ring-red-400;
+}
+
+.auth-input-label {
+    @apply text-zinc-700 font-normal;
+}
+/*Fim - Estilo dos inputs*/
+
+/*Início - efeito de loading do dashboard*/
+.valuebox-loading {
+    background: linear-gradient(-60deg, #ccd5e0 0% 30%, #c0c8d1 45% 55%, #ccd5e0 70% 100%);
+    background-size: 200%;
+    background-position: 150%;
+    animation: loading linear 0.75s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 150%;
+    }
+    100% {
+        background-position: -50%;
+    }
+}
+/*Fim - efeito de loading do dashboard*/

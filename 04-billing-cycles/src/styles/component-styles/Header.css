@@ -1,0 +1,30 @@
+/* Início - Header da aplicação */
+.app-header {
+    @apply bg-sky-700 h-14 flex items-center border-b border-neutral-50;
+}
+
+nav > .menu-button {
+    @apply flex items-center h-full cursor-pointer px-4 hover:bg-sky-800
+    focus-visible:bg-sky-800 -outline-offset-4 transition duration-100;
+}
+
+.user-avatar {
+    @apply py-2 px-4 h-full flex gap-2 items-center cursor-pointer transition
+    duration-100 hover:bg-sky-800;
+}
+
+.user-avatar + .drop-down {
+    @apply absolute right-0 w-52 bg-sky-700 border border-white hidden
+    opacity-0 animate-[show_0.2s_forwards] transition-all duration-1000;
+}
+
+.drop-down.open {
+    @apply block;
+}
+
+.drop-down .logout-button {
+    @apply py-1 px-4 rounded text-zinc-800 border border-zinc-400
+    bg-gradient-to-br bg-slate-200 to-zinc-300 hover:bg-slate-300
+    focus-visible:bg-slate-300 active:bg-slate-200 transition duration-100;
+}
+/* Fim - Header da aplicação */
