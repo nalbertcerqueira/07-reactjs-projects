@@ -46,9 +46,7 @@ export async function jwtValidation(req) {
     }
 
     //Verificando se o email e username fornecido pelo JWT realmente existe na DB
-    const foundUser = usersDB.users.find((user) => {
-        if (user.email === email && user.username === username) return true
-    })
+    const foundUser = usersDB.users[email]
     if (!foundUser) {
         return {
             status: 404,
