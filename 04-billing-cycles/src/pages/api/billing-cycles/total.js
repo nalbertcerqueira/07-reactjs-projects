@@ -15,14 +15,12 @@ export default function handler(req, res) {
 async function handleGET(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const { session_id } = cookieParser(req.headers.cookie)
-    const { username, email } = jwt.decode(session_id)
+    const { email } = jwt.decode(session_id)
 
     try {
         const data = JSON.parse(await readFile(dataPath, { encoding: "utf-8" })).data
-        const userIndex = data.findIndex((user) => {
-            return user.email === email && user.username === username
-        })
-        return res.status(200).json({ billingCount: data[userIndex].billings.length })
+        const foundUser = data[email]
+        return res.status(200).json({ billingCount: foundUser.billings.length })
     } catch (error) {
         return res.status(500).json({
             status: 500,
