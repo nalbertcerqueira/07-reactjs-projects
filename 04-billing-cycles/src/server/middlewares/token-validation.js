@@ -45,7 +45,7 @@ export async function jwtValidation(req) {
         }
     }
 
-    //Verificando se o email e username fornecido pelo JWT realmente existe na DB
+    //Verificando se o email fornecido pelo JWT realmente existe na DB
     const foundUser = usersDB.users[email]
     if (!foundUser) {
         return {
