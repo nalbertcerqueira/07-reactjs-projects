@@ -29,7 +29,7 @@ export default function handler(req, res) {
 async function handleGET(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const { session_id } = cookieParser(req.headers.cookie)
-    const { username, email } = jwt.decode(session_id)
+    const { email } = jwt.decode(session_id)
     const { id } = req.query
     let data = {}
 
@@ -45,12 +45,10 @@ async function handleGET(req, res) {
     }
 
     //Buscando o os dados com base no usuário
-    const userIndex = data.findIndex((user) => {
-        return user.email === email && user.username === username
-    })
+    const foundUser = data[email]
 
     //Buscando o ciclo de pagamentos com baseno ID informado
-    const foundBilling = data[userIndex].billings.find((billing) => billing.id === id)
+    const foundBilling = foundUser.billings.find((billing) => billing.id === id)
     if (!foundBilling) {
         const error = new Error(`the content with id: ${id} was not found`)
         return res.status(404).json({
@@ -66,9 +64,9 @@ async function handleGET(req, res) {
 //Alterando os dados de um cíclo de pagamentos com base no ID
 async function handlePUT(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
-    const { session_id } = cookieParser(req.headers.cookie)
-    const { username, email } = jwt.decode(session_id)
     const body = JSON.parse(JSON.stringify(req.body))
+    const { session_id } = cookieParser(req.headers.cookie)
+    const { email } = jwt.decode(session_id)
     const { id } = req.query
     let data = {}
 
@@ -84,14 +82,10 @@ async function handlePUT(req, res) {
     }
 
     //Buscando o usuário correspondente ao email informado
-    const userIndex = data.findIndex((user) => {
-        return user.email === email && user.username === username
-    })
+    const foundUser = data[email]
 
     //Buscando o ciclo de pagamentos com base no ID informado
-    const foundBillingIndex = data[userIndex].billings.findIndex(
-        (billing) => billing.id === id
-    )
+    const foundBillingIndex = foundUser.billings.findIndex((billing) => billing.id === id)
     if (foundBillingIndex < 0) {
         const error = new Error(`the content with id: ${id} was not found`)
         return res.status(404).json({
@@ -113,7 +107,7 @@ async function handlePUT(req, res) {
         }
     })
 
-    data[userIndex].billings[foundBillingIndex] = { id, ...body }
+    foundUser.billings[foundBillingIndex] = { id, ...body }
 
     //Reescrevendo o arquivo data.json e enviando uma resposta ao client
     try {
@@ -134,7 +128,7 @@ async function handlePUT(req, res) {
 async function handleDELETE(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const { session_id } = cookieParser(req.headers.cookie)
-    const { username, email } = jwt.decode(session_id)
+    const { email } = jwt.decode(session_id)
     const { id } = req.query
     let data = {}
 
@@ -150,12 +144,10 @@ async function handleDELETE(req, res) {
     }
 
     //Buscando os dados do usuário com base no email informado
-    const userIndex = data.findIndex((user) => {
-        return user.email === email && user.username === username
-    })
+    const foundUser = data[email]
 
     //Buscando o ciclo de pagamentos com base no ID informado
-    const foundBilling = data[userIndex].billings.find((billing) => billing.id === id)
+    const foundBilling = foundUser.billings.find((billing) => billing.id === id)
     if (!foundBilling) {
         const error = new Error(`the content with id: ${id} was not found`)
         return res.status(404).json({
@@ -166,7 +158,7 @@ async function handleDELETE(req, res) {
     }
 
     //Excluindo o ciclo de pagamentos
-    data[userIndex].billings = data[userIndex].billings.filter((billing) => billing.id !== id)
+    foundUser.billings = foundUser.billings.filter((billing) => billing.id !== id)
 
     //Reescrevendo o arquivo data.json e enviando uma respota ao client
     try {
