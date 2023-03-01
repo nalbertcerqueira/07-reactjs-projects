@@ -28,9 +28,9 @@ export default function handler(req, res) {
 //Adicionando um novo cíclo de pagamentos
 async function handlePOST(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
+    const body = JSON.parse(JSON.stringify(req.body))
     const { session_id } = cookieParser(req.headers.cookie)
     const { email } = jwt.decode(session_id)
-    const body = JSON.parse(JSON.stringify(req.body))
     let data = {}
 
     //Lendo o arquivo data.json
