@@ -24,7 +24,7 @@ export default function handler(req, res) {
 async function handleGET(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const { session_id } = cookieParser(req.headers.cookie)
-    const { username, email } = jwt.decode(session_id)
+    const { email } = jwt.decode(session_id)
     const { sort_by, value } = req.query
     const summary = {}
     let data = {}
@@ -41,15 +41,13 @@ async function handleGET(req, res) {
     }
 
     //Buscando o usuário com base no email fornecido
-    const userIndex = data.findIndex((user) => {
-        return user.email === email && user.username === username
-    })
+    const foundUser = data[email]
 
     //Filtrando os resultados com base nas queries strings informadas na url
     const filteredBillings =
         sort_by && value
-            ? data[userIndex].billings.filter((billing) => billing[sort_by] === value)
-            : data[userIndex].billings
+            ? foundUser.billings.filter((billing) => billing[sort_by] === value)
+            : foundUser.billings
 
     summary.credits = filteredBillings
         .reduce((acc, billing) => {
