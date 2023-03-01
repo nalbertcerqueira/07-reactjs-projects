@@ -34,7 +34,7 @@ async function handlePOST(req, res) {
 
     //Buscando o usuário com email fornecido no login ou retornando um erro
     //em caso negativo
-    const foundUser = usersDB.users.find((user) => user.email === email)
+    const foundUser = usersDB.users[email]
     if (!foundUser) {
         const error = new Error(`invalid email/password`)
         return res.status(401).json({
