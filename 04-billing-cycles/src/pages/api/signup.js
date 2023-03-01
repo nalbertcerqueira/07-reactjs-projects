@@ -45,9 +45,7 @@ async function handlePOST(req, res) {
 
     //Verificando se o email fornecido já possui cadastro no sistema
     try {
-        usersDB.users.map((user) => {
-            if (user.email === email) throw Error("This email is already registered")
-        })
+        if (usersDB.users[email]) throw Error("This email is already registered")
     } catch (error) {
         return res.status(409).json({
             status: 409,
@@ -71,8 +69,8 @@ async function handlePOST(req, res) {
         })
     }
 
-    usersDB.users.push(newUser)
-    billingCycleDB.data.push({ username, email, billings: [] })
+    usersDB.users[email] = newUser
+    billingCycleDB.data[email] = { username, email, billings: [] }
 
     //Atualizando os dados em data.json e users.json e retornando uma resposta ao client
     try {
