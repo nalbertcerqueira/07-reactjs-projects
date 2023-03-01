@@ -29,7 +29,7 @@ export default function handler(req, res) {
 async function handlePOST(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const { session_id } = cookieParser(req.headers.cookie)
-    const { username, email } = jwt.decode(session_id)
+    const { email } = jwt.decode(session_id)
     const body = JSON.parse(JSON.stringify(req.body))
     let data = {}
 
@@ -45,9 +45,7 @@ async function handlePOST(req, res) {
     }
 
     //Buscando o usuário com base no email fornecido
-    const userIndex = data.findIndex((user) => {
-        return user.email === email && user.username === username
-    })
+    const foundUser = data[email]
 
     //Gerando um id para cada débito e crédito adicionado pelo usuário
     ;["credits", "debts"].forEach((type) => {
@@ -60,17 +58,13 @@ async function handlePOST(req, res) {
 
     //Gerando um id referente ao cíclo de pagamento
     let newBillingId = generateHash(15)
-    let billingIdRepeated = data[userIndex].billings.find(
-        (billing) => billing.id === newBillingId
-    )
+    let billingIdRepeated = foundUser.billings.find((billing) => billing.id === newBillingId)
     while (billingIdRepeated) {
         newBillingId = generateHash(15)
-        billingIdRepeated = data[userIndex].billings.find(
-            (billing) => billing.id === newBillingId
-        )
+        billingIdRepeated = foundUser.billings.find((billing) => billing.id === newBillingId)
     }
 
-    data[userIndex].billings.push({ id: newBillingId, ...body })
+    foundUser.billings.push({ id: newBillingId, ...body })
 
     //Reescrevendo o arquivo data.json e enviando uma resposta ao client
     try {
@@ -91,7 +85,7 @@ async function handlePOST(req, res) {
 async function handleGET(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const { session_id } = cookieParser(req.headers.cookie)
-    const { username, email } = jwt.decode(session_id)
+    const { email } = jwt.decode(session_id)
     const { page, limit } = req.query
     let data = {}
 
@@ -106,9 +100,7 @@ async function handleGET(req, res) {
         })
     }
 
-    const userIndex = data.findIndex((user) => {
-        return user.email === email && user.username === username
-    })
+    const foundUser = data[email]
 
     //Determinando o índice inicial e final para filtrar os dados
     //com base na paginação
@@ -116,12 +108,12 @@ async function handleGET(req, res) {
     const end = page && limit ? page * limit : undefined
 
     //Ordenando os dados do mais recente ao mais antigo com base no mês e ano
-    data[userIndex].billings.sort((a, b) => {
+    foundUser.billings.sort((a, b) => {
         const timestampA = new Date(a.year, a.month - 1).valueOf()
         const timestampB = new Date(b.year, b.month - 1).valueOf()
         return timestampB - timestampA
     })
 
     //Enviando os dados filtrados ao usuário com base na paginação
-    return res.status(200).json(data[userIndex].billings.slice(begin, end))
+    return res.status(200).json(foundUser.billings.slice(begin, end))
 }
