@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Route, Routes as Router } from "react-router-dom"
 
-import Error from "../components/Error.jsx"
+import ErrorMsg from "../components/Error.jsx"
 import About from "../pages/About.jsx"
 import Todo from "../pages/Todo.jsx"
 
@@ -18,10 +18,13 @@ export default function Routes() {
         try {
             const response = await fetch(`http://localhost:3000/api/tasks${search}`)
             const data = await response.json()
-            if (response.status < 400) {
+            if (response.ok) {
                 setError(false)
                 setTaskList(data)
-            } else setError(true)
+            } else {
+                setError(true)
+                throw new Error(data.message)
+            }
         } catch (error) {
             console.log(error.message)
             setError(true)
@@ -41,7 +44,7 @@ export default function Routes() {
             <Route element={<About />} path="/about" />
             <Route
                 element={
-                    <Error
+                    <ErrorMsg
                         className="animate-display"
                         status="404"
                         message="Sorry, content not found."
