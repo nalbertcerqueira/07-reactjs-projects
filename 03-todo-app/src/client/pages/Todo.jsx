@@ -30,9 +30,7 @@ export default function Todo(props) {
             const response = await fetch("http://localhost:3000/api/tasks", {
                 method: "POST",
                 body: JSON.stringify({ taskDescription }),
-                headers: {
-                    "Content-Type": "application/json"
-                }
+                headers: { "Content-Type": "application/json" }
             })
             if (!response.ok) {
                 const data = await response.json()
@@ -86,9 +84,7 @@ export default function Todo(props) {
             const response = await fetch(`http://localhost:3000/api/tasks/${taskId}`, {
                 method: "PUT",
                 body: JSON.stringify({ done: isDone }),
-                headers: {
-                    "Content-Type": "application/json"
-                }
+                headers: { "Content-Type": "application/json" }
             })
             if (!response.ok) {
                 const data = await response.json()
