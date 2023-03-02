@@ -83,13 +83,19 @@ export default function Todo(props) {
     //Marcando uma tarefa como concluída ou pendente
     async function markTask({ taskId, isDone }) {
         try {
-            await fetch(`http://localhost:3000/api/tasks/${taskId}`, {
+            const response = await fetch(`http://localhost:3000/api/tasks/${taskId}`, {
                 method: "PUT",
                 body: JSON.stringify({ done: isDone }),
                 headers: {
                     "Content-Type": "application/json"
                 }
             })
+            if (!response.ok) {
+                const data = await response.json()
+                throw new Error(data.message)
+            } else {
+                props.fetcher(taskDescription)
+            }
             props.fetcher(taskDescription)
         } catch (error) {
             console.log(error.message)
