@@ -1,7 +1,7 @@
 import propTypes from "prop-types"
 import React, { useEffect, useState } from "react"
 
-import Error from "../components/Error.jsx"
+import ErrorMsg from "../components/Error.jsx"
 import FormLoading from "../components/Loadings/FormLoading.jsx"
 import ListLoading from "../components/Loadings/ListLoading.jsx"
 import TitleLoading from "../components/Loadings/TitleLoading.jsx"
@@ -19,7 +19,7 @@ export default function Todo(props) {
         props.fetcher()
     }, [])
 
-    //Manipulando o submit do formulário de cadstro (Form.jsx)
+    //Criando uma nova tarefa (Form.jsx)
     async function handleSubmit(event) {
         event.preventDefault()
 
@@ -27,15 +27,20 @@ export default function Todo(props) {
         else setFormValidity(true)
 
         try {
-            await fetch("http://localhost:3000/api/tasks", {
+            const response = await fetch("http://localhost:3000/api/tasks", {
                 method: "POST",
                 body: JSON.stringify({ taskDescription }),
                 headers: {
                     "Content-Type": "application/json"
                 }
             })
-            await props.fetcher()
-            setFilterTag("")
+            if (!response.ok) {
+                const data = await response.json()
+                throw new Error(data.message)
+            } else {
+                await props.fetcher()
+                setFilterTag("")
+            }
         } catch (error) {
             return console.log(error.message)
         }
@@ -88,7 +93,7 @@ export default function Todo(props) {
 
     if (props.error)
         return (
-            <Error
+            <ErrorMsg
                 className="animate-display"
                 status="500"
                 message="Sorry for the inconvenient, we're facing some problems in our systems."
