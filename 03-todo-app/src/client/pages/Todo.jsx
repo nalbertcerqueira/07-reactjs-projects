@@ -67,10 +67,15 @@ export default function Todo(props) {
     //Excluindo uma tarefa da lista
     async function removeTask(taskId) {
         try {
-            await fetch(`http://localhost:3000/api/tasks/${taskId}`, {
+            const response = await fetch(`http://localhost:3000/api/tasks/${taskId}`, {
                 method: "DELETE"
             })
-            props.fetcher(taskDescription)
+            if (!response.ok) {
+                const data = await response.json()
+                throw new Error(data.message)
+            } else {
+                props.fetcher(taskDescription)
+            }
         } catch (error) {
             console.log(error.message)
         }
