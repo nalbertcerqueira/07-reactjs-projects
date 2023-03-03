@@ -1,5 +1,5 @@
 import propTypes from "prop-types"
-import { createContext, useState } from "react"
+import { createContext, useCallback, useState } from "react"
 
 import { copyData } from "../utils/client"
 
@@ -116,44 +116,52 @@ export default function FormsContext({ children }) {
         setDebtList(dataCopy)
     }
 
-    //Adicionando/removendo uma linha de crédito ou débito nos formulários interativos
-    function addCreditDebt(index, type, isCopy = false) {
-        const defaultState = initialStates[type]
-        const dataTypes = { credit: creditList, debt: debtList }
-        const handler = { credit: setCreditList, debt: setDebtList }
+    //Adicionando/removendo uma linha de crédito ou débito nos formulários dinâmicos.
+    //useCallback pois esta função será passada para varios botões nos formulários dinâmicos
+    //de cadastro e edição de cíclo de pagamentos
+    const removeCreditDebt = useCallback(
+        (index, type) => {
+            const dataTypes = { credit: creditList, debt: debtList }
+            const handler = { credit: setCreditList, debt: setDebtList }
+            if (dataTypes[type].length < 2) return dataTypes[type]
 
-        const dataCopy = copyData(dataTypes[type])
-        let newItem = {}
-        if (type === "debt") {
-            newItem = isCopy
-                ? {
-                      name: dataCopy[index].name,
-                      value: dataCopy[index].value,
-                      status: dataCopy[index].status,
-                      id: ""
-                  }
-                : defaultState[0]
-        } else {
-            newItem = isCopy
-                ? { name: dataCopy[index].name, value: dataCopy[index].value, id: "" }
-                : defaultState[0]
-        }
+            const dataCopy = copyData(dataTypes[type])
+            const newData = dataCopy.filter((type, i) => {
+                return i !== index
+            })
+            handler[type](newData)
+        },
+        [creditList, debtList]
+    )
+    const addCreditDebt = useCallback(
+        (index, type, isCopy = false) => {
+            const defaultState = initialStates[type]
+            const dataTypes = { credit: creditList, debt: debtList }
+            const handler = { credit: setCreditList, debt: setDebtList }
 
-        const removedData = dataCopy.splice(0, index + 1, newItem)
-        const newData = removedData.concat(dataCopy)
-        handler[type](newData)
-    }
-    function removeCreditDebt(index, type) {
-        const dataTypes = { credit: creditList, debt: debtList }
-        const handler = { credit: setCreditList, debt: setDebtList }
-        if (dataTypes[type].length < 2) return dataTypes[type]
+            const dataCopy = copyData(dataTypes[type])
+            let newItem = {}
+            if (type === "debt") {
+                newItem = isCopy
+                    ? {
+                          name: dataCopy[index].name,
+                          value: dataCopy[index].value,
+                          status: dataCopy[index].status,
+                          id: ""
+                      }
+                    : defaultState[0]
+            } else {
+                newItem = isCopy
+                    ? { name: dataCopy[index].name, value: dataCopy[index].value, id: "" }
+                    : defaultState[0]
+            }
 
-        const dataCopy = copyData(dataTypes[type])
-        const newData = dataCopy.filter((type, i) => {
-            return i !== index
-        })
-        handler[type](newData)
-    }
+            const removedData = dataCopy.splice(0, index + 1, newItem)
+            const newData = removedData.concat(dataCopy)
+            handler[type](newData)
+        },
+        [creditList, debtList]
+    )
 
     //Validando todos os campos dos formulários antes do submit
     function validateCredit() {
