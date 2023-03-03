@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect, useMemo } from "react"
+import { useCallback, useContext, useEffect, useMemo } from "react"
 
 import { Context as FormsContext } from "../../contexts/FormsContext"
 import { Context as MainContext } from "../../contexts/MainContext"
@@ -17,24 +17,28 @@ export default function BillingCycleList() {
         billingCycle.getList()
     }, [])
 
-    function buttonAction(rowId, tabId) {
-        methods.resetForm()
-        billingCycle.showTab(tabId, rowId)
-    }
+    //useCallback pois essa função será passada para vários itens em uma lista
+    const buttonAction = useCallback(
+        (tabName, billingCycleId) => {
+            methods.resetForm()
+            billingCycle.showTab(tabName, billingCycleId)
+        },
+        [billingCycle.list]
+    )
 
     //Renderizando as ações de cada linha da tabela
     function renderActions(id) {
         return (
             <div className="flex items-center justify-end gap-2">
                 <Button
-                    onClick={() => buttonAction(id, "tabUpdate")}
+                    onClick={() => buttonAction("tabUpdate", id)}
                     className="update-button"
                     type="button"
                 >
                     <EditIcon className="stroke-white w-5 h-5" />
                 </Button>
                 <Button
-                    onClick={() => buttonAction(id, "tabDelete")}
+                    onClick={() => buttonAction("tabDelete", id)}
                     className="delete-button"
                     type="button"
                 >
