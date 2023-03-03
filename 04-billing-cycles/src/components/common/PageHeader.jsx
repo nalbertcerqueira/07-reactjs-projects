@@ -2,7 +2,7 @@ import propTypes from "prop-types"
 
 export default function PageHeader({ title, small }) {
     return (
-        <section className="mb-5 border-b border-zinc-300 pb-3">
+        <section className="opacity-0 mb-5 border-b border-zinc-300 pb-3 animate-[show_0.2s_forwards]">
             <h1
                 className={`text-zinc-700 text-3xl flex flex-wrap
                 items-end gap-2`}
