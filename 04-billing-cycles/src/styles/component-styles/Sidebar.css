@@ -1,17 +1,19 @@
 /* Início - Menu lateral */
 .sidebar {
     @apply bg-[var(--sidebar-bg)] overflow-hidden shrink-0 transition-all
-    duration-500 shadow-xl md:shadow-[var(--sidebar-shadow)];
-    @apply fixed h-full left-0 -translate-x-full z-30
-    md:z-10 md:relative md:h-auto md:-translate-x-0;
+    duration-500 shadow-xl md:shadow-[var(--sidebar-shadow)] fixed h-full
+    left-0 -translate-x-full z-30;
+    @apply md:z-10 md:relative md:-translate-x-0 md:h-auto;
 }
 
 .sidebar.open {
-    @apply -translate-x-full md:w-60 md:-translate-x-0;
+    @apply -translate-x-full;
+    @apply md:-translate-x-0 md:w-60;
 }
 
 .sidebar.closed {
-    @apply -translate-x-0 md:w-20;
+    @apply -translate-x-0;
+    @apply md:w-20;
 }
 
 .sidebar.open li span:not(:first-child) {
