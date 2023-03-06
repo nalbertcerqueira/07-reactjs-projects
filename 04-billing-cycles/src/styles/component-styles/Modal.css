@@ -1,7 +1,8 @@
 /*Início - Modal de exclusão*/
 .modal-overlay {
     @apply w-screen overflow-auto p-4 min-h-screen bg-slate-800/70 fixed top-0
-    left-0 xxs:justify-center items-center opacity-0 flex animate-showModal z-20;
+    left-0 items-center opacity-0 flex animate-showModal z-20 justify-start;
+    @apply xxs:justify-center;
 }
 
 .modal {
