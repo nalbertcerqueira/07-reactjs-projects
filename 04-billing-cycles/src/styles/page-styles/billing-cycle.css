@@ -12,8 +12,9 @@
 }
 
 .tab-header-button {
-    @apply flex sm:gap-1 text-zinc-800 items-center hover:text-zinc-500
+    @apply flex gap-0 text-zinc-800 items-center hover:text-zinc-500
     focus-visible:text-zinc-500 py-3 px-4 transition-[color] duration-100;
+    @apply sm:gap-1;
 }
 
 .tab-header:before {
