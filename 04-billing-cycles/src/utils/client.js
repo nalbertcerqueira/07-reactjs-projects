@@ -27,19 +27,22 @@ export function formatValuePTBR(value) {
 //de pagamentos para o padrão ISO ou PTBR
 export function formatBillingCycleISO(data) {
     const dataCopy = copyData(data)
-    dataCopy.map((object) => {
+    return dataCopy.map((object) => {
         object.value = fomartValueISO(object.value)
+        return object
     })
-    return dataCopy
 }
+
 export function formatBillingCyclePTBR(billingCyle) {
     const dataCopy = copyData(billingCyle)
 
-    dataCopy.credits.map((credit) => {
+    dataCopy.credits = dataCopy.credits.map((credit) => {
         credit.value = formatValuePTBR(credit.value)
+        return credit
     })
-    dataCopy.debts.map((debt) => {
+    dataCopy.debts = dataCopy.debts.map((debt) => {
         debt.value = formatValuePTBR(debt.value)
+        return debt
     })
 
     return dataCopy
