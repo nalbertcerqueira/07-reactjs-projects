@@ -51,7 +51,7 @@ export default function useAuth() {
     }
 
     async function submit(body, path) {
-        return fetch(`http://localhost:3000/${path}`, {
+        return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${path}`, {
             method: "POST",
             body: JSON.stringify(body),
             headers: {
@@ -146,7 +146,7 @@ export default function useAuth() {
 
     //Deslogando o usuário da aplicação
     async function logout() {
-        return fetch("http://localhost:3000/api/signout")
+        return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/signout`)
             .then(async (response) => {
                 const data = await response.json()
                 console.log(data)

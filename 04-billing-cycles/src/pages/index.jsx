@@ -19,7 +19,7 @@ import DebtIcon from "../components/icons/dashboard/DebtIcon"
 //Verificando se o JWT do usuário é válido e redirecionando
 //para a página de login caso contrário.
 export async function getServerSideProps({ req }) {
-    return await fetch("http://localhost:3000/api/auth-validation", {
+    return await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth-validation`, {
         method: "GET",
         headers: { Cookie: req.headers.cookie }
     })

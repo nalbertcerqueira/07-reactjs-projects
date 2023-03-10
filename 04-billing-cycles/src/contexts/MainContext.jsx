@@ -2,7 +2,7 @@ import propTypes from "prop-types"
 import { createContext, useState } from "react"
 import { toastEmmitter } from "../utils/client"
 
-const baseUrl = "http://localhost:3000"
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 const initialContext = {
     userLanguage: null,
     setLanguage: () => {},
@@ -52,7 +52,7 @@ export default function MainContext({ children }) {
 
     //Buscando dados para renderizar o dashboard em index.jsx
     async function refreshDashboard() {
-        return fetch("http://localhost:3000/api/billing-cycles/summary")
+        return fetch(`${baseUrl}/api/billing-cycles/summary`)
             .then(async (response) => {
                 const data = await response.json()
                 setIsDashboardLoading(false)
@@ -62,7 +62,6 @@ export default function MainContext({ children }) {
             })
             .catch(async (error) => {
                 setDashboardError(true)
-                console.log("vixi")
                 console.log(error.message)
             })
     }
@@ -128,7 +127,7 @@ export default function MainContext({ children }) {
     //Buscando dados para exibir a lista de cíclo de pagamentos
     async function getList(page, limit) {
         const queryString = page && limit ? `?page=${page}&limit=${limit}` : ""
-        const url = `http://localhost:3000/api/billing-cycles${queryString}`
+        const url = `${baseUrl}/api/billing-cycles${queryString}`
 
         fetch(url)
             .then(async (response) => {

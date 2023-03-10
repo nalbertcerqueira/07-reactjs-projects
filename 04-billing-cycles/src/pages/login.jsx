@@ -13,7 +13,7 @@ import useAuth from "../hooks/useAuth"
 //Verificando se o JWT do usuário é válido e redirecionando para
 //a aplicação em caso positivo.
 export function getServerSideProps({ req }) {
-    return fetch("http://localhost:3000/api/auth-validation", {
+    return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth-validation`, {
         method: "GET",
         headers: { Cookie: req.headers.cookie }
     })
