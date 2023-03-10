@@ -69,7 +69,7 @@ Dentro da aplicação, um cíclo de pagamentos é definido por uma série de cr�
 3. Baixe as dependências deste projeto com npm install;
 4. Altere a chave privada (AUTH_SECRET) em .env.local na raiz do projeto para uma chave de seu gosto;
 4. Inicie a aplicação com npm run dev;
-5. Em seu navegador navega até http://localhost:3000/ para visualizar o projeto.
+5. Navegue até http://localhost:3000/ para visualizar o projeto.
 ```
 
 ## 💻 Stacks utilizadas
