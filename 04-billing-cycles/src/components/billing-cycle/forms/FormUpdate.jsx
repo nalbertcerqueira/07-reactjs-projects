@@ -77,7 +77,7 @@ export default function FormUpdate(props) {
                         value={month}
                         id="month"
                         name="month"
-                        type="text"
+                        type="tel"
                         label="Mês"
                         onChange={methods.changeMonth}
                     />
@@ -91,7 +91,7 @@ export default function FormUpdate(props) {
                         value={year}
                         id="year"
                         name="year"
-                        type="text"
+                        type="tel"
                         label="Ano"
                         onChange={methods.changeYear}
                     />

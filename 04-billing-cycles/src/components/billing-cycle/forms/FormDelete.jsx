@@ -63,7 +63,7 @@ export default function FormDelete() {
                             value={month}
                             id="month"
                             name="month"
-                            type="text"
+                            type="tel"
                             label="Mês"
                         />
                     </div>
@@ -74,7 +74,7 @@ export default function FormDelete() {
                             value={year}
                             id="year"
                             name="year"
-                            type="text"
+                            type="tel"
                             label="Ano"
                         />
                     </div>

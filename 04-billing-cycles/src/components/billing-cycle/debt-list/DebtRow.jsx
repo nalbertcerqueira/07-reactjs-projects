@@ -35,7 +35,7 @@ export default function DebtRow(props) {
             </td>
             <td className="px-2 py-3">
                 <Input
-                    type="text"
+                    type="tel"
                     placeholder="Informe o valor"
                     autoComplete="transaction-amount"
                     readOnly={props.readOnly}
