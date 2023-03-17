@@ -18,7 +18,7 @@ apiRoutes.options("*", (req, res, next) => {
 })
 
 apiRoutes.get("/", (req, res) => {
-    return res.redirect("/api/tasks")
+    return res.redirect("/todo/api/tasks")
 })
 apiRoutes.get("/tasks", async (req, res) => {
     const { user_id_todo: userId } = cookieParser(req.headers.cookie)

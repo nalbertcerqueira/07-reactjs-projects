@@ -12,10 +12,7 @@ server.use(express.urlencoded({ extended: true }))
 
 server.use(enableCORS())
 server.use(cookieHandler)
-server.use("/api", apiRoutes)
-
-//Utilizando as rotas vindas de api.js
-server.get("/", (req, res) => res.redirect("/api"))
+server.use("/todo/api", apiRoutes)
 
 //Iniciando o serivdor na porta definida em .env
 server.listen(process.env.SERVER_PORT, () => {
