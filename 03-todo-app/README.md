@@ -9,16 +9,16 @@
 
 ## 📋 Descrição
 
-Uma lista de tarefas (Todo App) com design minimalista criada com ReactJS, Tailwindcss e ExpressJS. A ideia deste projeto foi criar uma aplicação com gerenciamento de estado e persistência de dados configurando tudo do zero, desde a configuração do webpack para gerar separadamente os bundles dos arquivos do client e servidor, até a configuração da API com ExpressJS.
+Uma lista de tarefas (Todo App) com design minimalista criada com ReactJS, Tailwindcss e ExpressJS. A ideia deste projeto foi criar uma aplicação com gerenciamento de estado em ReactJS, e persistência de dados através de uma API desenvolvida com NodeJS/ExpressJS.
 
-A persistência de dados é alcançada através de um arquivo JSON atuando como uma _fake database_, ao qual a API reescreve as informações durante as chamadas assícronas do lado do cliente.
+Para alcançar a persistência de dados, a API utiliza um arquivo JSON atuando como uma _fake database_, ao qual a API reescreve as informações durante as chamadas assícronas do lado do cliente.
 
 **Algumas funcionalidades incluem:**
 
--   Criação de tarefas;
--   Marcação de tarefas como concluídas ou pendentes;
--   Exclusão de tarefas concluídas;
--   Filtragem das tarefas pela sua descrição.
+- Criação de tarefas;
+- Marcação de tarefas como concluídas ou pendentes;
+- Exclusão de tarefas concluídas;
+- Filtragem das tarefas pela sua descrição.
 
 <center>
    <img width="800px" src="https://user-images.githubusercontent.com/105606295/217392885-b86a6f35-7c75-43eb-a097-b88be3947723.png">
@@ -33,18 +33,18 @@ A persistência de dados é alcançada através de um arquivo JSON atuando como 
 1. Clone este repositório;
 2. Com o terminal aberto, navege até o diretório deste projeto;
 3. Baixe as dependências deste projeto com npm install;
-4. Inicie a aplicação com npm run dev-server (modo desenvolvimento) ou npm run build-prod (modo produção) seguido de npm run start-prod;
+4. Inicie o frontend e o backend com rpm run dev;
 5. Em seu navegador utilize a url http://localhost:3000/ para visualizar o projeto.
 ```
 
 ## 💻 Stacks utilizadas
 
--   HTML
--   CSS
--   JavaScript
--   ReactJS
--   TailwindCSS
--   ExpressJS
+- HTML
+- CSS
+- JavaScript
+- ReactJS
+- TailwindCSS
+- ExpressJS
 
 ## 💵 Licença
 
