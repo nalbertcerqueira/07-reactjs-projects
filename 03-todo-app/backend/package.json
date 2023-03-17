@@ -12,7 +12,7 @@
     "scripts": {
         "build": "webpack --config webpack/webpack.prod.js",
         "dev": "nodemon --ext js,mjs,jsx,html,css ./src/server.js --watch",
-        "prod": "pm2 start ./build/server.js --name todo-list-backend && pm2 save"
+        "prod": "pm2 start ./build/server.js --name todo-app-backend && pm2 save"
     },
     "author": "",
     "license": "ISC",
