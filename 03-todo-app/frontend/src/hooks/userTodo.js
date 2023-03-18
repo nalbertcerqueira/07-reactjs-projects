@@ -17,7 +17,7 @@ export default function useTodo(refreshData) {
         else setFormValidity(true)
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/tasks`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/tasks`, {
                 credentials: "include",
                 method: "POST",
                 body: JSON.stringify({ taskDescription }),
@@ -57,7 +57,7 @@ export default function useTodo(refreshData) {
     async function removeTask(taskId) {
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/api/tasks/${taskId}`,
+                `${import.meta.env.VITE_API_URL}/tasks/${taskId}`,
                 {
                     method: "DELETE",
                     credentials: "include"
@@ -77,7 +77,7 @@ export default function useTodo(refreshData) {
     async function markTask({ taskId, isDone }) {
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/api/tasks/${taskId}`,
+                `${import.meta.env.VITE_API_URL}/tasks/${taskId}`,
                 {
                     credentials: "include",
                     method: "PUT",

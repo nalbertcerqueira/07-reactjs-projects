@@ -27,7 +27,10 @@ export default function Menu() {
                 >
                     Tarefas
                 </Link>
-                <Link className={`link ${pathname === "/about" && afterStyles}`} to="/about">
+                <Link
+                    className={`link ${pathname === "/about" && afterStyles}`}
+                    to="/about"
+                >
                     Sobre
                 </Link>
             </nav>

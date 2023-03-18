@@ -17,7 +17,7 @@ export default function Routes() {
         const search = description ? `?description=${description}` : ""
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/api/tasks${search}`,
+                `${import.meta.env.VITE_API_URL}/tasks${search}`,
                 {
                     credentials: "include"
                 }
