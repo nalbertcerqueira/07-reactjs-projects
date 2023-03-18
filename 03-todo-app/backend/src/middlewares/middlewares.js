@@ -58,8 +58,17 @@ module.exports.cookieHandler = async function (req, res, next) {
 //Middlware responsável por habilitar o CORS
 module.exports.enableCORS = function () {
     return (req, res, next) => {
-        res.setHeader("Access-Control-Allow-Credentials", "true")
-        res.setHeader("Access-Control-Allow-Origin", `${process.env.ALLOWED_ORIGINS}`)
-        return next()
+        const whitelist = process.env.ALLOWED_ORIGINS.split(" ")
+        const index = whitelist.indexOf(req.headers.origin)
+
+        if (!req.headers.origin) return next()
+
+        if (index >= 0) {
+            res.setHeader("Access-Control-Allow-Credentials", "true")
+            res.setHeader("Access-Control-Allow-Origin", whitelist[index])
+            return next()
+        } else {
+            return res.status(403).json({ status: 403, message: "Error 403: Forbidden" })
+        }
     }
 }

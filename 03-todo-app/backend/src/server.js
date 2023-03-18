@@ -7,6 +7,7 @@ const { enableCORS, cookieHandler } = require("./middlewares/middlewares.js")
 const server = express()
 
 //Aplicando middlewares
+server.set("trust proxy", true)
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
 

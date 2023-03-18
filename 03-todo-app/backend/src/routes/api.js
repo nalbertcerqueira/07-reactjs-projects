@@ -7,14 +7,22 @@ const apiRoutes = express.Router()
 
 //Rotas da API
 apiRoutes.options("*", (req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", `${process.env.ALLOWED_ORIGINS}`)
+    const whitelist = process.env.ALLOWED_ORIGINS.split(" ")
+    const index = whitelist.indexOf(req.headers.origin)
+
     res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE,PUT")
     res.setHeader("Access-Control-Allow-Credentials", "true")
     res.setHeader(
         "Access-Control-Allow-Headers",
         "Accept,X-Custom-Header,X-Requested-With,Origin,Content-Type"
     )
-    return next()
+
+    if (index >= 0) {
+        res.setHeader("Access-Control-Allow-Origin", whitelist[index])
+        return next()
+    } else {
+        return res.status(403).json({ status: 403, message: "Error 403: Forbidden" })
+    }
 })
 
 apiRoutes.get("/", (req, res) => {
