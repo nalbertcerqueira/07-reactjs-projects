@@ -40,6 +40,7 @@ module.exports.cookieHandler = async function (req, res, next) {
     //Adicionando o cookie na resposta da requisição http
     res.cookie("user_id_todo", newCookie, {
         httpOnly: true,
+        sameSite: "lax",
         maxAge: 31536000000,
         domain: process.env.COOKIE_DOMAIN
     })
