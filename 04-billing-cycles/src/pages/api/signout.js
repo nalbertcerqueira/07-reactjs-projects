@@ -10,6 +10,13 @@ export default function handler(req, res) {
 
 //Rota de logout
 function handleGET(req, res) {
-    res.setHeader("Set-Cookie", `session_id=0; Path=/; Max-Age=0; SameSite=Lax`)
+    res.setHeader(
+        "Set-Cookie",
+        `session_id=0; SameSite=${process.env.COOKIE_SAME_SITE}; Path=${
+            process.env.COOKIE_PATH
+        }; HttpOnly; Max-Age=0; Domain=${process.env.COOKIE_DOMAIN}; ${
+            process.env.COOKIE_SECURE ? "Secure" : ""
+        };`
+    )
     res.status(200).json({ status: 200, message: "Logout bem sucedido." })
 }

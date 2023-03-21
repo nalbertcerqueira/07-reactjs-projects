@@ -62,7 +62,11 @@ async function handlePOST(req, res) {
 
     res.setHeader(
         "Set-Cookie",
-        `session_id=${token}; SameSite=Lax; Max-Age=86400; Path=/; HttpOnly;`
+        `session_id=${token}; SameSite=${process.env.COOKIE_SAME_SITE}; Path=${
+            process.env.COOKIE_PATH
+        }; HttpOnly; Max-Age=86400; Domain=${process.env.COOKIE_DOMAIN}; ${
+            process.env.COOKIE_SECURE ? "Secure" : ""
+        };`
     )
     return res
         .status(200)
