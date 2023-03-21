@@ -122,7 +122,7 @@ export default function useAuth() {
 
             case 400:
                 setFlags({ ...flagsInitialState, passConfirm: false })
-                setErrorMsgs({ ...errorsInitialState, passConfirm: "As senhas não conferem" })
+                setErrorMsgs({ ...errorsInitialState, passConfirm: "As senhas não conferem." })
                 break
 
             case 500:
