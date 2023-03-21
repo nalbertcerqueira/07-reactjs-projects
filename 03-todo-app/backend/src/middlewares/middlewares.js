@@ -1,7 +1,8 @@
-require("dotenv").config()
 const { cookieParser, generateHash } = require("../utils/utils")
 const { readFile, writeFile } = require("fs").promises
 const { resolve } = require("path")
+
+require("dotenv").config({ path: resolve(process.cwd(), "./.env.local") })
 
 //Middleware responsável por verificar se o client já possui ou não um cookie.
 module.exports.cookieHandler = async function (req, res, next) {
@@ -40,9 +41,11 @@ module.exports.cookieHandler = async function (req, res, next) {
     //Adicionando o cookie na resposta da requisição http
     res.cookie("user_id_todo", newCookie, {
         httpOnly: true,
-        sameSite: "lax",
         maxAge: 31536000000,
-        domain: process.env.COOKIE_DOMAIN
+        sameSite: process.env.COOKIE_SAME_SITE,
+        domain: process.env.COOKIE_DOMAIN,
+        path: process.env.COOKIE_PATH,
+        secure: process.env.COOKIE_SECURE == "true" ? true : false
     })
 
     //reescrevendo o arquivo data.json e redirecionando o client para o endpoint/url

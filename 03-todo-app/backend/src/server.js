@@ -1,9 +1,10 @@
 //Importando dependências e funções
-require("dotenv").config()
 const express = require("express")
+const { resolve } = require("path")
 const apiRoutes = require("./routes/api.js")
 const { enableCORS, cookieHandler } = require("./middlewares/middlewares.js")
 
+require("dotenv").config({ path: resolve(process.cwd(), "./.env.local") })
 const server = express()
 
 //Aplicando middlewares

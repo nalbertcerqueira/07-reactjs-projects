@@ -1,9 +1,10 @@
-require("dotenv").config()
 const express = require("express")
 const fs = require("fs").promises
-const path = require("path")
+const { resolve } = require("path")
 const { generateHash, cookieParser } = require("../utils/utils.js")
+
 const apiRoutes = express.Router()
+require("dotenv").config({ path: resolve(process.cwd(), "./.env.local") })
 
 //Rotas da API
 apiRoutes.options("*", (req, res, next) => {
@@ -30,7 +31,7 @@ apiRoutes.get("/", (req, res) => {
 })
 apiRoutes.get("/tasks", async (req, res) => {
     const { user_id_todo: userId } = cookieParser(req.headers.cookie)
-    const filePath = path.resolve(process.cwd(), "./data/tasks.json")
+    const filePath = resolve(process.cwd(), "./data/tasks.json")
     const { description } = req.query
     let data
 
@@ -58,7 +59,7 @@ apiRoutes.get("/tasks", async (req, res) => {
 })
 apiRoutes.post("/tasks", async (req, res) => {
     const { user_id_todo: userId } = cookieParser(req.headers.cookie)
-    const filePath = path.resolve(process.cwd(), "./data/tasks.json")
+    const filePath = resolve(process.cwd(), "./data/tasks.json")
     const keysScheme = ["taskDescription"]
     const body = req.body
     let data
@@ -118,7 +119,7 @@ apiRoutes.post("/tasks", async (req, res) => {
 })
 apiRoutes.put("/tasks/:id", async (req, res) => {
     const { user_id_todo: userId } = cookieParser(req.headers.cookie)
-    const filePath = path.resolve(process.cwd(), "./data/tasks.json")
+    const filePath = resolve(process.cwd(), "./data/tasks.json")
     const keys = Object.keys(req.body)
     const { id: taskId } = req.params
     let data
@@ -164,7 +165,7 @@ apiRoutes.put("/tasks/:id", async (req, res) => {
 })
 apiRoutes.delete("/tasks/:id", async (req, res) => {
     const { user_id_todo: userId } = cookieParser(req.headers.cookie)
-    const filePath = path.resolve(process.cwd(), "./data/tasks.json")
+    const filePath = resolve(process.cwd(), "./data/tasks.json")
     const { id: taskId } = req.params
     let data
 
