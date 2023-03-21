@@ -7,7 +7,7 @@ const defaultErrorsMsgs = {
     username: "O nome deve conter no mínimo 4 caracteres.",
     email: "Insira um email no formato exemplo@email.com.",
     password: "Senha de no mínimo 6 dígitos com letras e números.",
-    passConfirm: "As senhas não conferem"
+    passConfirm: "As senhas não conferem."
 }
 const toastMsgs = {
     200: "Parabéns! O seu cadastro foi realizado! Agora é só seguir com seu login.",
