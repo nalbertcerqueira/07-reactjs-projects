@@ -37,7 +37,7 @@ export default function UserMenu() {
                 >
                     <img
                         className="h-full w-full"
-                        src="https://static.vecteezy.com/ti/vetor-gratis/t2/246312-mountain-lake-sunset-landscape-primeira-pessoa-vista-gratis-vetor.jpg"
+                        src="/profile.jpg"
                         alt="user profile picture"
                     />
                 </span>
@@ -52,7 +52,7 @@ export default function UserMenu() {
                     <span className="mb-3 block m-auto w-24 h-24 overflow-hidden rounded-full">
                         <img
                             className="h-full"
-                            src="https://static.vecteezy.com/ti/vetor-gratis/t2/246312-mountain-lake-sunset-landscape-primeira-pessoa-vista-gratis-vetor.jpg"
+                            src="/profile.jpg"
                             alt="user profile picture"
                         />
                     </span>

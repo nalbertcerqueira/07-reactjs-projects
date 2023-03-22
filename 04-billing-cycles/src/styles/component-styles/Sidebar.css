@@ -1,7 +1,7 @@
 /* Início - Menu lateral */
 .sidebar {
     @apply bg-[var(--sidebar-bg)] overflow-hidden shrink-0 transition-all
-    duration-500 shadow-xl md:shadow-[var(--sidebar-shadow)] fixed h-full
+    duration-500 shadow-xl md:shadow-[var(--sidebar-shadow)] fixed h-screen
     left-0 -translate-x-full z-30;
     @apply md:z-10 md:relative md:-translate-x-0 md:h-auto;
 }
