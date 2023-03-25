@@ -1,32 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
+
 import useAuth from "@/src/hooks/useAuth"
-import { useContext, useEffect, useState } from "react"
-import { Context as AuthContext } from "../../contexts/AuthContext"
+import useUserMenu from "@/src/hooks/useUserMenu"
+import { useContext, useEffect } from "react"
+import { Context as UserContext } from "../../contexts/UserContext"
 import Button from "../common/Button"
 
 //Componente utilizado em Header.jsx
 export default function UserMenu() {
-    const { username, email } = useContext(AuthContext)
+    const { username, email } = useContext(UserContext)
     const { methods } = useAuth()
-    const [menu, setMenu] = useState(false)
+    const { menu, bodyEvent, toggleMenu } = useUserMenu()
 
-    //Função utilizada para criar o efeito toggle no menu do usuário
-    function toggleMenu() {
-        setMenu((prevState) => (prevState ? false : true))
-    }
-
-    //Fechando o menu do usuário caso seja feito um click fora dele
-    function closeMenu(event) {
-        const firstCondition = !event.target.closest(".drop-down")
-        const secondCondition = !event.target.closest(".user-menu")
-        if (firstCondition && secondCondition) return setMenu(false)
-    }
-
-    useEffect(() => {
-        const body = document.body
-        body.addEventListener("click", closeMenu)
-        return () => body.removeEventListener("click", closeMenu)
-    }, [])
+    useEffect(bodyEvent, [])
 
     return (
         <div className="user-menu relative ml-auto h-full">
