@@ -2,8 +2,8 @@
 import propTypes from "prop-types"
 
 import { useContext, useEffect, useMemo } from "react"
-import { Context as AuthContext } from "../contexts/AuthContext"
 import { Context as MainContext } from "../contexts/MainContext"
+import { Context as UserContext } from "../contexts/UserContext"
 
 import AppTemplate from "../components/AppTemplate"
 import DefaultHead from "../components/common/DefaultHead"
@@ -16,8 +16,7 @@ import BalanceIcon from "../components/icons/dashboard/BalanceIcon"
 import BankIcon from "../components/icons/dashboard/BankIcon"
 import DebtIcon from "../components/icons/dashboard/DebtIcon"
 
-//Verificando se o JWT do usuário é válido e redirecionando
-//para a página de login caso contrário.
+//Validando o token do usuário antes de exibir a aplicação
 export async function getServerSideProps({ req }) {
     return await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth-validation`, {
         method: "GET",
@@ -37,7 +36,7 @@ export async function getServerSideProps({ req }) {
 Dashboard.PageTemplate = AppTemplate
 export default function Dashboard({ username, email }) {
     const { dashboard, setLanguage, userLanguage } = useContext(MainContext)
-    const { setUser } = useContext(AuthContext)
+    const { setUser } = useContext(UserContext)
 
     const credits = convertCurrency(dashboard.data?.credits || 0)
     const debts = convertCurrency(dashboard.data?.debts || 0)

@@ -2,9 +2,9 @@
 import propTypes from "prop-types"
 import { useContext, useEffect, useMemo } from "react"
 
-import { Context as AuthContext } from "../contexts/AuthContext"
 import { Context as MainContext } from "../contexts/MainContext"
 import { Context as ModalsContext } from "../contexts/ModalsContext"
+import { Context as UserContext } from "../contexts/UserContext"
 
 import AppTemplate from "../components/AppTemplate"
 import BillingCycleList from "../components/billing-cycle/BillingCycleList"
@@ -24,8 +24,7 @@ import DeleteIcon from "../components/icons/bylling-cycle/DeleteIcon"
 import EditIcon from "../components/icons/bylling-cycle/EditIcon"
 import ListIcon from "../components/icons/bylling-cycle/ListIcon"
 
-//Verificando se o JWT do usuário é válido e redirecionando
-//para a página de login caso contrário.
+//Validando o token do usuário antes de exibir a aplicação
 export async function getServerSideProps({ req }) {
     return await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth-validation`, {
         method: "GET",
@@ -44,7 +43,7 @@ export async function getServerSideProps({ req }) {
 
 BillingCycle.PageTemplate = AppTemplate
 export default function BillingCycle({ username, email }) {
-    const { setUser } = useContext(AuthContext)
+    const { setUser } = useContext(UserContext)
     const { billingCycle } = useContext(MainContext)
     const { modalDelete } = useContext(ModalsContext)
 

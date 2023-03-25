@@ -11,8 +11,7 @@ import UserIcon from "../components/icons/login-signup/UserIcon"
 
 import useAuth from "../hooks/useAuth"
 
-//Verificando se o JWT do usuário é válido e redirecionando para
-//a aplicação em caso positivo.
+//Validando o token do usuário antes de exibir a aplicação
 export function getServerSideProps({ req }) {
     return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth-validation`, {
         method: "GET",

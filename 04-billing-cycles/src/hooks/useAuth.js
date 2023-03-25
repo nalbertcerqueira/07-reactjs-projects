@@ -27,17 +27,13 @@ export default function useAuth() {
     const [flags, setFlags] = useState(flagsInitialState)
     const [errorMsgs, setErrorMsgs] = useState(errorsInitialState)
 
-    //Validando os inputs durante o processo de cadastro de
-    //um novo usuário
+    //Validando os inputs durante o processo de cadastro/login do usuário
     function validateSignupInputs() {
         const newFlags = {
             username: username.length >= 4 ? true : false,
             email: email.match(/\S+@\S+\.\S+/) ? true : false,
             passConfirm: passConfirm === password && passConfirm !== "" ? true : false,
-            password:
-                password.length >= 6 && password.match(/^(?=.*[a-zA-Z])(?=.*\d).+$/)
-                    ? true
-                    : false
+            password: password.length >= 6 && password.match(/^(?=.*[a-zA-Z])(?=.*\d).+$/)
         }
         setErrorMsgs({
             username: newFlags.username ? "" : defaultErrorsMsgs.username,
@@ -48,6 +44,11 @@ export default function useAuth() {
         setFlags({ ...flags, ...newFlags })
 
         return !Object.values(newFlags).includes(false)
+    }
+    //Resetando o formulário ao seu estado inicial
+    function resetForm() {
+        ;[setUsername(""), setEmail(""), setPassword(""), setPassConfirm("")]
+        ;[setFlags(flagsInitialState), setErrorMsgs(errorsInitialState)]
     }
 
     async function submit(body, path) {
@@ -71,7 +72,6 @@ export default function useAuth() {
                 console.log(error.message)
             })
     }
-
     //Efetuando o login do usuário
     async function login(event) {
         event.preventDefault()
@@ -103,7 +103,6 @@ export default function useAuth() {
         }
         return
     }
-
     //Efetuando o registro do usuário
     async function signup(event) {
         const body = { username, email, password, confirmPassword: passConfirm }
@@ -143,7 +142,6 @@ export default function useAuth() {
         }
         setIsSubmiting(false)
     }
-
     //Deslogando o usuário da aplicação
     async function logout() {
         return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/signout`)
@@ -156,12 +154,6 @@ export default function useAuth() {
                 console.log(error.message)
                 location.reload()
             })
-    }
-
-    //Resetando o formulário ao seu estado inicial
-    function resetForm() {
-        ;[setUsername(""), setEmail(""), setPassword(""), setPassConfirm("")]
-        ;[setFlags(flagsInitialState), setErrorMsgs(errorsInitialState)]
     }
 
     return {
@@ -178,8 +170,8 @@ export default function useAuth() {
             signup,
             resetForm,
             changeFlags: (flags) => setFlags(flags),
-            changeUser: (event) => setUsername(event.target.value),
             changeEmail: (event) => setEmail(event.target.value),
+            changeUser: (event) => setUsername(event.target.value),
             changePassword: (event) => setPassword(event.target.value),
             changePassConfirm: (event) => setPassConfirm(event.target.value)
         }

@@ -32,7 +32,6 @@ export function formatBillingCycleISO(data) {
     })
     return dataCopy
 }
-
 export function formatBillingCyclePTBR(billingCyle) {
     const dataCopy = copyData(billingCyle)
 

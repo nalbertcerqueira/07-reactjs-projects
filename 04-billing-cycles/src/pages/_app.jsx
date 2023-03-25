@@ -3,15 +3,15 @@ import propTypes from "prop-types"
 import "react-toastify/dist/ReactToastify.css"
 import "../styles/globals.css"
 
-import AuthContext from "../contexts/AuthContext"
 import FormsContext from "../contexts/FormsContext"
 import MainContext from "../contexts/MainContext"
 import MenuContext from "../contexts/MenuContext"
 import ModalsContext from "../contexts/ModalsContext"
+import UserContext from "../contexts/UserContext"
 
 export default function App({ Component, pageProps }) {
     return (
-        <AuthContext>
+        <UserContext>
             <MainContext>
                 <MenuContext>
                     <ModalsContext>
@@ -27,7 +27,7 @@ export default function App({ Component, pageProps }) {
                     </ModalsContext>
                 </MenuContext>
             </MainContext>
-        </AuthContext>
+        </UserContext>
     )
 }
 
