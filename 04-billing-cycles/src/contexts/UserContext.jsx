@@ -9,7 +9,7 @@ const initialState = {
 
 //Contexto utilizado em UserMenu.jsx para exibir o email e username do usuário
 export const Context = createContext(initialState)
-export default function AuthContext({ children }) {
+export default function UserContext({ children }) {
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
 
@@ -30,6 +30,6 @@ export default function AuthContext({ children }) {
         </Context.Provider>
     )
 }
-AuthContext.propTypes = {
+UserContext.propTypes = {
     children: propTypes.node
 }
