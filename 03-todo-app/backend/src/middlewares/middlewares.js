@@ -52,7 +52,7 @@ module.exports.cookieHandler = async function (req, res, next) {
     //que foi solicitado na requisição
     try {
         await writeFile(filePath, JSON.stringify(data), { encoding: "utf-8" })
-        return res.redirect(req.url)
+        return res.redirect(process.env.APP_ROOT)
     } catch (error) {
         return res
             .status(500)
