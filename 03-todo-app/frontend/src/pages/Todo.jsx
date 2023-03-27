@@ -34,7 +34,7 @@ export default function Todo({ refreshData, data, error }) {
             )}
             {data && (
                 <>
-                    <PageTitle title="Terefas" small="Cadastro" />
+                    <PageTitle title="Tarefas" small="Cadastro" />
                     <TodoForm
                         isValid={isFormValid}
                         filter={filterTag}
