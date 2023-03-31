@@ -18,7 +18,7 @@ export default function Sidebar() {
 
     const sidebarState = menu
     return (
-        <aside onMouseLeave={hideMenu} className={`sidebar ${sidebarState}`}>
+        <div onMouseLeave={hideMenu} className={`sidebar ${sidebarState}`}>
             <Link className={`logo gap-3 ${menu === "open" ? "gap-3" : "md:gap-0"}`} href="/">
                 <MoneyIcon className="stroke-white ml-2" />
                 <span
@@ -30,6 +30,6 @@ export default function Sidebar() {
                 </span>
             </Link>
             <Menu />
-        </aside>
+        </div>
     )
 }

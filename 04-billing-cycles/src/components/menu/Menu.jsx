@@ -9,7 +9,7 @@ import MenuTree from "./MenuTree"
 export default memo(Menu)
 function Menu() {
     return (
-        <section>
+        <nav>
             <ul>
                 <Item icon={<DashboardIcon className="icons" />} label="Dashboard" path="/" />
                 <MenuTree icon={<RegisterIcon className="icons" />} label="Cadastro">
@@ -20,6 +20,6 @@ function Menu() {
                     />
                 </MenuTree>
             </ul>
-        </section>
+        </nav>
     )
 }
