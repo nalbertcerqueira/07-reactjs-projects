@@ -151,6 +151,11 @@
         visibility: hidden;
     }
 
+    &--visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
     &__inner {
         @include mixins.display-flex($content: flex-start);
         @extend %inner-container-center;
@@ -168,9 +173,11 @@
         transition: 0.4s;
 
         @include mixins.mobile-520 {
-            width: 100%;
             transform: translateY(-50%);
-            opacity: 0;
+        }
+
+        &--open {
+            transform: translateY(0%);
         }
     }
 
