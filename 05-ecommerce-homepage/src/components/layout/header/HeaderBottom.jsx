@@ -8,9 +8,13 @@ export default function HeaderBottom() {
     const { isOpen, toggleMenuState } = useContext(MenuContext)
 
     return (
-        <div className={`header-bottom ${isOpen ? "is-visible" : ""}`}>
+        <div className={`header-bottom ${isOpen ? "header-bottom--visible" : ""}`}>
             <div className="header-bottom__inner">
-                <nav className={`header-bottom__navbar ${isOpen ? "navbar-shown" : ""}`}>
+                <nav
+                    className={`header-bottom__navbar ${
+                        isOpen ? "header-bottom__navbar--open" : ""
+                    }`}
+                >
                     <ul className="header-bottom__link-list">
                         <li>
                             <a className="header-bottom__navlink" href="#">
