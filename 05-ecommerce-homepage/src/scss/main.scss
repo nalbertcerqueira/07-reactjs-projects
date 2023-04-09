@@ -1,3 +1,5 @@
+//"layouts.scss" é importado depois de "modules.scss" pois alguns estilos presentes
+//em "layouts.scss", sobrescrevem certos estilos presentes em "modules.scss".
 @use "1-base/base.scss";
 @use "3-modules/modules.scss";
 @use "2-layouts/layouts.scss";
