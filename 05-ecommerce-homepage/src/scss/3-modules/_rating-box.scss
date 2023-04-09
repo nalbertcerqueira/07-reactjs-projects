@@ -1,0 +1,14 @@
+@use "../1-base/mixins" as mixins;
+
+.rating-box {
+    @include mixins.display-flex($gap: 0.25rem);
+
+    &__star-icon {
+        @include mixins.default-icon($margin: 0, $f-size: 0.85rem);
+        cursor: pointer;
+
+        path {
+            pointer-events: none;
+        }
+    }
+}

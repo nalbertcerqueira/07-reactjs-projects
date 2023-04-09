@@ -1,0 +1,245 @@
+@use "../1-base/variables" as vars;
+@use "../1-base/mixins" as mixins;
+@use "../1-base/placeholders" as *;
+
+.header-top {
+    @extend %horizontal-padding;
+    background-color: vars.$secondary-bg-color;
+
+    @include mixins.mobile-820 {
+        display: none;
+    }
+
+    &__inner {
+        @include mixins.display-flex($content: space-between);
+        @extend %inner-container-center;
+        padding: 0.5rem 0;
+    }
+
+    &__info-wrapper,
+    &__menu {
+        @include mixins.display-flex($gap: 1.25rem);
+    }
+
+    &__info-item {
+        font-size: 0.875rem;
+        color: vars.$light-color;
+    }
+
+    &__icon {
+        @include mixins.default-icon;
+    }
+}
+
+.header-middle {
+    @extend %horizontal-padding;
+    background-color: vars.$bg-color;
+    position: relative;
+
+    &::after {
+        content: "";
+        width: 100%;
+        height: 3px;
+        background-color: vars.$pimary-color;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    &__inner {
+        @include mixins.display-flex($content: space-between);
+        @extend %inner-container-center;
+        padding: 1.5rem 0;
+
+        @include mixins.mobile-820 {
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+    }
+
+    &__brand {
+        font-size: 2.6rem;
+        color: vars.$light-color;
+        font-weight: 800;
+
+        @include mixins.mobile-820 {
+            text-align: center;
+        }
+    }
+
+    &__brand-icon {
+        @include mixins.default-icon($margin: 0 0 0 0.5rem, $f-size: 1.75rem);
+    }
+
+    &__form-search {
+        @include mixins.display-flex;
+        width: 36%;
+
+        @include mixins.mobile-820 {
+            width: 90%;
+        }
+
+        @include mixins.mobile-420 {
+            width: 100%;
+        }
+    }
+
+    &__cart-container {
+        @include mixins.display-flex($gap: 2rem);
+
+        @include mixins.mobile-820 {
+            margin: 0.75rem 0;
+        }
+    }
+
+    &__link {
+        @include mixins.display-flex($gap: 0, $direction: column);
+        color: vars.$light-color;
+        font-size: 0.875rem;
+        position: relative;
+    }
+
+    &__counter {
+        background-color: vars.$pimary-color;
+        height: 1.4rem;
+        width: 1.4rem;
+        border-radius: 50%;
+        line-height: 1.35rem;
+        text-align: center;
+        position: absolute;
+        top: -0.75rem;
+        right: -0.5rem;
+        overflow: hidden;
+    }
+
+    &__btn-toggle {
+        display: none;
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        color: rgb(vars.$light-color, 0.9);
+        background-color: transparent;
+        border-color: rgb(vars.$light-color, 0.9);
+
+        &:hover,
+        &:focus-visible {
+            background-color: transparent;
+            color: vars.$pimary-color;
+            border-color: vars.$pimary-color;
+        }
+
+        @include mixins.mobile-520 {
+            display: block;
+        }
+    }
+}
+
+.header-bottom {
+    @extend %horizontal-padding;
+    border-bottom: 2px solid vars.$section-bg-color;
+    transition: 0.4s;
+
+    @include mixins.mobile-520 {
+        width: 100%;
+        height: 100vh;
+        padding: 1rem;
+        background-color: rgb(vars.$bg-color, 0.7);
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &__inner {
+        @include mixins.display-flex($content: flex-start);
+        @extend %inner-container-center;
+        padding: 0.75rem 0;
+
+        @include mixins.mobile-520 {
+            padding: 0;
+        }
+    }
+
+    &__navbar {
+        @include mixins.display-flex($content: space-between);
+        width: 100%;
+        position: relative;
+        transition: 0.4s;
+
+        @include mixins.mobile-520 {
+            width: 100%;
+            transform: translateY(-50%);
+            opacity: 0;
+        }
+    }
+
+    &__btn-toggle {
+        background-color: transparent;
+        border-color: transparent;
+        padding: 0rem 0.4rem;
+        color: rgb(vars.$dark-color, 0.9);
+        font-size: 1.2rem;
+        display: none;
+
+        &:hover {
+            border-color: vars.$pimary-color;
+            color: vars.$pimary-color;
+        }
+
+        @include mixins.mobile-520 {
+            display: block;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+    }
+
+    &__link-list {
+        @include mixins.display-flex($gap: 1rem, $content: flex-start);
+
+        @include mixins.mobile-520 {
+            background-color: vars.$light-color;
+            padding: 1.5rem 2rem;
+            border-radius: 0.75rem;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__navlink {
+        position: relative;
+        font-size: 0.875rem;
+        color: vars.$dark-color;
+        transition: 0.25s;
+
+        &:hover,
+        &:focus-visible {
+            color: vars.$pimary-color;
+
+            &::after {
+                opacity: 1;
+                width: 100%;
+            }
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 100%;
+            width: 0;
+            height: 2px;
+            border-radius: 4px;
+            background-color: vars.$pimary-color;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: 0.25s;
+        }
+
+        @include mixins.mobile-520 {
+            font-size: 1rem;
+        }
+    }
+}

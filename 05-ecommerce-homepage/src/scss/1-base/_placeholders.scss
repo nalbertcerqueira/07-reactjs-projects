@@ -1,0 +1,10 @@
+@use "variables" as vars;
+
+%horizontal-padding {
+    padding-inline: 1rem;
+}
+
+%inner-container-center {
+    max-width: vars.$inner-container-width;
+    margin: 0 auto;
+}

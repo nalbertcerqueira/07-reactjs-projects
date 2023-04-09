@@ -1,0 +1,48 @@
+@use "variables" as vars;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-weight: 400;
+    overflow-wrap: break-word;
+    line-height: calc(1em + 0.5rem);
+    font-family: vars.$default-font;
+}
+
+body,
+html {
+    min-width: min-content;
+}
+
+::after,
+::before {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+li {
+    list-style-type: none;
+}
+
+input,
+button {
+    border: none;
+    outline: none;
+}
+
+body::-webkit-scrollbar {
+    width: 1rem;
+    background-color: vars.$section-bg-color;
+    border-radius: 2rem;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(vars.$pimary-color, darken(vars.$pimary-color, 10%));
+    border: 2px solid vars.$section-bg-color;
+    border-radius: 2rem;
+}

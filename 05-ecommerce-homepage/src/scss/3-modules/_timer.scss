@@ -1,0 +1,32 @@
+@use "../1-base/variables" as vars;
+@use "../1-base/mixins" as mixins;
+
+.timer {
+    @include mixins.display-flex($gap: 1.75rem);
+
+    @include mixins.mobile-820 {
+        max-width: 320px;
+        flex-grow: 1;
+        flex-wrap: wrap;
+    }
+
+    &__item {
+        @include mixins.display-flex($direction: column);
+        width: 100px;
+        height: 100px;
+        background-color: vars.$pimary-color;
+        border-radius: 50%;
+        box-shadow: 2px 2px 4px #7e7e7e;
+    }
+
+    &__unit {
+        color: vars.$light-color;
+        font-size: 0.875rem;
+    }
+
+    &__value {
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: vars.$light-color;
+    }
+}

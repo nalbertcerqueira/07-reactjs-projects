@@ -1,0 +1,39 @@
+@use "../1-base/variables" as vars;
+@use "../1-base/mixins" as mixins;
+
+.footer-links {
+    @include mixins.mobile-820 {
+        width: 100%;
+        text-align: center;
+    }
+
+    &__title {
+        color: vars.$light-color;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+    }
+
+    &__list {
+        @include mixins.display-flex(
+            $direction: column,
+            $gap: 0.5rem,
+            $items: flex-start
+        );
+
+        @include mixins.mobile-820 {
+            align-items: center;
+        }
+    }
+
+    &__link {
+        color: vars.$gray-text-color;
+        font-size: 0.875rem;
+        transition: 0.25s;
+
+        &:hover,
+        &:focus-visible {
+            color: vars.$pimary-color;
+        }
+    }
+}

@@ -1,0 +1,80 @@
+@use "../1-base/variables" as vars;
+@use "../1-base/mixins" as mixins;
+
+.banner {
+    position: relative;
+    width: 30%;
+    min-height: 200px;
+    padding: 1.75rem;
+    overflow: hidden;
+
+    @include mixins.mobile-820 {
+        width: 80%;
+    }
+
+    @include mixins.mobile-420 {
+        width: 100%;
+    }
+
+    &:hover {
+        .banner__bg-img {
+            scale: 1.2;
+        }
+
+        .banner__cover {
+            width: 100%;
+            border-radius: 0;
+        }
+    }
+
+    &__bg-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        transition: 0.4s;
+    }
+
+    &__cover {
+        position: absolute;
+        opacity: 0.8;
+        transition: 0.4s;
+        top: 0;
+        left: 0;
+        width: 70%;
+        height: 100%;
+        border-radius: 0 0 40% 0;
+        background-color: vars.$pimary-color;
+    }
+
+    &__content {
+        position: relative;
+    }
+
+    &__title {
+        margin-bottom: 1rem;
+        color: vars.$light-color;
+        font-weight: 700;
+        max-width: 70%;
+        font-size: 1.75rem;
+    }
+
+    &__products-link {
+        color: vars.$light-color;
+        font-weight: 700;
+        font-size: 1.25rem;
+
+        &:hover .banner__link-icon,
+        &:focus-visible .banner__link-icon {
+            transform: translateX(0.25rem);
+        }
+    }
+
+    &__link-icon {
+        font-size: 1rem;
+        font-weight: 400;
+        transition: 0.4s;
+    }
+}

@@ -1,0 +1,13 @@
+@use "../1-base/variables" as vars;
+@use "../1-base/mixins" as mixins;
+
+.common-link {
+    &__content {
+        font-size: 0.875rem;
+        color: vars.$light-color;
+    }
+
+    &__icon {
+        @include mixins.default-icon;
+    }
+}

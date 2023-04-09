@@ -1,0 +1,114 @@
+@use "../1-base/variables" as vars;
+@use "../1-base/mixins" as mixins;
+@use "../1-base/placeholders" as *;
+
+.footer {
+    @extend %horizontal-padding;
+    background-color: vars.$bg-color;
+
+    &__inner-container {
+        @extend %inner-container-center;
+        padding: 2.5rem 0;
+    }
+
+    &__content {
+        @include mixins.display-flex(
+            $gap: 2rem,
+            $items: flex-start,
+            $content: space-between
+        );
+        margin-bottom: 2.5rem;
+
+        @include mixins.mobile-820 {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__about {
+        width: 25%;
+
+        @include mixins.mobile-820 {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    &__about-title {
+        color: vars.$light-color;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1.25rem;
+    }
+
+    &__about-description {
+        font-size: 0.875rem;
+        color: vars.$gray-text-color;
+        margin-bottom: 0.75rem;
+
+        @include mixins.mobile-820 {
+            text-align: justify;
+        }
+    }
+
+    &__about-links-wrapper {
+        @include mixins.display-flex(
+            $gap: 0.5rem,
+            $direction: column,
+            $items: flex-start
+        );
+
+        @include mixins.mobile-820 {
+            align-items: center;
+        }
+    }
+
+    &__common-link {
+        &:focus-visible .footer__link-content {
+            color: vars.$pimary-color;
+        }
+    }
+
+    &__link-content {
+        color: vars.$gray-text-color;
+        transition: 0.25s;
+
+        &:hover {
+            color: vars.$pimary-color;
+        }
+    }
+
+    &__payment-methods {
+        width: fit-content;
+        margin: 0 auto 2rem;
+    }
+
+    &__payment-cards {
+        @include mixins.display-flex($gap: 0.8rem);
+
+        @include mixins.mobile-820 {
+            flex-wrap: wrap;
+        }
+    }
+
+    &__payment-icon {
+        font-size: 2.65rem;
+        color: vars.$dark-color;
+        cursor: pointer;
+        transition: 0.24s;
+
+        &:hover {
+            color: vars.$pimary-color;
+        }
+    }
+
+    &__copyright {
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    &__copyright-content {
+        color: vars.$gray-text-color;
+        font-size: 0.875rem;
+    }
+}

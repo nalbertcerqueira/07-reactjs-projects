@@ -1,0 +1,150 @@
+@use "../1-base/mixins" as mixins;
+@use "../1-base/variables" as vars;
+@use "../1-base/placeholders" as *;
+
+%deal-text-styles {
+    text-transform: uppercase;
+    text-align: center;
+    text-shadow: 2px 2px 4px vars.$section-bg-color;
+}
+
+.banners {
+    @extend %horizontal-padding;
+
+    &__inner {
+        @extend %inner-container-center;
+        @include mixins.display-flex(
+            $content: space-between,
+            $gap: 1.5rem,
+            $items: stretch
+        );
+        padding: 2.625rem 0;
+
+        @include mixins.mobile-820 {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
+
+.products {
+    @extend %horizontal-padding;
+    border-bottom: 2px solid vars.$section-bg-color;
+
+    &__inner {
+        @extend %inner-container-center;
+        padding: 1.75rem 0 3rem;
+    }
+
+    &__grid {
+        @include mixins.display-flex(
+            $content: space-between,
+            $gap: 1.5rem,
+            $items: stretch
+        );
+
+        @include mixins.mobile-820 {
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 1.75rem;
+        margin-bottom: 1.75rem;
+
+        @include mixins.mobile-820 {
+            text-align: center;
+            margin-bottom: 2.75rem;
+        }
+    }
+}
+
+.deal {
+    @extend %horizontal-padding;
+    background-color: vars.$section-bg-color;
+
+    &__inner-container {
+        @extend %inner-container-center;
+        @include mixins.display-flex($direction: column, $gap: 1.5rem);
+        background-image: url("/img/deal_headset.png");
+        background-repeat: no-repeat;
+        background-position-x: right;
+        background-position-y: 2rem;
+        background-size: auto 85%;
+        padding: 4rem 0;
+
+        @include mixins.mobile-820 {
+            background-size: auto 50%;
+            background-position-y: 1rem;
+        }
+    }
+
+    &__title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        @extend %deal-text-styles;
+    }
+
+    &__promo-description {
+        font-size: 1.3rem;
+        @extend %deal-text-styles;
+    }
+}
+
+.newsletter {
+    @extend %horizontal-padding;
+
+    &__inner {
+        @extend %inner-container-center;
+        @include mixins.display-flex($gap: 1.75rem, $direction: column);
+        padding: 2.75rem 0;
+    }
+
+    &__title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        text-align: center;
+        color: vars.$dark-color;
+    }
+
+    &__form {
+        @include mixins.display-flex;
+        width: 290px;
+        margin: 0 auto;
+
+        @include mixins.mobile-420 {
+            width: 100%;
+        }
+    }
+
+    &__input {
+        border-color: vars.$section-bg-color;
+    }
+
+    &__social-links {
+        @include mixins.display-flex($gap: 0.85rem);
+        margin-top: 1rem;
+    }
+
+    &__social-link {
+        padding: 0.4rem 0.75rem;
+        border: 1px solid vars.$section-bg-color;
+        transition: 0.25s;
+
+        &:hover,
+        &:focus-visible {
+            background-color: vars.$section-bg-color;
+
+            .newsletter__social-icon {
+                color: vars.$pimary-color;
+            }
+        }
+    }
+
+    &__social-icon {
+        color: vars.$dark-color;
+        transition: 0.25s;
+    }
+}
