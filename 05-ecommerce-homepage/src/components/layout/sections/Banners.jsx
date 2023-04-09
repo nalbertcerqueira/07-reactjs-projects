@@ -1,6 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import Banner from "../../Banner"
+import notebookBanner from "/img/banner-1.jpg"
+import accessorieBanner from "/img/banner-2.jpg"
+import cameraBanner from "/img/banner-3.jpg"
 
 //Componente utilizado em App.jsx
 export default function Banners() {
@@ -9,7 +12,7 @@ export default function Banners() {
         <section className="banners">
             <div className="banners__inner">
                 <Banner
-                    imgSrc="/img/banner-1.jpg"
+                    imgSrc={notebookBanner}
                     imgAlt="an open notebook on a table"
                     id="banner-1"
                     bannerTitle="Promoção de Notebooks"
@@ -21,7 +24,7 @@ export default function Banners() {
                     }
                 />
                 <Banner
-                    imgSrc="/img/banner-2.jpg"
+                    imgSrc={accessorieBanner}
                     imgAlt="a headseat on a suport"
                     id="banner-2"
                     bannerTitle="Lançamento de Acessórios"
@@ -33,7 +36,7 @@ export default function Banners() {
                     }
                 />
                 <Banner
-                    imgSrc="/img/banner-3.jpg"
+                    imgSrc={cameraBanner}
                     imgAlt="a professional camera"
                     id="banner-3"
                     bannerTitle="Câmeras Potentes"
