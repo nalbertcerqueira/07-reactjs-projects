@@ -8,6 +8,8 @@ export default function useTimer(duration) {
 
     function countdown() {
         const interval = setInterval(() => {
+            if (new Date() > endDate) return
+
             const remainingTime = endDate - new Date()
 
             const daysRest = remainingTime % (24 * 3600 * 1000)
