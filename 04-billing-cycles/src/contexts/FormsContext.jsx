@@ -69,7 +69,7 @@ export default function FormsContext({ children }) {
         ;[setCreditList(data.credits), setDebtList(data.debts)]
     }
 
-    //Função utilizada para controlar os inputs de nome, mes e ano
+    //Função utilizada para controlar os inputs de nome, mês e ano
     //de um cíclo de pagamentos
     function changeName(event) {
         return setName(event.target.value)
@@ -84,7 +84,7 @@ export default function FormsContext({ children }) {
     }
 
     //Funções utilizadas para controlar os inputs de nome, valor e status
-    //dos créditos e débitos de um determinado cpiclo de pagamentos
+    //dos créditos e débitos de um determinado cíclo de pagamentos
     function changeCreditDebtName(index, type, event) {
         const dataTypes = { credit: creditList, debt: debtList }
         const handler = { credit: setCreditList, debt: setDebtList }

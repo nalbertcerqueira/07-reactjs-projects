@@ -140,7 +140,7 @@ export default function MainContext({ children }) {
             })
     }
 
-    //Funções utilizadas para cadastrar, remover e alterar um ciclo de pagamentos
+    //Funções utilizadas para cadastrar, remover e alterar um cíclo de pagamentos
     async function create(data) {
         await submit("POST", data, { success: "Dados cadastrados com sucesso!" })
         await getList()
@@ -154,7 +154,7 @@ export default function MainContext({ children }) {
         })
     }
 
-    //Alterando o ciclo pagamentos atual que será exibido na aba de edição ou exclusão
+    //Alterando o cíclo pagamentos atual que será exibido na aba de edição ou exclusão
     function changeCurrentBC(billingCycle) {
         setCurrentBC({ ...currentBC, ...billingCycle })
     }
