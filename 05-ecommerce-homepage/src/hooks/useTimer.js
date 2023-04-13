@@ -4,9 +4,9 @@ import { useState } from "react"
 //da promoção em Deal.jsx
 export default function useTimer(duration) {
     const [time, setTime] = useState({ days: 0, hours: 0, min: 0, sec: 0 })
-    const endDate = new Date(Date.now() + duration)
 
     function countdown() {
+        const endDate = new Date(Date.now() + duration)
         const interval = setInterval(() => {
             if (new Date() > endDate) return
 
