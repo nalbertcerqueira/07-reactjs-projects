@@ -20,7 +20,7 @@ O projeto teve com objetivo, consolidar conhecimentos acerca do pre-processador 
 3. Inicie a aplicação com npm run dev;
 4. Navegue até http://localhost:3000/ para visualizar o projeto.
 
-## 💻 Stacks utilizadas
+## 💻 Stack utilizada
 
 -   HTML
 -   CSS

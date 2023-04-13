@@ -22,7 +22,7 @@ O design do projeto teve como inspiração o modelo de calculadora utilizado pel
 5. Em seu navegador utilize a url http://localhost:3000/ para visualizar o projeto.
 ```
 
-## 💻 Stacks utilizadas
+## 💻 Stack utilizada
 
 -   HTML
 -   CSS

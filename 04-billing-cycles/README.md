@@ -48,14 +48,14 @@ Dentro da aplicação, um cíclo de pagamentos é definido por uma série de cr�
 </td>
 <td>
 
-| Rota (Método)                    | Funcionalidade              |
-| -------------------------------- | --------------------------- |
-| api/billing-cycles (GET)         | Consulta todos os cíclos    |
-| api/billing-cycles/1 (GET)       | Consulta o cíclo de ID=1    |
-| api/billing-cycles (POST)        | Cria um novo cíclo          |
-| api/billing-cycles/1 (PUT)       | Altera o cíclo de ID=1      |
-| api/billing-cycles/1 (DELETE)    | Apaga o cíclo de ID=1       |
-| api/billing-cycles/summary (GET) | Obtém o consolidado geral   |
+| Rota (Método)                    | Funcionalidade            |
+| -------------------------------- | ------------------------- |
+| api/billing-cycles (GET)         | Consulta todos os cíclos  |
+| api/billing-cycles/1 (GET)       | Consulta o cíclo de ID=1  |
+| api/billing-cycles (POST)        | Cria um novo cíclo        |
+| api/billing-cycles/1 (PUT)       | Altera o cíclo de ID=1    |
+| api/billing-cycles/1 (DELETE)    | Apaga o cíclo de ID=1     |
+| api/billing-cycles/summary (GET) | Obtém o consolidado geral |
 
 </td>
 </tr>
@@ -72,7 +72,7 @@ Dentro da aplicação, um cíclo de pagamentos é definido por uma série de cr�
 5. Navegue até http://localhost:3000/ para visualizar o projeto.
 ```
 
-## 💻 Stacks utilizadas
+## 💻 Stack utilizada
 
 -   HTML
 -   CSS

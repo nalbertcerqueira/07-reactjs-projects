@@ -34,7 +34,7 @@ A CRUD foi desenvolvida em NextJS e TailwindCSS e permite a persistência de dad
 5. Em seu navegador utilize a url http://localhost:3000/ para visualizar o projeto.
 ```
 
-## 💻 Stacks utilizadas
+## 💻 Stack utilizada
 
 -   HTML
 -   CSS

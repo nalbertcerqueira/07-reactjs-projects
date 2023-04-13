@@ -37,7 +37,7 @@ Para alcançar a persistência de dados, a API utiliza um arquivo JSON atuando c
 5. Em seu navegador utilize a url http://localhost:3000/ para visualizar o projeto.
 ```
 
-## 💻 Stacks utilizadas
+## 💻 Stack utilizada
 
 - HTML
 - CSS
