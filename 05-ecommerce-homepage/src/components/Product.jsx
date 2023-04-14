@@ -24,7 +24,7 @@ export default function Product(props) {
                 <p className="product__category">{props.category}</p>
                 <h2 className="product__name">{props.name}</h2>
                 <p className="product__price">{priceInReal}</p>
-                <RatingBox starRating={props.starRating} />
+                <RatingBox key={props.starRating} starRating={props.starRating} />
             </div>
             <a href="#" role="button" className="btn btn--cta">
                 COMPRAR
