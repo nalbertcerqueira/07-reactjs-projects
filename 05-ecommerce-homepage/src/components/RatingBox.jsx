@@ -1,27 +1,25 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import propTypes from "prop-types"
-import React, { useEffect } from "react"
+import React from "react"
 import useRatingBox from "../hooks/useRatingBox"
 
 //Componente utilizado em todos os produtos, vulgo Product.jsx
 export default function RatingBox({ starRating }) {
     //Utilizando o hook useRatingBox para criar a funcionalidade de avaliação do produto
-    const { starTypes, mouseClickHandler, updateStateFromProps } = useRatingBox()
+    const { rating, handleClick, generateRatingArray } = useRatingBox(starRating)
 
-    //Atualizando o estado em starTypes de acordo com o valor passado em starRating
-    useEffect(() => {
-        updateStateFromProps(starRating)
-    }, [starRating])
+    //Gerando um array de classes css (fas ou far) a partir do estado
+    const ratingArray = generateRatingArray(rating)
 
     function renderStars() {
         const stars = []
-        for (let i = 0; i <= 4; i++) {
+        for (let i = 1; i <= 5; i++) {
             stars.push(
                 <FontAwesomeIcon
                     data-index={i}
                     className="rating-box__star-icon"
                     key={i}
-                    icon={[starTypes[i], "star"]}
+                    icon={[ratingArray[i - 1], "star"]}
                 />
             )
         }
@@ -29,7 +27,7 @@ export default function RatingBox({ starRating }) {
     }
 
     return (
-        <div onClick={mouseClickHandler} className="rating-box">
+        <div onClick={handleClick} className="rating-box">
             {renderStars()}
         </div>
     )
