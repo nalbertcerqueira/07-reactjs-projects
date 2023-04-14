@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import propTypes from "prop-types"
-import React, { useState } from "react"
+import React, { useEffect } from "react"
 import useRatingBox from "../hooks/useRatingBox"
 
 //Componente utilizado em todos os produtos, vulgo Product.jsx
@@ -9,9 +9,9 @@ export default function RatingBox({ starRating }) {
     const { starTypes, mouseClickHandler, updateStateFromProps } = useRatingBox()
 
     //Atualizando o estado em starTypes de acordo com o valor passado em starRating
-    useState(() => {
+    useEffect(() => {
         updateStateFromProps(starRating)
-    }, [])
+    }, [starRating])
 
     function renderStars() {
         const stars = []
