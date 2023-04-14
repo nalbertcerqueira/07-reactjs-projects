@@ -1,29 +1,28 @@
 import { useState } from "react"
 
 //Hook utilizado para criar a funcionalidade de avaliação dos produtos
-export default function useRatingBox() {
-    const [starTypes, setStarsTypes] = useState(["far", "far", "far", "far", "far"])
+export default function useRatingBox(starRating) {
+    const [rating, setRating] = useState(starRating)
 
-    function updateStateFromProps(starRating) {
-        const newState = starTypes.map((star, index) =>
-            index <= starRating - 1 ? "fas" : "far"
-        )
-        setStarsTypes(newState)
+    function generateRatingArray(rating) {
+        const ratingArray = []
+        for (let i = 0; i <= 4; i++) {
+            if (i <= rating - 1) ratingArray.push("fas")
+            else ratingArray.push("far")
+        }
+        return ratingArray
     }
 
-    function mouseClickHandler(event) {
+    function handleClick(event) {
         if (event.target.tagName === "svg") {
             const finalIndex = event.target.dataset.index
-            const newState = starTypes.map((star, index) =>
-                index <= finalIndex ? "fas" : "far"
-            )
-            setStarsTypes(newState)
+            setRating(parseInt(finalIndex))
         }
     }
 
     return {
-        starTypes,
-        mouseClickHandler,
-        updateStateFromProps
+        rating,
+        handleClick,
+        generateRatingArray
     }
 }
