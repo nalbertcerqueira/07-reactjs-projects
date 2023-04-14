@@ -7,7 +7,7 @@ export default function Timer({ duration }) {
     //Utilizando hook useTimer para criar a funcionalidade de contagem regressiva
     const { time, countdown } = useTimer(duration)
 
-    useEffect(countdown, [])
+    useEffect(countdown, [duration])
 
     return (
         <div className="timer">
