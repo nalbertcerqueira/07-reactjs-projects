@@ -7,17 +7,19 @@ export default function ListLoading(props) {
         return new Array(rows).fill(1).map((row, i) => {
             return (
                 <div key={i} className="list-loading-container">
-                    <span className="block rounded-md w-32 sm:w-60 h-4 loading-gradient"></span>
+                    <span className="block rounded-md w-32 sm:w-60 h-4 loading-gradient" />
                     <div className="flex gap-3">
-                        <span className="block rounded-md w-9 h-9 bg-neutral-300"></span>
-                        <span className="block rounded-md w-9 h-9 bg-neutral-300"></span>
+                        <span className="block rounded-md w-9 h-9 bg-neutral-300" />
+                        <span className="block rounded-md w-9 h-9 bg-neutral-300" />
                     </div>
                 </div>
             )
         })
     }
     return (
-        <div className={`px-3 sm:px-0 mt-8 h-72 rounded-x w-full ${props.className}`}>
+        <div
+            className={`px-3 sm:px-0 mt-8 h-72 rounded-x w-full ${props.className || ""}`}
+        >
             {renderRows(props.rows)}
         </div>
     )
@@ -25,5 +27,4 @@ export default function ListLoading(props) {
 ListLoading.propTypes = {
     className: propTypes.string,
     rows: propTypes.number.isRequired
-    // children: propTypes.node
 }
