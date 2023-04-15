@@ -3,7 +3,7 @@ import { useState } from "react"
 export default function useTodo(refreshData) {
     const [taskInput, setTaskInput] = useState("")
     const [isInputValid, setIsInputValid] = useState(true)
-    const [filterTag, setFilterTag] = useState("")
+    const [filterTag, setFilterTag] = useState(null)
 
     //Controlando o input do formulário de cadastro de tarefas (Form.jsx)
     function handleTaskInput(event) {
@@ -13,7 +13,7 @@ export default function useTodo(refreshData) {
 
     //Removendo o filtro de tarefas
     function removeFilter() {
-        setFilterTag("")
+        setFilterTag(null)
         setTaskInput("")
         refreshData()
     }
@@ -31,7 +31,7 @@ export default function useTodo(refreshData) {
         if (taskInput === "") return setIsInputValid(false)
         else setIsInputValid(true)
 
-        fetch(`${import.meta.env.VITE_API_URL}/tasks`, {
+        return fetch(`${import.meta.env.VITE_API_URL}/tasks`, {
             credentials: "include",
             method: "POST",
             body: JSON.stringify({ taskDescription: taskInput }),
@@ -43,7 +43,7 @@ export default function useTodo(refreshData) {
                     throw new Error(data.message)
                 }
                 await refreshData()
-                setFilterTag("")
+                setFilterTag(null)
                 setTaskInput("")
             })
             .catch((error) => {
@@ -52,7 +52,7 @@ export default function useTodo(refreshData) {
     }
     //Excluindo uma tarefa da lista
     async function removeTask(taskId) {
-        fetch(`${import.meta.env.VITE_API_URL}/tasks/${taskId}`, {
+        return fetch(`${import.meta.env.VITE_API_URL}/tasks/${taskId}`, {
             method: "DELETE",
             credentials: "include"
         })
@@ -69,7 +69,7 @@ export default function useTodo(refreshData) {
     }
     //Marcando uma tarefa como concluída ou pendente
     async function updateTask({ taskId, isDone }) {
-        fetch(`${import.meta.env.VITE_API_URL}/tasks/${taskId}`, {
+        return fetch(`${import.meta.env.VITE_API_URL}/tasks/${taskId}`, {
             credentials: "include",
             method: "PUT",
             body: JSON.stringify({ done: isDone }),
