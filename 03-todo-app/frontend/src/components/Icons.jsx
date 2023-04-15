@@ -4,7 +4,7 @@ import React from "react"
 //Ícone utilizado em Menu.jsx
 export function CalendarIcon(props) {
     return (
-        <div className={props.className}>
+        <div className={props.className || ""}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -29,7 +29,7 @@ CalendarIcon.propTypes = {
 //Ícone utilizado em Form.jsx
 export function PlusIcon(props) {
     return (
-        <div className={props.className}>
+        <div className={props.className || ""}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -53,7 +53,7 @@ PlusIcon.propTypes = {
 //Ícone utilizado em Form.jsx
 export function SearchIcon(props) {
     return (
-        <div className={props.className}>
+        <div className={props.className || ""}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -77,7 +77,7 @@ SearchIcon.propTypes = {
 //Ícone utilizado em TodoList.jsx
 export function TrashIcon(props) {
     return (
-        <div className={`${props.className} pointer-events-none`}>
+        <div className={`${props.className || ""} pointer-events-none`}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -101,7 +101,7 @@ TrashIcon.propTypes = {
 //Ícone utilizado em TodoList.jsx
 export function DoneIcon(props) {
     return (
-        <div className={props.className}>
+        <div className={props.className || ""}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -109,7 +109,11 @@ export function DoneIcon(props) {
                 strokeWidth={2.0}
                 className="w-5 h-5"
             >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M4.5 12.75l6 6 9-13.5"
+                />
             </svg>
         </div>
     )
@@ -121,7 +125,7 @@ DoneIcon.propTypes = {
 //Ícone utilizado em TodoList.jsx
 export function UndoIcon(props) {
     return (
-        <div className={props.className}>
+        <div className={props.className || ""}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -145,7 +149,7 @@ UndoIcon.propTypes = {
 //Ícone utilizado em FloatingTag.jsx
 export function CloseIcon(props) {
     return (
-        <div className={props.className}>
+        <div className={props.className || ""}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -153,7 +157,11 @@ export function CloseIcon(props) {
                 strokeWidth={1.5}
                 className="w-5 h-5"
             >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                />
             </svg>
         </div>
     )

@@ -1,7 +1,7 @@
 import propTypes from "prop-types"
 import React from "react"
 
-import { FloatingTag } from "./Tags.jsx"
+import { FloatingTag } from "./Tag.jsx"
 
 //Componente Button utilizado em TodoForm.jsx e TodoList.jsx
 export default function Button(props) {
