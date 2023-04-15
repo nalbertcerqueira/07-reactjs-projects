@@ -1,12 +1,12 @@
 import React from "react"
 import PageTitle from "../components/PageTitle.jsx"
 
-//Page: página sobre, utilizada em AppRouter.jsx
+//Página de sobre, utilizada em AppRouter.jsx
 export default function About() {
     return (
         <>
             <PageTitle title="Sobre" small="Nós" />
-            <section className="px-3 sm:px-0 mt-8 animate-display">
+            <section className="px-3 sm:px-0 my-8 animate-display">
                 <article>
                     <h3 className="font-bold text-2xl text-neutral-700 mb-2">
                         Nossa História
