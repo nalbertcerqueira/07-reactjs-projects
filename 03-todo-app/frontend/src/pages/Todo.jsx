@@ -1,5 +1,6 @@
 import propTypes from "prop-types"
-import React from "react"
+import React, { useContext } from "react"
+import { Context as TodoContext } from "../contexts/TodoContext.jsx"
 
 import ErrorMsg from "../components/Error.jsx"
 import FormLoading from "../components/Loadings/FormLoading.jsx"
@@ -8,47 +9,49 @@ import TitleLoading from "../components/Loadings/TitleLoading.jsx"
 import PageTitle from "../components/PageTitle.jsx"
 import TodoForm from "../components/Todo/TodoForm.jsx"
 import TodoList from "../components/Todo/TodoList.jsx"
-import useTodo from "../hooks/userTodo.js"
+import useTodo from "../hooks/useTodo.js"
 
-//Page: lista de tarefas utilizada em AppRoutes.jsx
-export default function Todo({ refreshData, data, error }) {
-    const { taskDescription, isFormValid, filterTag, methods } = useTodo(refreshData)
+//Página da lista de tarefas, utilizada em AppRoutes.jsx
+export default function Todo() {
+    const { todoList, error, refreshTodo } = useContext(TodoContext)
+    const { taskInput, isInputValid, filterTag, methods } = useTodo(refreshTodo)
 
     if (error)
         return (
             <ErrorMsg
                 className="animate-display"
                 status="500"
-                message="Sorry for the inconvenient, we're facing some problems in our systems."
+                message="Sorry for the inconvenient,
+                we're facing some problems in our systems."
             />
         )
 
     return (
         <>
-            {!data && (
+            {!todoList && (
                 <>
                     <TitleLoading className="animate-display" />
                     <FormLoading className="animate-display" />
                     <ListLoading className="animate-display" rows={5} />
                 </>
             )}
-            {data && (
+            {todoList && (
                 <>
                     <PageTitle title="Tarefas" small="Cadastro" />
                     <TodoForm
-                        isValid={isFormValid}
+                        isValid={isInputValid}
                         filter={filterTag}
                         removeFilter={methods.removeFilter}
-                        handleInput={methods.handleInput}
-                        handleSubmit={methods.handleSubmit}
-                        handleSearch={methods.handleSearch}
-                        taskDescription={taskDescription}
+                        handleInput={methods.handleTaskInput}
+                        handleSubmit={methods.addTask}
+                        handleSearch={methods.filterTasks}
+                        taskDescription={taskInput}
                         className="animate-display"
                     />
                     <TodoList
-                        list={data}
+                        tasks={todoList}
                         removeTask={methods.removeTask}
-                        markTask={methods.markTask}
+                        markTask={methods.updateTask}
                         className="animate-display"
                     />
                 </>
