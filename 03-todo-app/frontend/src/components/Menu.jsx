@@ -8,6 +8,7 @@ export default function Menu() {
     const { pathname } = useLocation()
     const afterStyles =
         "after:w-full after:h-0.5 after:bg-gray-50 after:block after:absolute after:rounded-lg"
+
     return (
         <header className="menu-header">
             <nav className="flex gap-6 items-center">
@@ -21,14 +22,14 @@ export default function Menu() {
                 </Link>
                 <Link
                     className={`link ${
-                        (pathname === "/todo" || pathname === "/") && afterStyles
+                        pathname === "/todo" || pathname === "/" ? afterStyles : ""
                     }`}
                     to="/todo"
                 >
                     Tarefas
                 </Link>
                 <Link
-                    className={`link ${pathname === "/about" && afterStyles}`}
+                    className={`link ${pathname === "/about" ? afterStyles : ""}`}
                     to="/about"
                 >
                     Sobre
