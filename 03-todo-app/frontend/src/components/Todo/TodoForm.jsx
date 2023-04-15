@@ -1,31 +1,16 @@
 import propTypes from "prop-types"
-import React, { useEffect, useRef, useState } from "react"
+import React from "react"
 
 import Button from "../Button.jsx"
+import { FilterTag } from "../FilterTag.jsx"
 import { PlusIcon, SearchIcon } from "../Icons.jsx"
-import { FilterTag } from "../Tags.jsx"
 
-//Formulário utilizado na página Todo.jsx
+//Formulário utilizado em Todo.jsx
 export default function TodoForm(props) {
     const inputBorder = props.isValid ? "border-neutral-300" : "border-red-500"
-    const [animation, setAnimation] = useState("")
-    const timeoutRef = useRef(null)
-
-    useEffect(() => {
-        return () => clearTimeout(timeoutRef.current)
-    }, [])
-
-    //Aplicando uma animação antes de fechar o filtro
-    function closeFilter() {
-        setAnimation("animate-[slide_0.6s_forwards_ease-in-out]")
-        timeoutRef.current = setTimeout(() => {
-            setAnimation("")
-            props.removeFilter()
-        }, 600)
-    }
 
     return (
-        <section className={`px-3 sm:px-0 mt-8 ${props.className}`}>
+        <section className={`px-3 sm:px-0 mt-8 ${props.className || ""}`}>
             <form className="flex gap-6 pr-1">
                 <input
                     className={`form-input ${inputBorder}`}
@@ -56,14 +41,12 @@ export default function TodoForm(props) {
                 </div>
             </form>
             {!props.isValid && (
-                <span className="block text-red-500 mt-2">A tarefa não pode está vazia.</span>
+                <span className="block text-red-500 mt-2">
+                    A tarefa não pode está vazia.
+                </span>
             )}
             {props.filter && (
-                <FilterTag
-                    className={animation}
-                    closeFilter={closeFilter}
-                    filter={props.filter}
-                />
+                <FilterTag closeFilter={props.removeFilter} filter={props.filter} />
             )}
         </section>
     )
