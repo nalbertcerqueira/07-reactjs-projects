@@ -31,7 +31,6 @@ export default function Newsletter() {
                     </a>
                     <a href="#" role="button" className="newsletter__social-link">
                         <FontAwesomeIcon
-                            // size="sm"
                             className="newsletter__social-icon"
                             icon={["fab", "instagram"]}
                         />
