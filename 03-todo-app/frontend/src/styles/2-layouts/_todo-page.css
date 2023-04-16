@@ -1,4 +1,4 @@
-/*Formuário de cadastro de tarefas*/
+/*Formulário de cadastro de tarefas*/
 .form-container {
     @apply px-3 sm:px-0 mt-8 animate-display;
 }
