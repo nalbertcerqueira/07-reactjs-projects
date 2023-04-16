@@ -1,13 +1,16 @@
-import propTypes from "prop-types"
-import React from "react"
+import React, { useContext } from "react"
 
+import { TodoContext } from "../../contexts/TodoContext.jsx"
+import useTodo from "../../hooks/useTodo.js"
 import Button from "../Button.jsx"
 import { FilterTag } from "../FilterTag.jsx"
 import { PlusIcon, SearchIcon } from "../Icons.jsx"
 
 //Formulário utilizado em Todo.jsx
-export default function TodoForm(props) {
-    const inputBorder = props.isValid ? "" : "form-container__input--invalid"
+export default function TodoForm() {
+    const { refreshTodo } = useContext(TodoContext)
+    const { taskInput, isInputValid, filterTag, methods } = useTodo(refreshTodo)
+    const inputBorder = isInputValid ? "" : "form-container__input--invalid"
 
     return (
         <section className="form-container">
@@ -16,13 +19,13 @@ export default function TodoForm(props) {
                     className={`form-container__input ${inputBorder}`}
                     type="text"
                     placeholder="Adicione uma tarefa"
-                    onChange={props.handleInput}
-                    value={props.taskDescription}
+                    onChange={methods.handleTaskInput}
+                    value={taskInput}
                 />
                 <div className="flex gap-3">
                     <Button
                         tag="Nova Tarefa"
-                        onClick={props.handleSubmit}
+                        onClick={methods.addTask}
                         color="blue"
                         type="submit"
                         className="btn btn--submit"
@@ -31,7 +34,7 @@ export default function TodoForm(props) {
                     </Button>
                     <Button
                         tag="Filtrar"
-                        onClick={props.handleSearch}
+                        onClick={methods.filterTasks}
                         color="cyan"
                         type="button"
                         className="btn btn--search"
@@ -40,23 +43,14 @@ export default function TodoForm(props) {
                     </Button>
                 </div>
             </form>
-            {!props.isValid && (
+            {!isInputValid && (
                 <span className="block text-red-500 mt-2">
                     A tarefa não pode está vazia.
                 </span>
             )}
-            {props.filter && (
-                <FilterTag closeFilter={props.removeFilter} filter={props.filter} />
+            {filterTag && (
+                <FilterTag closeFilter={methods.removeFilter} filter={filterTag} />
             )}
         </section>
     )
-}
-TodoForm.propTypes = {
-    isValid: propTypes.bool,
-    filter: propTypes.string,
-    taskDescription: propTypes.string,
-    handleSubmit: propTypes.func,
-    handleSearch: propTypes.func,
-    handleInput: propTypes.func,
-    removeFilter: propTypes.func
 }

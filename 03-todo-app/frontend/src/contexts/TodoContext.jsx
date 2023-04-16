@@ -1,10 +1,10 @@
 import propTypes from "prop-types"
 import React, { createContext, useEffect, useState } from "react"
 
-export const Context = createContext(null)
+export const TodoContext = createContext(null)
 
 //Contexto utilizado em App.jsx
-export default function TodoContext({ children }) {
+export default function TodoProvider({ children }) {
     const [todoList, setTodoList] = useState(null)
     const [error, setError] = useState(false)
 
@@ -48,11 +48,11 @@ export default function TodoContext({ children }) {
     }
 
     return (
-        <Context.Provider value={{ todoList, error, refreshTodo }}>
+        <TodoContext.Provider value={{ todoList, error, refreshTodo }}>
             {children}
-        </Context.Provider>
+        </TodoContext.Provider>
     )
 }
-TodoContext.propTypes = {
+TodoProvider.propTypes = {
     children: propTypes.node
 }

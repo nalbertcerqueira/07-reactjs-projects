@@ -1,6 +1,5 @@
 import propTypes from "prop-types"
 import React, { useContext } from "react"
-import { Context as TodoContext } from "../contexts/TodoContext.jsx"
 
 import ErrorMsg from "../components/Error.jsx"
 import FormLoading from "../components/Loadings/FormLoading.jsx"
@@ -9,12 +8,13 @@ import TitleLoading from "../components/Loadings/TitleLoading.jsx"
 import PageTitle from "../components/PageTitle.jsx"
 import TodoForm from "../components/Todo/TodoForm.jsx"
 import TodoList from "../components/Todo/TodoList.jsx"
+import { TodoContext } from "../contexts/TodoContext.jsx"
 import useTodo from "../hooks/useTodo.js"
 
 //Página da lista de tarefas, utilizada em AppRoutes.jsx
 export default function Todo() {
     const { todoList, error, refreshTodo } = useContext(TodoContext)
-    const { taskInput, isInputValid, filterTag, methods } = useTodo(refreshTodo)
+    const { methods } = useTodo(refreshTodo)
 
     if (error)
         return (
@@ -37,15 +37,7 @@ export default function Todo() {
             {todoList && (
                 <>
                     <PageTitle title="Tarefas" small="Cadastro" />
-                    <TodoForm
-                        isValid={isInputValid}
-                        filter={filterTag}
-                        removeFilter={methods.removeFilter}
-                        handleInput={methods.handleTaskInput}
-                        handleSubmit={methods.addTask}
-                        handleSearch={methods.filterTasks}
-                        taskDescription={taskInput}
-                    />
+                    <TodoForm />
                     <TodoList
                         tasks={todoList}
                         removeTask={methods.removeTask}
