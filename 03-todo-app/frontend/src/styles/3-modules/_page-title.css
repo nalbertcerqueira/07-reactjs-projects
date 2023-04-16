@@ -1,0 +1,13 @@
+.title-container {
+    @apply px-3 sm:px-0 mt-8 pb-4 border-b-2 border-neutral-200
+    shadow-neutral-50 animate-display;
+    box-shadow: 0 2px 2px -2px #cfcfcf;
+}
+
+.title-container__title {
+    @apply font-bold text-3xl text-neutral-700;
+}
+
+.title-container__small {
+    @apply text-neutral-500 text-2xl font-semibold;
+}

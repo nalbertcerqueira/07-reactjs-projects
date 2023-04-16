@@ -6,30 +6,26 @@ import { CalendarIcon } from "./Icons.jsx"
 //Componente Menu utilizado em App.jsx
 export default function Menu() {
     const { pathname } = useLocation()
-    const afterStyles =
-        "after:w-full after:h-0.5 after:bg-gray-50 after:block after:absolute after:rounded-lg"
-
+    const linkSelected = "header__nav-link--selected"
     return (
-        <header className="menu-header">
-            <nav className="flex gap-6 items-center">
-                <Link
-                    to="/"
-                    className="whitespace-nowrap flex hover:text-gray-50
-                    transition-all text-xl"
-                >
-                    <CalendarIcon className="mr-2 flex items-center" />
+        <header className="header">
+            <nav className="header__navbar">
+                <Link to="/" className="header__brand-link">
+                    <CalendarIcon className="header__brand-icon" />
                     Todo App
                 </Link>
                 <Link
-                    className={`link ${
-                        pathname === "/todo" || pathname === "/" ? afterStyles : ""
+                    className={`header__nav-link ${
+                        pathname === "/todo" || pathname === "/" ? linkSelected : ""
                     }`}
                     to="/todo"
                 >
                     Tarefas
                 </Link>
                 <Link
-                    className={`link ${pathname === "/about" ? afterStyles : ""}`}
+                    className={`header__nav-link ${
+                        pathname === "/about" ? linkSelected : ""
+                    }`}
                     to="/about"
                 >
                     Sobre

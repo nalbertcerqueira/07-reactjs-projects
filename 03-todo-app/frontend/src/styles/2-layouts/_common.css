@@ -1,0 +1,33 @@
+/*Container da aplicação*/
+.app-container {
+    @apply px-0 sm:px-12 min-w-360 max-w-7xl m-auto;
+}
+
+/*Header da página*/
+.header {
+    @apply bg-neutral-800 sm:rounded-lg py-4 px-6 flex gap-6
+    items-center min-w-fit;
+}
+
+.header__brand-link {
+    @apply text-gray-300 whitespace-nowrap flex hover:text-gray-50 text-xl
+    transition-all;
+}
+
+.header__brand-icon {
+    @apply mr-2 flex items-center;
+}
+
+.header__navbar {
+    @apply flex gap-6 items-center;
+}
+
+.header__nav-link {
+    @apply text-gray-300 hover:text-gray-50 relative transition-all;
+    @apply after:w-full after:h-0.5 after:bg-gray-50 after:block after:absolute
+    after:rounded-lg after:opacity-0 after:transition;
+}
+
+.header__nav-link--selected {
+    @apply after:opacity-100;
+}

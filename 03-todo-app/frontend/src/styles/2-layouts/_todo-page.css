@@ -1,0 +1,45 @@
+/*Formuário de cadastro de tarefas*/
+.form-container {
+    @apply px-3 sm:px-0 mt-8 animate-display;
+}
+
+.form-container__input {
+    @apply border-2 rounded-md outline-none focus:border-sky-600 transition-all
+    w-full px-4 py-2 border-neutral-300;
+}
+
+.form-container__input--invalid {
+    @apply border-red-500;
+}
+
+/*Lista de tarefas*/
+.todo-container {
+    @apply px-2 sm:px-0 mt-8 max-h-70-screen overflow-x-hidden animate-display;
+}
+
+.todo-container__thead-row {
+    @apply text-left text-neutral-700 border-b-2 border-neutral-300;
+}
+
+.todo-container__task {
+    @apply py-2 border-b-2 border-neutral-200 text-neutral-700 translate-x-5
+    pr-2 break-all;
+}
+
+.todo-container__task--done {
+    @apply line-through decoration-green-600 decoration-2 text-neutral-400;
+}
+
+.todo-container__marker {
+    @apply absolute h-5/6 w-1 -left-4 top-2/4 -translate-y-2/4 rounded-full
+    bg-neutral-400;
+}
+
+.todo-container__marker--done {
+    @apply bg-green-600;
+}
+
+.todo-container__actions {
+    @apply py-2 px-2 whitespace-nowrap border-b-2 border-neutral-200 pr-8
+    text-neutral-700 text-right w-32;
+}

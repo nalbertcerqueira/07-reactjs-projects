@@ -5,7 +5,6 @@ import { CloseIcon } from "./Icons.jsx"
 
 //Componente utilizado em Form.jsx
 export function FilterTag(props) {
-    const animation = "animate-[slide_0.6s_forwards_ease-in-out]"
     const [willClose, setWillClose] = useState(false)
 
     useEffect(() => {
@@ -15,14 +14,12 @@ export function FilterTag(props) {
     }, [willClose])
 
     return (
-        <div className={`filter-tag ${willClose ? animation : ""}`}>
-            <span className="font-medium"></span>
-            {props.filter}
+        <div className={`filter-tag ${willClose ? "filter-tag--slide" : ""}`}>
+            <span className="overflow-hidden text-ellipsis">{props.filter}</span>
             <Button
                 type="button"
                 onClick={() => setWillClose(true)}
-                className="rounded border border-transparent hover:border-neutral-500
-                transition-all"
+                className="filter-tag__btn"
             >
                 <CloseIcon className="stroke-neutral-700" />
             </Button>

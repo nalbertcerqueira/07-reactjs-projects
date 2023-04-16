@@ -6,12 +6,10 @@ export default function About() {
     return (
         <>
             <PageTitle title="Sobre" small="Nós" />
-            <section className="px-3 sm:px-0 my-8 animate-display">
+            <section className="about-container">
                 <article>
-                    <h3 className="font-bold text-2xl text-neutral-700 mb-2">
-                        Nossa História
-                    </h3>
-                    <p className="text-neutral-700 text-justify">
+                    <h3 className="about-container__topic-title">Nossa História</h3>
+                    <p className="about-container__topic-text">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
                         illo magni a dignissimos tempore ipsam adipisci voluptatibus
                         voluptas provident aperiam maiores, facilis sed, aliquam totam
@@ -19,10 +17,8 @@ export default function About() {
                     </p>
                 </article>
                 <article className="mt-4">
-                    <h3 className="font-bold text-2xl text-neutral-700 mb-2">
-                        Missão e Visão
-                    </h3>
-                    <p className="text-neutral-700 text-justify">
+                    <h3 className="about-container__topic-title">Missão e Visão</h3>
+                    <p className="about-container__topic-text">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
                         illo magni a dignissimos tempore ipsam adipisci voluptatibus
                         voluptas provident aperiam maiores, facilis sed, aliquam totam
@@ -30,8 +26,8 @@ export default function About() {
                     </p>
                 </article>
                 <article className="mt-4">
-                    <h3 className="font-bold text-2xl text-neutral-700 mb-2">Imprensa</h3>
-                    <p className="text-neutral-700 text-justify">
+                    <h3 className="about-container__topic-title">Imprensa</h3>
+                    <p className="about-container__topic-text">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
                         illo magni a dignissimos tempore ipsam adipisci voluptatibus
                         voluptas provident aperiam maiores, facilis sed, aliquam totam

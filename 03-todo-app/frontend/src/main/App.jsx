@@ -8,7 +8,7 @@ import Routes from "./AppRoutes.jsx"
 export default function App() {
     return (
         <TodoContext>
-            <main className="px-0 sm:px-12 min-w-360 max-w-7xl m-auto">
+            <main className="app-container">
                 <BrowserRouter>
                     <Menu />
                     <Routes />

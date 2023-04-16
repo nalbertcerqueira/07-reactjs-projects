@@ -19,7 +19,6 @@ export default function Todo() {
     if (error)
         return (
             <ErrorMsg
-                className="animate-display"
                 status="500"
                 message="Sorry for the inconvenient,
                 we're facing some problems in our systems."
@@ -30,9 +29,9 @@ export default function Todo() {
         <>
             {!todoList && (
                 <>
-                    <TitleLoading className="animate-display" />
-                    <FormLoading className="animate-display" />
-                    <ListLoading className="animate-display" rows={5} />
+                    <TitleLoading />
+                    <FormLoading />
+                    <ListLoading rows={5} />
                 </>
             )}
             {todoList && (
@@ -46,13 +45,11 @@ export default function Todo() {
                         handleSubmit={methods.addTask}
                         handleSearch={methods.filterTasks}
                         taskDescription={taskInput}
-                        className="animate-display"
                     />
                     <TodoList
                         tasks={todoList}
                         removeTask={methods.removeTask}
                         markTask={methods.updateTask}
-                        className="animate-display"
                     />
                 </>
             )}

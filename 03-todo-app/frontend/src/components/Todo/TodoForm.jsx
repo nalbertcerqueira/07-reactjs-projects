@@ -7,13 +7,13 @@ import { PlusIcon, SearchIcon } from "../Icons.jsx"
 
 //Formulário utilizado em Todo.jsx
 export default function TodoForm(props) {
-    const inputBorder = props.isValid ? "border-neutral-300" : "border-red-500"
+    const inputBorder = props.isValid ? "" : "form-container__input--invalid"
 
     return (
-        <section className={`px-3 sm:px-0 mt-8 ${props.className || ""}`}>
+        <section className="form-container">
             <form className="flex gap-6 pr-1">
                 <input
-                    className={`form-input ${inputBorder}`}
+                    className={`form-container__input ${inputBorder}`}
                     type="text"
                     placeholder="Adicione uma tarefa"
                     onChange={props.handleInput}
@@ -25,7 +25,7 @@ export default function TodoForm(props) {
                         onClick={props.handleSubmit}
                         color="blue"
                         type="submit"
-                        className="self-center p-2 rounded-sm transition-all"
+                        className="btn btn--submit"
                     >
                         <PlusIcon className="stroke-white" />
                     </Button>
@@ -34,7 +34,7 @@ export default function TodoForm(props) {
                         onClick={props.handleSearch}
                         color="cyan"
                         type="button"
-                        className="self-center p-2 rounded-sm transition-all"
+                        className="btn btn--search"
                     >
                         <SearchIcon className="stroke-white" />
                     </Button>
@@ -54,8 +54,7 @@ export default function TodoForm(props) {
 TodoForm.propTypes = {
     isValid: propTypes.bool,
     filter: propTypes.string,
-    className: propTypes.string,
-    taskDescription: propTypes.oneOfType([propTypes.string, propTypes.number]),
+    taskDescription: propTypes.string,
     handleSubmit: propTypes.func,
     handleSearch: propTypes.func,
     handleInput: propTypes.func,

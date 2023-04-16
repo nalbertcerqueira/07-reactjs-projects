@@ -7,7 +7,8 @@ import { DoneIcon, TrashIcon, UndoIcon } from "../Icons"
 //Componente utilizado em TodoList.jsx
 export default function TodoRow({ task, markTask, removeTask }) {
     const [willRemove, setWillRemove] = useState(false)
-    const markerStyle = task.done ? "bg-green-600" : "bg-neutral-400"
+    const taskDoneMarker = task.done ? "todo-container__marker--done" : ""
+    const taksDone = task.done ? "todo-container__task--done" : ""
 
     //Removendo de fato a tarefa após finalizar a animação
     useEffect(() => {
@@ -18,17 +19,16 @@ export default function TodoRow({ task, markTask, removeTask }) {
 
     return (
         <tr className={`relative ${willRemove ? "animate-slide" : ""}`}>
-            <td className={`table-data ${task.done ? "task-done description-done" : ""}`}>
-                <span className={`task-mark ${markerStyle}`}></span>
+            <td className={`todo-container__task ${taksDone}`}>
+                <span className={`todo-container__marker ${taskDoneMarker}`}></span>
                 {task.taskDescription}
             </td>
-            <td className="td-actions">
+            <td className="todo-container__actions">
                 <Button
                     tag="Excluir tarefa"
                     hide={!task.done}
                     onClick={() => setWillRemove(true)}
-                    color="red"
-                    className="p-1 rounded-sm mr-3 transition-all"
+                    className="btn btn--delete mr-3"
                     type="button"
                 >
                     <TrashIcon className="stroke-white" />
@@ -37,8 +37,7 @@ export default function TodoRow({ task, markTask, removeTask }) {
                     tag="Concluir tarefa"
                     hide={task.done}
                     onClick={() => markTask({ taskId: task.id, isDone: true })}
-                    color="green"
-                    className="p-1 rounded-sm transition-all"
+                    className="btn btn--confirm"
                     type="button"
                 >
                     <DoneIcon className="stroke-white" />
@@ -47,8 +46,7 @@ export default function TodoRow({ task, markTask, removeTask }) {
                     tag="Desfazer"
                     hide={!task.done}
                     onClick={() => markTask({ taskId: task.id, isDone: false })}
-                    color="yellow"
-                    className="p-1 rounded-sm transition-all"
+                    className="btn btn--undo"
                     type="button"
                 >
                     <UndoIcon className="stroke-white" />

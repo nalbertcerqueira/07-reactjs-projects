@@ -1,0 +1,11 @@
+.error-container {
+    @apply animate-display text-center mt-8 max-w-xl m-auto;
+}
+
+.error-container__title {
+    @apply font-bold text-3xl text-neutral-700;
+}
+
+.error-container__msg {
+    @apply text-neutral-500 text-2xl font-semibold;
+}

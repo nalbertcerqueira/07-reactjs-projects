@@ -4,12 +4,10 @@ import React from "react"
 //Componente utilizado em About.jsx e Todo.jsx
 export default function PageTitle(props) {
     return (
-        <section className="page-header">
-            <h2 className="font-bold text-3xl text-neutral-700">
+        <section className="title-container">
+            <h2 className="title-container__title">
                 {props.title}{" "}
-                <span className="text-neutral-500 text-2xl font-semibold">
-                    {props.small}
-                </span>
+                <span className="title-container__small">{props.small}</span>
             </h2>
         </section>
     )

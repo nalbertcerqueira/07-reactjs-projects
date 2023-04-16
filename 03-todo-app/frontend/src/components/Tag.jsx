@@ -3,7 +3,7 @@ import React from "react"
 
 //Componente utilizado em Button.jsx
 export function FloatingTag(props) {
-    return <span className={`button-tag ${props.className || ""}`}>{props.tag}</span>
+    return <span className="button-tag">{props.tag}</span>
 }
 FloatingTag.propTypes = {
     tag: propTypes.node,

@@ -6,25 +6,18 @@ export default function ListLoading(props) {
     function renderRows(rows) {
         return new Array(rows).fill(1).map((row, i) => {
             return (
-                <div key={i} className="list-loading-container">
-                    <span className="block rounded-md w-32 sm:w-60 h-4 loading-gradient" />
+                <div key={i} className="todo-loading__inner">
+                    <span className="todo-loading__bar loading-gradient" />
                     <div className="flex gap-3">
-                        <span className="block rounded-md w-9 h-9 bg-neutral-300" />
-                        <span className="block rounded-md w-9 h-9 bg-neutral-300" />
+                        <span className="todo-loading__btn" />
+                        <span className="todo-loading__btn" />
                     </div>
                 </div>
             )
         })
     }
-    return (
-        <div
-            className={`px-3 sm:px-0 mt-8 h-72 rounded-x w-full ${props.className || ""}`}
-        >
-            {renderRows(props.rows)}
-        </div>
-    )
+    return <div className="todo-loading">{renderRows(props.rows)}</div>
 }
 ListLoading.propTypes = {
-    className: propTypes.string,
     rows: propTypes.number.isRequired
 }

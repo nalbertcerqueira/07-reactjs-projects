@@ -1,0 +1,56 @@
+/*Loading do título da página*/
+.title-loading {
+    @apply px-3 sm:px-0 mt-9 w-full pb-5 border-b-2 border-neutral-200
+    animate-display;
+}
+
+.title-loading__bar {
+    @apply block w-56 sm:w-64 h-8 bg-neutral-300 rounded-md;
+}
+
+/*Loading do formulário*/
+.form-loading {
+    @apply px-3 sm:px-0 w-full flex items-center gap-6 mt-8 animate-display;
+}
+
+.form-loading__bar {
+    @apply block w-full h-9 rounded-md;
+}
+
+.form-loading__btn {
+    @apply block h-11 w-11 bg-neutral-300 rounded-md shrink-0;
+}
+
+/*Loading da lista de tarefas*/
+.todo-loading {
+    @apply px-3 sm:px-0 mt-8 h-72 w-full animate-display;
+}
+
+.todo-loading__inner {
+    @apply border-b-2 border-neutral-300 pl-4 pr-6 py-2 flex justify-between
+    items-center gap-6;
+}
+
+.todo-loading__bar {
+    @apply block rounded-md w-32 sm:w-60 h-4;
+}
+
+.todo-loading__btn {
+    @apply block rounded-md w-9 h-9 bg-neutral-300;
+}
+
+/*Efeito de loading*/
+.loading-gradient {
+    background-size: 200% 100%;
+    background-image: linear-gradient(135deg, #d4d4d4 8%, #c0bfbf 18%, #d4d4d4 33%);
+    animation: gradient 2s linear infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 200% 100%;
+    }
+    100% {
+        background-position: -200% 100%;
+    }
+}
