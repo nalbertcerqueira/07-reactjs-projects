@@ -8,7 +8,8 @@ module.exports = {
         "eslint:recommended",
         "plugin:react/recommended",
         "prettier",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:react-hooks/recommended"
     ],
     overrides: [],
     parserOptions: {
