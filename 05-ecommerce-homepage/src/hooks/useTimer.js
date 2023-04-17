@@ -1,17 +1,22 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 //Hook utilizado parar criar a funcionalidade de contagem regressiva
 //da promoção em Deal.jsx
 export default function useTimer(duration) {
     const [time, setTime] = useState({ days: 0, hours: 0, min: 0, sec: 0 })
+    const timerRef = useRef(null)
 
-    function countdown() {
+    useEffect(() => {
+        countdown(duration)
+        return () => clearInterval(timerRef.current)
+    }, [duration])
+
+    function countdown(duration) {
         const endDate = new Date(Date.now() + duration)
-        const interval = setInterval(() => {
+        timerRef.current = setInterval(() => {
             if (new Date() > endDate) return
 
             const remainingTime = endDate - new Date()
-
             const daysRest = remainingTime % (24 * 3600 * 1000)
             const hoursRest = daysRest % (3600 * 1000)
             const minutesRest = hoursRest % (60 * 1000)
@@ -23,13 +28,7 @@ export default function useTimer(duration) {
                 sec: Math.floor(minutesRest / 1000)
             })
         }, 1000)
-
-        return () => clearInterval(interval)
     }
 
-    return {
-        time,
-        duration,
-        countdown
-    }
+    return time
 }

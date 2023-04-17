@@ -1,13 +1,11 @@
 import propTypes from "prop-types"
-import React, { useEffect } from "react"
+import React from "react"
 import useTimer from "../hooks/useTimer"
 
 //Componente utilizado em Deal.jsx em <main></main>
 export default function Timer({ duration }) {
     //Utilizando hook useTimer para criar a funcionalidade de contagem regressiva
-    const { time, countdown } = useTimer(duration)
-
-    useEffect(countdown, [duration])
+    const time = useTimer(duration)
 
     return (
         <div className="timer">
