@@ -1,30 +1,28 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image"
+import { useContext } from "react"
 
+import profileImg from "@/public/profile.jpg"
+import { UserContext } from "@/src/contexts/providers/UserContext"
 import useAuth from "@/src/hooks/useAuth"
 import useUserMenu from "@/src/hooks/useUserMenu"
-import { useContext, useEffect } from "react"
-import { Context as UserContext } from "../../contexts/UserContext"
 import Button from "../common/Button"
 
 //Componente utilizado em Header.jsx
 export default function UserMenu() {
     const { username, email } = useContext(UserContext)
+    const { menu, toggleMenu } = useUserMenu()
     const { methods } = useAuth()
-    const { menu, bodyEvent, toggleMenu } = useUserMenu()
-
-    useEffect(bodyEvent, [])
 
     return (
         <div className="user-menu relative ml-auto h-full">
-            <div onClick={toggleMenu} className="user-avatar">
+            <button type="button" onClick={toggleMenu} className="user-avatar">
                 <span
                     className="shrink-0 block h-9 w-9 rounded-full overflow-hidden border-2
                     border-white/30"
                 >
-                    <img
+                    <Image
                         className="h-full w-full"
-                        src="/profile.jpg"
+                        src={profileImg}
                         alt="user profile picture"
                     />
                 </span>
@@ -33,13 +31,13 @@ export default function UserMenu() {
                         {username}
                     </p>
                 </div>
-            </div>
+            </button>
             <div className={`drop-down ${menu ? "open" : ""}`}>
                 <section className="p-3">
                     <span className="mb-3 block m-auto w-24 h-24 overflow-hidden rounded-full">
-                        <img
+                        <Image
                             className="h-full"
-                            src="/profile.jpg"
+                            src={profileImg}
                             alt="user profile picture"
                         />
                     </span>

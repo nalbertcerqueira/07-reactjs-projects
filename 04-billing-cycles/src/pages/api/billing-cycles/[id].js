@@ -25,7 +25,7 @@ export default function handler(req, res) {
     }
 }
 
-//Consumo de dados de um cíclo de pagamentos com base em seu ID
+//Consumo de dados de um ciclo de pagamentos com base em seu ID
 async function handleGET(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const { session_id } = cookieParser(req.headers.cookie)
@@ -61,7 +61,7 @@ async function handleGET(req, res) {
     return res.status(200).json({ billing: foundBilling })
 }
 
-//Alterando os dados de um cíclo de pagamentos com base no ID
+//Alterando os dados de um ciclo de pagamentos com base no ID
 async function handlePUT(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const body = JSON.parse(JSON.stringify(req.body))

@@ -1,7 +1,7 @@
 import propTypes from "prop-types"
 
 //Componente utilizado para exibir o consolidado de créditos,
-//débitos e saldo em index.jsx
+//débitos e o saldo resultante em index.jsx
 export default function ValueBox(props) {
     return (
         <div

@@ -1,13 +1,19 @@
 import { useState } from "react"
 import { toast } from "react-toastify"
 
-const flagsInitialState = { username: true, email: true, password: true, passConfirm: true }
-const errorsInitialState = { username: "", email: "", password: "", passConfirm: "" }
+const errorsInitialState = { username: "", email: "", password: "", confirmPassword: "" }
+const userInitialStatate = { username: "", email: "", password: "", confirmPassword: "" }
+const flagsInitialState = {
+    username: true,
+    email: true,
+    password: true,
+    confirmPassword: true
+}
 const defaultErrorsMsgs = {
     username: "O nome deve conter no mínimo 4 caracteres.",
     email: "Insira um email no formato exemplo@email.com.",
     password: "Senha de no mínimo 6 dígitos com letras e números.",
-    passConfirm: "As senhas não conferem."
+    confirmPassword: "As senhas não conferem."
 }
 const toastMsgs = {
     200: "Parabéns! O seu cadastro foi realizado! Agora é só seguir com seu login.",
@@ -18,28 +24,26 @@ const toastMsgs = {
 
 //Hook utilizado nas páginas login.jsx e signup.jsx
 export default function useAuth() {
-    const [email, setEmail] = useState("")
-    const [username, setUsername] = useState("")
-    const [password, setPassword] = useState("")
-    const [passConfirm, setPassConfirm] = useState("")
-
+    const [user, setUser] = useState(userInitialStatate)
     const [isSubmiting, setIsSubmiting] = useState(false)
     const [flags, setFlags] = useState(flagsInitialState)
     const [errorMsgs, setErrorMsgs] = useState(errorsInitialState)
 
     //Validando os inputs durante o processo de cadastro/login do usuário
-    function validateSignupInputs() {
+    function validateInputs() {
+        const { username, email, password, confirmPassword } = user
         const newFlags = {
             username: username.length >= 4 ? true : false,
             email: email.match(/\S+@\S+\.\S+/) ? true : false,
-            passConfirm: passConfirm === password && passConfirm !== "" ? true : false,
+            confirmPassword:
+                confirmPassword === password && confirmPassword !== "" ? true : false,
             password: password.length >= 6 && password.match(/^(?=.*[a-zA-Z])(?=.*\d).+$/)
         }
         setErrorMsgs({
             username: newFlags.username ? "" : defaultErrorsMsgs.username,
             email: newFlags.email ? "" : defaultErrorsMsgs.email,
             password: newFlags.password ? "" : defaultErrorsMsgs.password,
-            passConfirm: newFlags.passConfirm ? "" : defaultErrorsMsgs.passConfirm
+            confirmPassword: newFlags.confirmPassword ? "" : defaultErrorsMsgs.confirmPassword
         })
         setFlags({ ...flags, ...newFlags })
 
@@ -47,17 +51,22 @@ export default function useAuth() {
     }
     //Resetando o formulário ao seu estado inicial
     function resetForm() {
-        ;[setUsername(""), setEmail(""), setPassword(""), setPassConfirm("")]
-        ;[setFlags(flagsInitialState), setErrorMsgs(errorsInitialState)]
+        setUser(userInitialStatate)
+        setFlags(flagsInitialState)
+        setErrorMsgs(errorsInitialState)
+    }
+    //Controlando os inputs do formulário
+    function handleFieldChange(event) {
+        const fieldName = event.target.name
+        const fieldValue = event.target.value
+        setUser({ ...user, [fieldName]: fieldValue })
     }
 
     async function submit(body, path) {
         return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${path}`, {
             method: "POST",
             body: JSON.stringify(body),
-            headers: {
-                "Content-Type": "application/json"
-            }
+            headers: { "Content-Type": "application/json" }
         })
             .then(async (response) => {
                 console.log(await response.json())
@@ -75,6 +84,7 @@ export default function useAuth() {
     //Efetuando o login do usuário
     async function login(event) {
         event.preventDefault()
+        const { email, password } = user
         const status = await submit({ email, password }, "api/login")
 
         setIsSubmiting(true)
@@ -105,23 +115,25 @@ export default function useAuth() {
     }
     //Efetuando o registro do usuário
     async function signup(event) {
-        const body = { username, email, password, confirmPassword: passConfirm }
         event.preventDefault()
 
-        if (!validateSignupInputs()) {
+        if (!validateInputs()) {
             return toast.error(toastMsgs.inputValidationFailed, { toastId: "submit-failed" })
         }
 
         setIsSubmiting(true)
-        const status = await submit(body, "api/signup")
+        const status = await submit(user, "api/signup")
         switch (status) {
             case 200:
                 toast.success(toastMsgs[200])
                 return setTimeout(() => location.assign("/login"), 2000)
 
             case 400:
-                setFlags({ ...flagsInitialState, passConfirm: false })
-                setErrorMsgs({ ...errorsInitialState, passConfirm: "As senhas não conferem." })
+                setFlags({ ...flagsInitialState, confirmPassword: false })
+                setErrorMsgs({
+                    ...errorsInitialState,
+                    confirmPassword: "As senhas não conferem."
+                })
                 break
 
             case 500:
@@ -157,10 +169,7 @@ export default function useAuth() {
     }
 
     return {
-        username,
-        email,
-        password,
-        passConfirm,
+        user,
         flags,
         errorMsgs,
         isSubmiting,
@@ -170,10 +179,7 @@ export default function useAuth() {
             signup,
             resetForm,
             changeFlags: (flags) => setFlags(flags),
-            changeEmail: (event) => setEmail(event.target.value),
-            changeUser: (event) => setUsername(event.target.value),
-            changePassword: (event) => setPassword(event.target.value),
-            changePassConfirm: (event) => setPassConfirm(event.target.value)
+            handleFieldChange
         }
     }
 }

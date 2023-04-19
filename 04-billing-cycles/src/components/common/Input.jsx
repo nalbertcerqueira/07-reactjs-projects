@@ -13,7 +13,6 @@ export default function Input(props) {
             )}
             <div className="relative">
                 <input
-                    data-id={props.datasetId}
                     readOnly={props.readOnly || false}
                     placeholder={props.placeholder}
                     onChange={props.onChange}
@@ -31,7 +30,6 @@ export default function Input(props) {
 }
 Input.propTypes = {
     id: propTypes.string,
-    datasetId: propTypes.any,
     name: propTypes.string,
     className: propTypes.string,
     value: propTypes.oneOfType([propTypes.string, propTypes.number]),

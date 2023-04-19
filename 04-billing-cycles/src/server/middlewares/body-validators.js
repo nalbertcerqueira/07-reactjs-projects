@@ -1,7 +1,7 @@
 import { body, validationResult } from "express-validator"
 
 //Validando o corpo de requisição para adições (POST) ou alterações (PUT)
-//de cíclos de pagamentos
+//de ciclos de pagamentos
 export async function validateBillingCycle(req, res, handler) {
     const billingScheme = ["id", "name", "month", "year", "credits", "debts"]
     const billingValidations = [

@@ -28,7 +28,7 @@ export async function getServerSideProps({ req }) {
 
 Login.PageTemplate = AuthTemplate
 export default function Login() {
-    const { email, isSubmiting, password, flags, errorMsgs, methods } = useAuth()
+    const { user, isSubmiting, flags, errorMsgs, methods } = useAuth()
 
     return (
         <>
@@ -38,8 +38,8 @@ export default function Login() {
                     <Input
                         label="Email"
                         labelClassName="auth-input-label"
-                        value={email}
-                        onChange={methods.changeEmail}
+                        value={user.email}
+                        onChange={methods.handleFieldChange}
                         placeholder="exemplo@meuemail.com"
                         type="text"
                         id="email"
@@ -58,8 +58,8 @@ export default function Login() {
                     <Input
                         label="Senha"
                         labelClassName="auth-input-label"
-                        value={password}
-                        onChange={methods.changePassword}
+                        value={user.password}
+                        onChange={methods.handleFieldChange}
                         placeholder="Senha"
                         type="password"
                         id="password"

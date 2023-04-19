@@ -1,8 +1,14 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 //Hook utilizado em UserMenu.jsx
 export default function useUserMenu() {
     const [menu, setMenu] = useState(false)
+
+    useEffect(() => {
+        const body = document.body
+        body.addEventListener("click", closeMenu)
+        return () => body.removeEventListener("click", closeMenu)
+    }, [])
 
     //Função utilizada para criar o efeito toggle no menu do usuário.
     function toggleMenu() {
@@ -16,16 +22,8 @@ export default function useUserMenu() {
         if (firstCondition && secondCondition) return setMenu(false)
     }
 
-    //Adicionando closeMenu ao evento de click no body.
-    function bodyEvent() {
-        const body = document.body
-        body.addEventListener("click", closeMenu)
-        return () => body.removeEventListener("click", closeMenu)
-    }
-
     return {
         menu,
-        bodyEvent,
         closeMenu,
         toggleMenu
     }

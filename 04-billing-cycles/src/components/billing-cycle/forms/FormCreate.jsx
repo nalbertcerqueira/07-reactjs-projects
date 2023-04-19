@@ -1,64 +1,62 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import propTypes from "prop-types"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 
-import Buttton from "../../common/Button"
-import Input from "../../common/Input"
-import ValidationMsg from "../../common/ValidationMsg"
+import { FormContext } from "@/src/contexts/providers/FormContext"
+import { TabsContext } from "@/src/contexts/providers/TabsContext"
+import useFormActions from "@/src/hooks/useFormActions"
+import useTabsActions from "@/src/hooks/useTabsActions"
+
+import Buttton from "@/src/components/common/Button"
+import Input from "@/src/components/common/Input"
+import ValidationMsg from "@/src/components/common/ValidationMsg"
 import CreditList from "../credit-list/CreditList"
 import DebtList from "../debt-list/DebtList"
 import ValuesSummary from "./ValuesSummary"
 
-import { Context as FormsContext } from "../../../contexts/FormsContext"
-import {
-    calculateSummary,
-    formatBillingCycleISO,
-    formatValuePTBR,
-    toastEmmitter
-} from "../../../utils/client"
+import { formatBillingCycleISO, toastEmmitter } from "@/src/utils/client"
 
-//Componente utilizado para o cadastro de um novo cíclo de pagamentos
+//Componente utilizado para o cadastro de um novo ciclo de pagamentos
 //em billing-cycle.jsx
 export default function FormCreate(props) {
-    const { methods, name, month, year, summary, flags, creditList, debtList } =
-        useContext(FormsContext)
+    const { formState, formDispatch } = useContext(FormContext)
+    const { tabsDispatch } = useContext(TabsContext)
+    const formActions = useFormActions(formDispatch)
+    const tabsActions = useTabsActions(tabsDispatch)
 
-    useEffect(() => {
-        const credits = creditList.data
-        const debts = debtList.data
-        methods.changeSummary(calculateSummary({ credits, debts }))
-    }, [creditList.data, debtList.data])
+    const isFormValid = !Object.values(formState.validations).includes(false)
 
     async function submitForm(event) {
         event.preventDefault()
 
-        if (methods.validateAllForm() === false) {
+        if (!formActions.validateForm(formState)) {
             return toastEmmitter({
                 id: "failed-create",
-                message: "Por favor, corrija os erros do forumlário antes de enviá-lo."
+                message: "Por favor, corrija os erros do formulário antes de enviá-lo."
             })
         }
-        const credits = formatBillingCycleISO(creditList.data)
-        const debts = formatBillingCycleISO(debtList.data)
-        await props.onSubmit({ name, month, year, credits, debts })
+        const credits = formatBillingCycleISO(formState.credits)
+        const debts = formatBillingCycleISO(formState.debts)
+        const { id, name, month, year } = formState
+        await props.onSubmit({ id, name, month, year, credits, debts })
 
-        methods.resetForm()
+        formActions.resetForm()
+        tabsActions.resetTabs()
     }
 
     return (
-        <form className="text-base min-w-[480px]" onSubmit={submitForm}>
+        <form className="text-base min-w-[480px]">
             <div className="flex flex-col md:flex-row gap-3">
                 <div className="w-full">
                     <Input
                         placeholder="Ciclo de pagamento"
-                        value={name}
+                        value={formState.name}
                         id="name"
                         name="name"
                         type="text"
                         label="Nome"
-                        onChange={methods.changeName}
+                        onChange={formActions.handleFieldChange}
                     />
-                    {!flags.name && (
+                    {!formState.validations.name && (
                         <ValidationMsg
                             className="mt-1"
                             message="O nome deve ter no minímo 4 caracteres."
@@ -68,14 +66,14 @@ export default function FormCreate(props) {
                 <div className="w-full md:w-2/4">
                     <Input
                         placeholder="Mês de ocorrência"
-                        value={month}
+                        value={formState.month}
                         id="month"
                         name="month"
                         type="tel"
                         label="Mês"
-                        onChange={methods.changeMonth}
+                        onChange={formActions.handleFieldChange}
                     />
-                    {!flags.month && (
+                    {!formState.validations.month && (
                         <ValidationMsg
                             className="mt-1"
                             message="Apenas valores entre 1 e 12."
@@ -85,14 +83,14 @@ export default function FormCreate(props) {
                 <div className="w-full md:w-2/4">
                     <Input
                         placeholder="Ano de ocorrência"
-                        value={year}
+                        value={formState.year}
                         id="year"
                         name="year"
                         type="tel"
                         label="Ano"
-                        onChange={methods.changeYear}
+                        onChange={formActions.handleFieldChange}
                     />
-                    {!flags.year && (
+                    {!formState.validations.year && (
                         <ValidationMsg
                             className="mt-1"
                             message="Apenas valores entre 1970 e 2100."
@@ -101,27 +99,21 @@ export default function FormCreate(props) {
                 </div>
             </div>
             <div className="mt-6 flex gap-3 flex-col lg:flex-row w-full">
-                <ValuesSummary
-                    credit={formatValuePTBR(summary.credit)}
-                    debt={formatValuePTBR(summary.debt)}
-                    balance={formatValuePTBR(summary.balance)}
-                />
+                <ValuesSummary />
             </div>
             <div className="mt-6 flex gap-3 flex-col xl:flex-row">
-                <CreditList fieldLegend="Créditos" data={creditList} />
-                <DebtList fieldLegend="Débitos" data={debtList} />
+                <CreditList fieldLegend="Créditos" credits={formState.credits} />
+                <DebtList fieldLegend="Débitos" debts={formState.debts} />
             </div>
             <div className="mt-6 flex gap-3 items-center">
-                <Buttton className="create-form-button" type="submit">
+                <Buttton onClick={submitForm} className="create-form-button" type="submit">
                     Enviar
                 </Buttton>
                 <Buttton
-                    onClick={() => {
-                        methods.clearAllErrors()
-                    }}
+                    onClick={formActions.clearErrors}
                     className="animate-[show_0.1s_forwards] clear-form-button"
                     type="button"
-                    optionalHandler={methods.isFormValid}
+                    isFormValid={isFormValid}
                 >
                     Limpar
                 </Buttton>

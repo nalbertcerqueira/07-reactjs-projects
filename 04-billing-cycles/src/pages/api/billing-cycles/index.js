@@ -25,7 +25,7 @@ export default function handler(req, res) {
     }
 }
 
-//Adicionando um novo cíclo de pagamentos
+//Adicionando um novo ciclo de pagamentos
 async function handlePOST(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const body = JSON.parse(JSON.stringify(req.body))
@@ -56,7 +56,7 @@ async function handlePOST(req, res) {
         }
     })
 
-    //Gerando um id referente ao cíclo de pagamento
+    //Gerando um id referente ao ciclo de pagamento
     let newBillingId = generateHash(15)
     let billingIdRepeated = foundUser.billings.find((billing) => billing.id === newBillingId)
     while (billingIdRepeated) {
@@ -64,7 +64,7 @@ async function handlePOST(req, res) {
         billingIdRepeated = foundUser.billings.find((billing) => billing.id === newBillingId)
     }
 
-    foundUser.billings.push({ id: newBillingId, ...body })
+    foundUser.billings.push({ ...body, id: newBillingId })
 
     //Reescrevendo o arquivo data.json e enviando uma resposta ao client
     try {
@@ -81,7 +81,7 @@ async function handlePOST(req, res) {
     }
 }
 
-//Enviando todos os dados de cíclos de pagamentos do usuário
+//Enviando todos os dados de ciclos de pagamentos do usuário
 async function handleGET(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const { session_id } = cookieParser(req.headers.cookie)

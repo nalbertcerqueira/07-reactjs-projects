@@ -45,7 +45,9 @@ async function handlePOST(req, res) {
 
     //Verificando se o email fornecido já possui cadastro no sistema
     try {
-        if (usersDB.users[email]) throw Error("This email is already registered")
+        if (usersDB.users[email.replace(/ /g, "")]) {
+            throw Error("This email is already registered")
+        }
     } catch (error) {
         return res.status(409).json({
             status: 409,

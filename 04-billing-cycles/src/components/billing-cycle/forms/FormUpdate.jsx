@@ -1,101 +1,94 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import propTypes from "prop-types"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 
-import Buttton from "../../common/Button"
-import Input from "../../common/Input"
-import ValidationMsg from "../../common/ValidationMsg"
+import { FormContext } from "@/src/contexts/providers/FormContext"
+import { TabsContext } from "@/src/contexts/providers/TabsContext"
+import useFormActions from "@/src/hooks/useFormActions"
+import useTabsActions from "@/src/hooks/useTabsActions"
+
+import Buttton from "@/src/components/common/Button"
+import Input from "@/src/components/common/Input"
+import ValidationMsg from "@/src/components/common/ValidationMsg"
 import CreditList from "../credit-list/CreditList"
 import DebtList from "../debt-list/DebtList"
 import ValuesSummary from "./ValuesSummary"
 
-import { Context as FormsContext } from "../../../contexts/FormsContext"
-import { Context as MainContext } from "../../../contexts/MainContext"
-import {
-    calculateSummary,
-    formatBillingCycleISO,
-    formatBillingCyclePTBR,
-    formatValuePTBR,
-    toastEmmitter
-} from "../../../utils/client"
+import { formatBillingCycleISO, toastEmmitter } from "@/src/utils/client"
 
 //Componente utilizado para editar um ciclo de pagamentos
 //em billing-cycle.jsx
 export default function FormUpdate(props) {
-    const { billingCycle, currentBC } = useContext(MainContext)
-    const { methods, id, name, month, year, summary, flags, creditList, debtList } =
-        useContext(FormsContext)
-
-    useEffect(() => {
-        methods.setAllData(formatBillingCyclePTBR(currentBC.data))
-    }, [])
-    useEffect(() => {
-        const credits = creditList.data
-        const debts = debtList.data
-        methods.changeSummary(calculateSummary({ credits, debts }))
-    }, [creditList.data, debtList.data])
+    const { formState, formDispatch } = useContext(FormContext)
+    const { tabsDispatch } = useContext(TabsContext)
+    const formActions = useFormActions(formDispatch)
+    const tabsActions = useTabsActions(tabsDispatch)
 
     async function submitForm(event) {
         event.preventDefault()
 
-        if (methods.validateAllForm() === false) {
+        if (!formActions.validateForm(formState)) {
             return toastEmmitter({
                 id: "failed-create",
-                message: "Por favor, corrija os erros do forumlário antes de enviá-lo."
+                message: "Por favor, corrija os erros do formulário antes de enviá-lo."
             })
         }
-        const credits = formatBillingCycleISO(creditList.data)
-        const debts = formatBillingCycleISO(debtList.data)
+        const credits = formatBillingCycleISO(formState.credits)
+        const debts = formatBillingCycleISO(formState.debts)
+        const { id, name, month, year } = formState
         await props.onSubmit({ id, name, month, year, credits, debts })
 
-        methods.resetForm()
+        tabsActions.resetTabs()
+        formActions.resetForm()
     }
 
     return (
-        <form className="text-base min-w-[480px]" onSubmit={submitForm}>
+        <form className="text-base min-w-[480px]">
             <div className="flex flex-col md:flex-row gap-3">
                 <div className="w-full">
                     <Input
                         placeholder="Ciclo de pagamento"
-                        value={name}
+                        value={formState.name}
                         id="name"
                         name="name"
                         type="text"
                         label="Nome"
-                        onChange={methods.changeName}
+                        onChange={formActions.handleFieldChange}
                     />
-                    {!flags.name && (
+                    {!formState.validations.name && (
                         <ValidationMsg
                             className="mt-1"
-                            message="Deve conter no minímo 4 caracteres."
+                            message="O nome deve ter no minímo 4 caracteres."
                         />
                     )}
                 </div>
                 <div className="w-full md:w-2/4">
                     <Input
                         placeholder="Mês de ocorrência"
-                        value={month}
+                        value={formState.month}
                         id="month"
                         name="month"
                         type="tel"
                         label="Mês"
-                        onChange={methods.changeMonth}
+                        onChange={formActions.handleFieldChange}
                     />
-                    {!flags.month && (
-                        <ValidationMsg className="mt-1" message="Apenas valores de 1 a 12." />
+                    {!formState.validations.month && (
+                        <ValidationMsg
+                            className="mt-1"
+                            message="Apenas valores entre 1 e 12."
+                        />
                     )}
                 </div>
                 <div className="w-full md:w-2/4">
                     <Input
                         placeholder="Ano de ocorrência"
-                        value={year}
+                        value={formState.year}
                         id="year"
                         name="year"
                         type="tel"
                         label="Ano"
-                        onChange={methods.changeYear}
+                        onChange={formActions.handleFieldChange}
                     />
-                    {!flags.year && (
+                    {!formState.validations.year && (
                         <ValidationMsg
                             className="mt-1"
                             message="Apenas valores entre 1970 e 2100."
@@ -104,27 +97,23 @@ export default function FormUpdate(props) {
                 </div>
             </div>
             <div className="mt-6 flex gap-3 flex-col lg:flex-row w-full">
-                <ValuesSummary
-                    credit={formatValuePTBR(summary.credit)}
-                    debt={formatValuePTBR(summary.debt)}
-                    balance={formatValuePTBR(summary.balance)}
-                />
+                <ValuesSummary />
             </div>
             <div className="mt-6 flex gap-3 flex-col xl:flex-row">
-                <CreditList data={creditList} fieldLegend="Créditos" />
-                <DebtList data={debtList} fieldLegend="Débitos" />
+                <CreditList credits={formState.credits} fieldLegend="Créditos" />
+                <DebtList debts={formState.debts} fieldLegend="Débitos" />
             </div>
             <div className="mt-6 flex gap-3 items-center">
-                <Buttton className="create-form-button" type="submit">
+                <Buttton onClick={submitForm} className="create-form-button" type="submit">
                     Salvar
                 </Buttton>
                 <Buttton
-                    onClick={() => {
-                        billingCycle.resetState()
-                        setTimeout(methods.resetForm, 100)
-                    }}
                     className="clear-form-button"
                     type="button"
+                    onClick={() => {
+                        tabsActions.resetTabs()
+                        formActions.resetForm()
+                    }}
                 >
                     Cancelar
                 </Buttton>

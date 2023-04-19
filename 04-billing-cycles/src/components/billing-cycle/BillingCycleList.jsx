@@ -1,44 +1,52 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useContext, useEffect, useMemo } from "react"
+import { useContext } from "react"
 
-import { Context as FormsContext } from "../../contexts/FormsContext"
-import { Context as MainContext } from "../../contexts/MainContext"
-
+import { BillingCyclesContext } from "@/src/contexts/providers/BillingCyclesContext"
+import { FormContext } from "@/src/contexts/providers/FormContext"
+import { TabsContext } from "@/src/contexts/providers/TabsContext"
+import useFetchBillingCycles from "@/src/hooks/useFetchBillingCycles"
+import useFormActions from "@/src/hooks/useFormActions"
+import useTabsActions from "@/src/hooks/useTabsActions"
 import Button from "../common/Button"
 import DeleteIcon from "../icons/bylling-cycle/DeleteIcon"
 import EditIcon from "../icons/bylling-cycle/EditIcon"
 
 //Lista de ciclo de pagamentos utilizado na página billing-cycle.jsx
 export default function BillingCycleList() {
-    const { billingCycle } = useContext(MainContext)
-    const { methods } = useContext(FormsContext)
+    const { billingCyclesList, methods } = useContext(BillingCyclesContext)
+    const { tabsDispatch } = useContext(TabsContext)
+    const { formDispatch } = useContext(FormContext)
+    const tabsActions = useTabsActions(tabsDispatch)
+    const formActions = useFormActions(formDispatch)
 
-    useEffect(() => {
-        billingCycle.getList()
-    }, [])
-
-    //useCallback pois essa função será passada para vários itens em uma lista
-    const buttonAction = useCallback(
-        (tabName, billingCycleId) => {
-            methods.resetForm()
-            billingCycle.showTab(tabName, billingCycleId)
-        },
-        [billingCycle.list]
-    )
+    useFetchBillingCycles(methods.setBillingCycleList)
 
     //Renderizando as ações de cada linha da tabela
     function renderActions(id) {
         return (
             <div className="flex items-center justify-end gap-2">
                 <Button
-                    onClick={() => buttonAction("tabUpdate", id)}
+                    onClick={() => {
+                        const currentCycle = billingCyclesList.filter(
+                            (cycle) => cycle.id === id
+                        )[0]
+                        methods.setCurrentId(id)
+                        formActions.setAllFields(currentCycle)
+                        tabsActions.setAndNavigateToTab(["tabUpdate"], "tabUpdate")
+                    }}
                     className="update-button"
                     type="button"
                 >
                     <EditIcon className="stroke-white w-5 h-5" />
                 </Button>
                 <Button
-                    onClick={() => buttonAction("tabDelete", id)}
+                    onClick={() => {
+                        const currentCycle = billingCyclesList.filter(
+                            (cycle) => cycle.id === id
+                        )[0]
+                        methods.setCurrentId(id)
+                        formActions.setAllFields(currentCycle)
+                        tabsActions.setAndNavigateToTab(["tabDelete"], "tabDelete")
+                    }}
                     className="delete-button"
                     type="button"
                 >
@@ -47,7 +55,8 @@ export default function BillingCycleList() {
             </div>
         )
     }
-    //Renderizando cada linha da tabela
+
+    //Renderizando as linhas da tabela
     function renderRows(list) {
         if (list.length === 0) return null
         return list.map((value) => {
@@ -61,8 +70,9 @@ export default function BillingCycleList() {
             )
         })
     }
-    return useMemo(() => {
-        return (
+
+    return (
+        <>
             <table className="w-full">
                 <thead className="text-base">
                     <tr className="border-b-2 border-zinc-300">
@@ -72,8 +82,8 @@ export default function BillingCycleList() {
                         <th className="text-right font-medium pb-3 px-2">Ações</th>
                     </tr>
                 </thead>
-                <tbody className="text-base">{renderRows(billingCycle.list)}</tbody>
+                <tbody className="text-base">{renderRows(billingCyclesList)}</tbody>
             </table>
-        )
-    }, [billingCycle.list])
+        </>
+    )
 }

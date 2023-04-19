@@ -29,8 +29,7 @@ export function getServerSideProps({ req }) {
 
 Singup.PageTemplate = AuthTemplate
 export default function Singup() {
-    const { email, username, password, passConfirm, flags, isSubmiting, errorMsgs, methods } =
-        useAuth()
+    const { user, flags, isSubmiting, errorMsgs, methods } = useAuth()
 
     return (
         <>
@@ -40,8 +39,8 @@ export default function Singup() {
                     <Input
                         label="Seu nome"
                         labelClassName="auth-input-label"
-                        value={username}
-                        onChange={methods.changeUser}
+                        value={user.username}
+                        onChange={methods.handleFieldChange}
                         placeholder="Nome e sobrenome"
                         type="text"
                         id="username"
@@ -60,8 +59,8 @@ export default function Singup() {
                     <Input
                         label="Email"
                         labelClassName="auth-input-label"
-                        value={email}
-                        onChange={methods.changeEmail}
+                        value={user.email}
+                        onChange={methods.handleFieldChange}
                         placeholder="exemplo@meuemail.com"
                         type="text"
                         id="email"
@@ -80,8 +79,8 @@ export default function Singup() {
                     <Input
                         label="Senha"
                         labelClassName="auth-input-label"
-                        value={password}
-                        onChange={methods.changePassword}
+                        value={user.password}
+                        onChange={methods.handleFieldChange}
                         placeholder="Senha"
                         type="password"
                         id="password"
@@ -100,19 +99,22 @@ export default function Singup() {
                     <Input
                         label="Confirmar senha"
                         labelClassName="auth-input-label"
-                        value={passConfirm}
-                        onChange={methods.changePassConfirm}
+                        value={user.confirmPassword}
+                        onChange={methods.handleFieldChange}
                         placeholder="Confirme sua senha"
                         type="password"
                         id="confirm-pass"
-                        name="confirm-pass"
+                        name="confirmPassword"
                         autoComplete="new-password"
                         className="input-auth"
                         icon={<PasswordIcon className="auth-icon" stroke="auth-icon-svg" />}
                     />
                     {!flags.passConfirm && (
                         <div>
-                            <ValidationMsg className="mt-1" message={errorMsgs.passConfirm} />
+                            <ValidationMsg
+                                className="mt-1"
+                                message={errorMsgs.confirmPassword}
+                            />
                         </div>
                     )}
                 </div>

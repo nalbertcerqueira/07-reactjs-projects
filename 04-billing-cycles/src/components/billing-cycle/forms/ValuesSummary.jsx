@@ -1,4 +1,8 @@
-import propTypes from "prop-types"
+import { useContext } from "react"
+
+import { FormContext } from "@/src/contexts/providers/FormContext"
+import { calculateSummary, formatValuePTBR } from "@/src/utils/client"
+import { defaultCurrency as currency } from "@/src/utils/constants"
 
 import ValueBox from "../../dashboard/ValueBox"
 import BalanceIcon from "../../icons/dashboard/BalanceIcon"
@@ -7,7 +11,10 @@ import DebtIcon from "../../icons/dashboard/DebtIcon"
 
 //Componente utilizado nos formulários FormCreate, FormUpdate e
 //FormDelete.jsx
-export default function ValuesSummary({ credit, debt, balance }) {
+export default function ValuesSummary() {
+    const { formState } = useContext(FormContext)
+    const summary = calculateSummary({ credits: formState.credits, debts: formState.debts })
+
     return (
         <>
             <ValueBox
@@ -18,7 +25,7 @@ export default function ValuesSummary({ credit, debt, balance }) {
                 footerBgColor="bg-green-700"
                 className="w-full min-w-[230px]"
                 text="Total de Créditos"
-                value={credit}
+                value={`${currency} ${formatValuePTBR(summary.credit)}`}
             />
             <ValueBox
                 icon={<DebtIcon stroke="stroke-red-700 w-16 h-16" />}
@@ -28,7 +35,7 @@ export default function ValuesSummary({ credit, debt, balance }) {
                 footerBgColor="bg-red-700"
                 className="w-full min-w-[230px]"
                 text="Total de Débitos"
-                value={debt}
+                value={`${currency} ${formatValuePTBR(summary.debt)}`}
             />
             <ValueBox
                 icon={<BalanceIcon stroke="stroke-sky-700 w-16 h-16" />}
@@ -38,13 +45,8 @@ export default function ValuesSummary({ credit, debt, balance }) {
                 footerBgColor="bg-sky-700"
                 className="w-full min-w-[230px]"
                 text="Saldo geral"
-                value={balance}
+                value={`${currency} ${formatValuePTBR(summary.balance)}`}
             />
         </>
     )
-}
-ValuesSummary.propTypes = {
-    credit: propTypes.oneOfType([propTypes.string, propTypes.number]),
-    debt: propTypes.oneOfType([propTypes.string, propTypes.number]),
-    balance: propTypes.oneOfType([propTypes.string, propTypes.number])
 }

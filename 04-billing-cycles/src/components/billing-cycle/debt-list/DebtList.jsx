@@ -1,49 +1,44 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import propTypes from "prop-types"
 import { useContext } from "react"
 
-import { Context as FormsContext } from "../../../contexts/FormsContext"
+import { FormContext } from "@/src/contexts/providers/FormContext"
+import useFormActions from "@/src/hooks/useFormActions"
 import ValidationMsg from "../../common/ValidationMsg"
 import DebtRow from "./DebtRow"
 
-//Lista de débitos que cotém inputs que serão adicionados
-//dinamicamente nos formulários FormCreate, FormUpdate e FormDelete.jsx
-export default function DebtList({ fieldLegend, data, readOnly }) {
-    const { flags } = useContext(FormsContext)
-    const debts = data.data
+//Lista de débitos com inputs que serão adicionados dinamicamente
+//aos formulários FormCreate, FormUpdate e FormDelete.jsx
+export default function DebtList({ fieldLegend, debts, readOnly }) {
+    const { formState, formDispatch } = useContext(FormContext)
+    const { handleNestedFieldChange, addCreditDebt, removeCreditDebt } =
+        useFormActions(formDispatch)
 
+    //Renderizando cada linha da tabela
     function renderRows() {
         return debts.map((debt, index) => {
             return (
                 <DebtRow
-                    datasetId={debt.id}
                     key={debt?.id || index}
                     id={debt?.id || index}
                     readOnly={readOnly}
-                    name={debts[index].name}
-                    value={`${debts[index].value}`}
-                    status={debts[index].status}
-                    changeName={(event) => data.changeName(index, "debt", event)}
-                    changeValue={(event) => data.changeValue(index, "debt", event)}
-                    changeStatus={(event) => data.changeStatus(index, event)}
-                    addNewDebt={() => data.add(index, "debt")}
-                    copyDebt={() => data.add(index, "debt", true)}
-                    removeDebt={() => data.remove(index, "debt")}
+                    name={debt.name}
+                    value={debt.value}
+                    status={debt.status}
+                    handleChange={(event) => handleNestedFieldChange(event, index, "debts")}
+                    addDebt={() => addCreditDebt(index, "debts")}
+                    copyDebt={() => addCreditDebt(index, "debts", true)}
+                    removeDebt={() => removeCreditDebt(index, "debts")}
                 />
             )
         })
     }
+    //Renderização os erros validação
     function renderValidationMsg() {
         return (
-            <ValidationMsg
-                className="px-2 mb-3"
-                message={
-                    <>
-                        <div>O nome do débito deve ter no mínimo 4 caracteres.</div>
-                        <div>O valor do débito não pode está em branco.</div>
-                    </>
-                }
-            />
+            <ValidationMsg className="px-2 mb-3">
+                <div>O nome do débito deve ter no mínimo 4 caracteres.</div>
+                <div>O valor do débito não pode está em branco.</div>
+            </ValidationMsg>
         )
     }
 
@@ -55,7 +50,7 @@ export default function DebtList({ fieldLegend, data, readOnly }) {
             >
                 {fieldLegend}
             </legend>
-            {!flags.debts && renderValidationMsg()}
+            {!formState.validations.debts && renderValidationMsg()}
             <table className="w-full">
                 <thead>
                     <tr className="border-b-2 border-zinc-300">
@@ -80,6 +75,6 @@ export default function DebtList({ fieldLegend, data, readOnly }) {
 }
 DebtList.propTypes = {
     fieldLegend: propTypes.string,
-    data: propTypes.object,
+    debts: propTypes.array,
     readOnly: propTypes.bool
 }

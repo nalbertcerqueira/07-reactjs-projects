@@ -1,6 +1,6 @@
+import { MenuContext } from "@/src/contexts/providers/MenuContext"
 import propTypes from "prop-types"
 import { useContext } from "react"
-import { Context as MenuContext } from "../../contexts/MenuContext"
 import MenuIcon from "../icons/MenuIcon"
 import UserMenu from "./UserMenu"
 

@@ -10,7 +10,11 @@ export default function Footer({ className }) {
             <div>
                 <p>
                     <span>Coded by: </span>
-                    <a className="footer-link" href="https://github.com/nalbertcerqueira">
+                    <a
+                        target="_blank"
+                        className="footer-link"
+                        href="https://github.com/nalbertcerqueira"
+                    >
                         Nalbert Cerqueira
                     </a>
                 </p>

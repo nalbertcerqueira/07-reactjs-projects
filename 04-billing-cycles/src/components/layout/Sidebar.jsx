@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { useContext } from "react"
 
-import { Context as MenuContext } from "../../contexts/MenuContext"
+import { MenuContext } from "@/src/contexts/providers/MenuContext"
 import MoneyIcon from "../icons/MoneyIcon"
 import Menu from "../menu/Menu"
 
@@ -9,7 +9,7 @@ import Menu from "../menu/Menu"
 export default function Sidebar() {
     const { menu, changeMenuState } = useContext(MenuContext)
 
-    //Escondendo o menu caso o viewport possua largura inferior a 768px
+    //Recolhendo o menu lateral caso o viewport possua largura inferior a 768px
     function hideMenu() {
         if (window.innerWidth <= 768) {
             changeMenuState("closed")

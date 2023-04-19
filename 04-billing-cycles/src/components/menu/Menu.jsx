@@ -1,4 +1,3 @@
-import { memo } from "react"
 import CoinIcon from "../icons/menu/CoinIcon.jsx"
 import DashboardIcon from "../icons/menu/Dashboard"
 import RegisterIcon from "../icons/menu/RegisterIcon"
@@ -6,8 +5,7 @@ import Item from "./Item"
 import MenuTree from "./MenuTree"
 
 //Componente Menu utilizado em Sidebar.jsx
-export default memo(Menu)
-function Menu() {
+export default function Menu() {
     return (
         <nav>
             <ul>

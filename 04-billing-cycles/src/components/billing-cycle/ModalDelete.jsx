@@ -1,24 +1,33 @@
+import { BillingCyclesContext } from "@/src/contexts/providers/BillingCyclesContext"
+import { FormContext } from "@/src/contexts/providers/FormContext"
+import { TabsContext } from "@/src/contexts/providers/TabsContext"
+import useFormActions from "@/src/hooks/useFormActions"
+import useTabsActions from "@/src/hooks/useTabsActions"
+import propTypes from "prop-types"
 import { useContext } from "react"
-
-import { Context as FormsContext } from "../../contexts/FormsContext"
-import { Context as MainContext } from "../../contexts/MainContext"
-import { Context as ModalsContext } from "../../contexts/ModalsContext"
+import { ModalContext } from "../../contexts/providers/ModalContext"
 
 import Button from "../common/Button"
 import CloseIcon from "../icons/modal/CloseIcon"
 import WarningIcon from "../icons/modal/WarningIcon"
 
 //Componente utilizado na página billing-cycle.jsx durante a
-//exclusão de um cíclo de pagamentos
-export default function ModalDelete() {
-    const { currentBC, billingCycle } = useContext(MainContext)
-    const { modalDelete } = useContext(ModalsContext)
-    const { methods } = useContext(FormsContext)
+//exclusão de um ciclo de pagamentos
+export default function ModalDelete({ onSubmit }) {
+    const { billingCyclesList, currentId } = useContext(BillingCyclesContext)
+    const { modalDelete } = useContext(ModalContext)
+    const { formDispatch } = useContext(FormContext)
+    const { tabsDispatch } = useContext(TabsContext)
+    const formActions = useFormActions(formDispatch)
+    const tabsActions = useTabsActions(tabsDispatch)
 
     async function confirmModal() {
-        await billingCycle.delete(currentBC.data)
+        const currentCycle = billingCyclesList.filter((cycle) => cycle.id === currentId)[0]
+        await onSubmit(currentCycle)
+
         modalDelete.changeState("hidden")
-        methods.resetForm()
+        tabsActions.resetTabs()
+        formActions.resetForm()
     }
 
     return (
@@ -51,9 +60,7 @@ export default function ModalDelete() {
                     </Button>
                     <Button
                         type="button"
-                        onClick={() => {
-                            modalDelete.changeState("hidden")
-                        }}
+                        onClick={() => modalDelete.changeState("hidden")}
                         className="clear-form-button m-0"
                     >
                         Cancelar
@@ -62,4 +69,7 @@ export default function ModalDelete() {
             </div>
         </div>
     )
+}
+ModalDelete.propTypes = {
+    onSubmit: propTypes.func
 }

@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import propTypes from "prop-types"
-import { useContext, useEffect, useState } from "react"
+import { useContext } from "react"
 
-import { Context as FormsContext } from "../../../contexts/FormsContext"
+import { FormContext } from "@/src/contexts/providers/FormContext"
 import Button from "../../common/Button"
 import Input from "../../common/Input"
 import AddIcon from "../../icons/bylling-cycle/AddIcon"
@@ -11,52 +10,45 @@ import DeleteIcon from "../../icons/bylling-cycle/DeleteIcon"
 
 //Linha de débito adicionada dinamicamente em DebtList.jsx
 export default function DebtRow(props) {
-    const [rowFlags, setFlags] = useState({ name: true, value: true })
-    const { flags } = useContext(FormsContext)
-
-    useEffect(() => {
-        setFlags({ name: props.name.length >= 4, value: props.value.length > 0 })
-    }, [flags])
+    const { formState } = useContext(FormContext)
+    const isNameValid = formState.validations.debts ? true : props.name.length >= 4
+    const isValueValid = formState.validations.debts ? true : props.value.length > 0
 
     return (
         <tr className="animate-[show_0.2s_forwards] border-t border-zinc-300 ">
             <td className="px-2 py-3">
                 <Input
                     type="text"
+                    name="name"
                     placeholder="Informe o nome"
                     readOnly={props.readOnly}
                     value={props.name}
-                    onChange={props.changeName}
-                    datasetId={props.datasetId}
+                    onChange={props.handleChange}
                     id={`${props.id}-debt-name`}
-                    name={`${props.id}-debt-name`}
-                    className={`debt ${!rowFlags.name && !flags.debts ? "input-invalid" : ""}`}
+                    className={`debt ${!isNameValid ? "input-invalid" : ""}`}
                 />
             </td>
             <td className="px-2 py-3">
                 <Input
                     type="tel"
+                    name="value"
                     placeholder="Informe o valor"
                     autoComplete="transaction-amount"
                     readOnly={props.readOnly}
                     value={props.value}
-                    onChange={props.changeValue}
-                    datasetId={props.datasetId}
+                    onChange={props.handleChange}
                     id={`${props.id}-debt-value`}
-                    name={`${props.id}-debt-value`}
-                    className={`debt ${
-                        !rowFlags.value && !flags.debts ? "input-invalid" : ""
-                    }`}
+                    className={`debt ${!isValueValid ? "input-invalid" : ""}`}
                 />
             </td>
             <td className="px-2 py-3">
                 <select
+                    name="status"
                     value={props.status}
                     disabled={props.readOnly}
                     className="default-select"
-                    name={`${props.id}-debt-status`}
                     id={`${props.id}-debt-status`}
-                    onChange={props.changeStatus}
+                    onChange={props.handleChange}
                 >
                     <option value="PENDENTE">PENDENTE</option>
                     <option value="PAGO">PAGO</option>
@@ -68,7 +60,7 @@ export default function DebtRow(props) {
                     className="add-button"
                     type="button"
                     onClick={() => {
-                        if (!props.readOnly) props.addNewDebt()
+                        if (!props.readOnly) props.addDebt()
                     }}
                 >
                     <AddIcon className="stroke-white" />
@@ -102,11 +94,8 @@ DebtRow.propTypes = {
     status: propTypes.string,
     className: propTypes.string,
     readOnly: propTypes.bool,
-    datasetId: propTypes.any,
-    changeName: propTypes.func,
-    changeValue: propTypes.func,
-    changeStatus: propTypes.func,
-    addNewDebt: propTypes.func,
+    handleChange: propTypes.func,
+    addDebt: propTypes.func,
     copyDebt: propTypes.func,
     removeDebt: propTypes.func
 }

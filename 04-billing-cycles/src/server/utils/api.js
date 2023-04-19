@@ -1,4 +1,4 @@
-//Função responsável por gerar um ID para os cíclos de pagamento
+//Função responsável por gerar um ID para os ciclos de pagamento
 export function generateHash(idLength) {
     const charactersList = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
     let id = ""

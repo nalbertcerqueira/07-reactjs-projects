@@ -1,19 +1,13 @@
 import propTypes from "prop-types"
 import { createContext, useState } from "react"
 
-const initialContext = {
-    modalDelete: {
-        state: "",
-        changeState: () => {}
-    }
-}
-
 //Contexto de modais utilizado na página billing-cycle.jsx
-export const Context = createContext(initialContext)
-export default function ModalsContext({ children }) {
+export const ModalContext = createContext(null)
+export default function ModalProvider({ children }) {
     const [modalDelete, setModalDelete] = useState("hidden")
+
     return (
-        <Context.Provider
+        <ModalContext.Provider
             value={{
                 modalDelete: {
                     state: modalDelete,
@@ -22,9 +16,9 @@ export default function ModalsContext({ children }) {
             }}
         >
             {children}
-        </Context.Provider>
+        </ModalContext.Provider>
     )
 }
-ModalsContext.propTypes = {
+ModalProvider.propTypes = {
     children: propTypes.node
 }

@@ -1,10 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import propTypes from "prop-types"
-import { useContext, useEffect, useMemo } from "react"
+import { useContext, useEffect } from "react"
 
-import { Context as MainContext } from "../contexts/MainContext"
-import { Context as ModalsContext } from "../contexts/ModalsContext"
-import { Context as UserContext } from "../contexts/UserContext"
+import { ModalContext } from "../contexts/providers/ModalContext"
+import { UserContext } from "../contexts/providers/UserContext"
 
 import AppTemplate from "../components/AppTemplate"
 import BillingCycleList from "../components/billing-cycle/BillingCycleList"
@@ -18,11 +16,13 @@ import If from "../components/common/Conditional"
 import DefaultHead from "../components/common/DefaultHead"
 import PageContent from "../components/common/PageContent"
 import PageHeader from "../components/common/PageHeader"
+import useApi from "../hooks/useApi"
 
 import AddIcon from "../components/icons/bylling-cycle/AddIcon"
 import DeleteIcon from "../components/icons/bylling-cycle/DeleteIcon"
 import EditIcon from "../components/icons/bylling-cycle/EditIcon"
 import ListIcon from "../components/icons/bylling-cycle/ListIcon"
+import { BillingCyclesContext } from "../contexts/providers/BillingCyclesContext"
 
 //Validando o token do usuário antes de exibir a aplicação
 export async function getServerSideProps({ req }) {
@@ -44,64 +44,68 @@ export async function getServerSideProps({ req }) {
 BillingCycle.PageTemplate = AppTemplate
 export default function BillingCycle({ username, email }) {
     const { setUser } = useContext(UserContext)
-    const { billingCycle } = useContext(MainContext)
-    const { modalDelete } = useContext(ModalsContext)
+    const { modalDelete } = useContext(ModalContext)
+    const { methods } = useContext(BillingCyclesContext)
+    const apiMethods = useApi(methods.setBillingCycleList)
 
     useEffect(() => {
-        setUser({ email, username })
-    }, [])
+        let ignore = false
+        if (!ignore) setUser({ username, email })
+        return () => {
+            ignore = true
+        }
+    }, [setUser, email, username])
 
-    return useMemo(() => {
-        return (
-            <>
-                <DefaultHead title="MyMoney App | Billing Cycle" />
-                <PageHeader title="Ciclos de Pagamentos" small="Cadastro" />
-                <PageContent>
-                    <div className="rounded-md overflow-hidden shadow-base bg-slate-100">
-                        <ul className="tabs-header">
-                            <TabHeader
-                                label="Listar"
-                                target="tabList"
-                                icon={<ListIcon className="tab-header-icon" />}
-                            />
-                            <TabHeader
-                                label="Incluir"
-                                target="tabCreate"
-                                icon={<AddIcon className="tab-header-icon" />}
-                            />
-                            <TabHeader
-                                label="Alterar"
-                                target="tabUpdate"
-                                icon={<EditIcon className="tab-header-icon w-4 h-4" />}
-                            />
-                            <TabHeader
-                                label="Excluir"
-                                target="tabDelete"
-                                icon={<DeleteIcon className="tab-header-icon" />}
-                            />
-                        </ul>
-                        <div className="py-3 px-4 tabs-content">
-                            <TabContent id="tabList">
-                                <BillingCycleList />
-                            </TabContent>
-                            <TabContent id="tabCreate">
-                                <FormCreate onSubmit={billingCycle.create} />
-                            </TabContent>
-                            <TabContent id="tabUpdate">
-                                <FormUpdate onSubmit={billingCycle.update} />
-                            </TabContent>
-                            <TabContent id="tabDelete">
-                                <FormDelete />
-                            </TabContent>
-                        </div>
+    return (
+        <>
+            <DefaultHead title="MyMoney App | Billing Cycle" />
+            <PageHeader title="Ciclos de Pagamentos" small="Cadastro" />
+
+            <PageContent>
+                <div className="rounded-md overflow-hidden shadow-base bg-slate-100">
+                    <ul className="tabs-header">
+                        <TabHeader
+                            label="Listar"
+                            target="tabList"
+                            icon={<ListIcon className="tab-header-icon" />}
+                        />
+                        <TabHeader
+                            label="Incluir"
+                            target="tabCreate"
+                            icon={<AddIcon className="tab-header-icon" />}
+                        />
+                        <TabHeader
+                            label="Alterar"
+                            target="tabUpdate"
+                            icon={<EditIcon className="tab-header-icon w-4 h-4" />}
+                        />
+                        <TabHeader
+                            label="Excluir"
+                            target="tabDelete"
+                            icon={<DeleteIcon className="tab-header-icon" />}
+                        />
+                    </ul>
+                    <div className="py-3 px-4 tabs-content">
+                        <TabContent id="tabList">
+                            <BillingCycleList />
+                        </TabContent>
+                        <TabContent id="tabCreate">
+                            <FormCreate onSubmit={apiMethods.post} />
+                        </TabContent>
+                        <TabContent id="tabUpdate">
+                            <FormUpdate onSubmit={apiMethods.put} />
+                        </TabContent>
+                        <TabContent id="tabDelete">
+                            <FormDelete />
+                        </TabContent>
                     </div>
-                </PageContent>
-                <If condition={modalDelete.state !== "hidden"}>
-                    <ModalDelete />
-                </If>
-            </>
-        )
-    }, [modalDelete.state])
+                </div>
+            </PageContent>
+            <If condition={modalDelete.state !== "hidden"}>
+                <ModalDelete onSubmit={apiMethods.deletee} />
+            </If>
+        </>
+    )
 }
 BillingCycle.propTypes = {
     username: propTypes.string,

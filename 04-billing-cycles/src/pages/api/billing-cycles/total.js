@@ -11,7 +11,7 @@ export default function handler(req, res) {
     return res.status(405).send({ status: 405, message: "Error 405: method not allowed" })
 }
 
-//Enviando o total de cíclos de pagamentos do usuário ao client
+//Enviando o total de ciclos de pagamentos do usuário ao client
 async function handleGET(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const { session_id } = cookieParser(req.headers.cookie)

@@ -13,18 +13,25 @@ export function copyData(data) {
     return JSON.parse(JSON.stringify(data))
 }
 
-//Formatando um valor de crédito ou débito para o padrão 0.00
+//Convertendo valores monetários para R$
+export function convertCurrency(value, locale = "pt-br", currency = "BRL") {
+    return value.toLocaleString(locale, {
+        style: "currency",
+        currency
+    })
+}
+
+//Formatando um valor de crédito ou débito para number
 export function fomartValueISO(value) {
     return parseFloat(value.replace(/[.,]/g, "") / 100)
 }
-//Formatando um valor de crédito ou débito para o padrão 0.000,00
+//Formatando um valor de crédito ou débito para R$
 export function formatValuePTBR(value) {
     const options = { minimumFractionDigits: 2 }
     return Intl.NumberFormat("pt-br", options).format(parseFloat(value))
 }
 
-//Formatando todos os valores de créditos ou débitos de um cíclo
-//de pagamentos para o padrão ISO ou PTBR
+//Formatando todos os valores de créditos ou débitos para number
 export function formatBillingCycleISO(data) {
     const dataCopy = copyData(data)
     dataCopy.map((object) => {
@@ -32,6 +39,8 @@ export function formatBillingCycleISO(data) {
     })
     return dataCopy
 }
+
+//Formatando todos os valores de créditos ou débitos para R$
 export function formatBillingCyclePTBR(billingCyle) {
     const dataCopy = copyData(billingCyle)
 
@@ -45,7 +54,7 @@ export function formatBillingCyclePTBR(billingCyle) {
     return dataCopy
 }
 
-//Calculando o somatório de créditos e débitos de um cíclo de pagamentos
+//Calculando o somatório de créditos e débitos de um ciclo de pagamentos
 export function calculateSummary({ credits, debts }) {
     const creditsISO = formatBillingCycleISO(credits)
     const debtsISO = formatBillingCycleISO(debts)
