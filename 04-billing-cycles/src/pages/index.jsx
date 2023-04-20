@@ -24,7 +24,7 @@ export async function getServerSideProps({ req }) {
     })
         .then(async (response) => {
             const { username, email } = await response.json()
-            if (!response.ok) return { redirect: { destination: "/login", permanent: false } }
+            if (!response.ok) throw "Error"
             else return { props: { username, email } }
         })
         .catch((error) => {
