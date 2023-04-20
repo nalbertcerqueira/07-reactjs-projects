@@ -84,10 +84,11 @@ export default function useAuth() {
     //Efetuando o login do usuário
     async function login(event) {
         event.preventDefault()
+        setIsSubmiting(true)
+
         const { email, password } = user
         const status = await submit({ email, password }, "api/login")
 
-        setIsSubmiting(true)
         if (status >= 400 && status < 500) {
             resetForm()
             setFlags({ ...flags, email: true, password: false })
