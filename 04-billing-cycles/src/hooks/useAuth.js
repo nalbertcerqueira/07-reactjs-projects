@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { toast } from "react-toastify"
+import { baseApiUrl, basePath } from "../utils/constants"
 
 const errorsInitialState = { username: "", email: "", password: "", confirmPassword: "" }
 const userInitialStatate = { username: "", email: "", password: "", confirmPassword: "" }
@@ -63,7 +64,7 @@ export default function useAuth() {
     }
 
     async function submit(body, path) {
-        return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${path}`, {
+        return fetch(`${baseApiUrl}/${path}`, {
             method: "POST",
             body: JSON.stringify(body),
             headers: { "Content-Type": "application/json" }
@@ -110,7 +111,7 @@ export default function useAuth() {
         } else if (status === 200) {
             toast.success("Login bem sucedido!")
             setErrorMsgs(errorsInitialState)
-            return location.assign("/")
+            return location.assign(basePath)
         }
         return
     }
@@ -127,7 +128,7 @@ export default function useAuth() {
         switch (status) {
             case 200:
                 toast.success(toastMsgs[200])
-                return setTimeout(() => location.assign("/login"), 2000)
+                return setTimeout(() => location.assign(`${basePath}login`), 2000)
 
             case 400:
                 setFlags({ ...flagsInitialState, confirmPassword: false })
@@ -157,7 +158,7 @@ export default function useAuth() {
     }
     //Deslogando o usuário da aplicação
     async function logout() {
-        return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/signout`)
+        return fetch(`${baseApiUrl}/api/signout`)
             .then(async (response) => {
                 const data = await response.json()
                 console.log(data)
