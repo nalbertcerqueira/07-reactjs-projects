@@ -1,3 +1,4 @@
+import favicon from "@/public/favicon.png"
 import Head from "next/head"
 import propTypes from "prop-types"
 
@@ -11,7 +12,7 @@ export default function DefaultHead({ title }) {
                 content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"
             />
             meta
-            <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+            <link rel="shortcut icon" href={favicon.src} type="image/x-icon" />
             <title>{title}</title>
         </Head>
     )
