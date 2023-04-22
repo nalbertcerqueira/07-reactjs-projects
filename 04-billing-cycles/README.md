@@ -4,19 +4,19 @@
 ![NextJS badge](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![Tailwind badge](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-# <img src="https://user-images.githubusercontent.com/105606295/221874628-e371951e-5a17-4570-8ecc-dfac851f8f86.png" width="40px" height="40px" alt="internet banking icon"><img> App - Cíclo de Pagamentos
+# <img src="https://user-images.githubusercontent.com/105606295/221874628-e371951e-5a17-4570-8ecc-dfac851f8f86.png" width="40px" height="40px" alt="internet banking icon"><img> App - Ciclo de Pagamentos
 
 ## 📋 Descrição
 
-Esta aplicação foi desenvolvida principalmente com NextJS e Tailwindcss, sendo inspirada por um projeto existente em um dos cursos da Cod3r Brasil. Tendo como principal objetivo a construção de uma área para gerenciamento de cíclos de pagamentos mensais.
+Esta aplicação foi desenvolvida principalmente com NextJS e Tailwindcss, sendo inspirada por um projeto existente em um dos cursos da Cod3r Brasil. Tendo como principal objetivo a construção de uma área para gerenciamento de ciclos de pagamentos mensais.
 
-Dentro da aplicação, um cíclo de pagamentos é definido por uma série de créditos e débitos lançados pelo usuário, gerando um balanço mensal com o total de créditos, débitos e o saldo resultante.
+Dentro da aplicação, um ciclo de pagamentos é definido por uma série de créditos e débitos lançados pelo usuário, gerando um balanço mensal com o total de créditos, débitos e o saldo resultante.
 
 **Principais funcionalidades:**
 
 -   Login e cadastro de usuários;
--   Criação, edição e exclusão de cíclos de pagamentos;
--   Visualização de todos os cíclos de pagamentos;
+-   Criação, edição e exclusão de ciclos de pagamentos;
+-   Visualização de todos os ciclos de pagamentos;
 -   Resumo contendo o consolidado geral de créditos, débitos e o saldo resultado.
 
 <br>
@@ -50,11 +50,11 @@ Dentro da aplicação, um cíclo de pagamentos é definido por uma série de cr�
 
 | Rota (Método)                    | Funcionalidade            |
 | -------------------------------- | ------------------------- |
-| api/billing-cycles (GET)         | Consulta todos os cíclos  |
-| api/billing-cycles/1 (GET)       | Consulta o cíclo de ID=1  |
-| api/billing-cycles (POST)        | Cria um novo cíclo        |
-| api/billing-cycles/1 (PUT)       | Altera o cíclo de ID=1    |
-| api/billing-cycles/1 (DELETE)    | Apaga o cíclo de ID=1     |
+| api/billing-cycles (GET)         | Consulta todos os ciclos  |
+| api/billing-cycles/1 (GET)       | Consulta o ciclo de ID=1  |
+| api/billing-cycles (POST)        | Cria um novo ciclo        |
+| api/billing-cycles/1 (PUT)       | Altera o ciclo de ID=1    |
+| api/billing-cycles/1 (DELETE)    | Apaga o ciclo de ID=1     |
 | api/billing-cycles/summary (GET) | Obtém o consolidado geral |
 
 </td>
