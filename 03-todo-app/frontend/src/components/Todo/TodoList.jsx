@@ -1,10 +1,30 @@
 import propTypes from "prop-types"
-import React from "react"
-
+import React, { useContext } from "react"
+import { FormContext } from "../../contexts/FormContext"
+import { TodoContext } from "../../contexts/TodoContext"
+import useTodoApi from "../../hooks/useTodoApi"
 import TodoRow from "./TodoRow"
 
 //Lista de tarefas utilizada em Todo.jsx
-export default function TodoList({ tasks, removeTask, markTask }) {
+export default function TodoList({ tasks }) {
+    const { filterTag } = useContext(FormContext)
+    const { setTodoList } = useContext(TodoContext)
+    const { put, remove, get } = useTodoApi()
+
+    function markTask({ taskId, isDone }) {
+        put({ taskId, isDone }, async () => {
+            const todoList = await get(filterTag || "")
+            setTodoList(todoList)
+        })
+    }
+
+    async function removeTask(taskId) {
+        await remove(taskId, async () => {
+            const todoList = await get(filterTag || "")
+            setTodoList(todoList)
+        })
+    }
+
     return (
         <section className="todo-container">
             <table className="w-full">
@@ -31,8 +51,5 @@ export default function TodoList({ tasks, removeTask, markTask }) {
     )
 }
 TodoList.propTypes = {
-    className: propTypes.string,
-    tasks: propTypes.array,
-    removeTask: propTypes.func,
-    markTask: propTypes.func
+    tasks: propTypes.array
 }

@@ -1,26 +1,26 @@
 import propTypes from "prop-types"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Button from "./Button.jsx"
 import { CloseIcon } from "./Icons.jsx"
 
-//Componente utilizado em Form.jsx
-export function FilterTag(props) {
+//Componente utilizado em TodoForm.jsx
+export function FilterTag({ filter, closeFilter }) {
     const [willClose, setWillClose] = useState(false)
+    const timerRef = useRef(null)
 
-    useEffect(() => {
-        let timer
-        if (willClose) timer = setTimeout(props.closeFilter, 600)
-        return () => clearTimeout(timer)
-    }, [willClose])
+    //Limpando o timer após a remoção do componente no DOM
+    useEffect(() => clearTimeout(timerRef.current), [])
+
+    function handleClose() {
+        setWillClose(true)
+        clearTimeout(timerRef.current)
+        timerRef.current = setTimeout(closeFilter, 600)
+    }
 
     return (
         <div className={`filter-tag ${willClose ? "filter-tag--slide" : ""}`}>
-            <span className="overflow-hidden text-ellipsis">{props.filter}</span>
-            <Button
-                type="button"
-                onClick={() => setWillClose(true)}
-                className="filter-tag__btn"
-            >
+            <span className="overflow-hidden text-ellipsis">{filter}</span>
+            <Button type="button" onClick={handleClose} className="filter-tag__btn">
                 <CloseIcon className="stroke-neutral-700" />
             </Button>
         </div>

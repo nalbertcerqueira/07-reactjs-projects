@@ -26,7 +26,7 @@ CalendarIcon.propTypes = {
     className: propTypes.string
 }
 
-//Ícone utilizado em Form.jsx
+//Ícone utilizado em TodoForm.jsx
 export function PlusIcon(props) {
     return (
         <div className={props.className || ""}>
@@ -50,7 +50,7 @@ PlusIcon.propTypes = {
     className: propTypes.string
 }
 
-//Ícone utilizado em Form.jsx
+//Ícone utilizado em TodoForm.jsx
 export function SearchIcon(props) {
     return (
         <div className={props.className || ""}>

@@ -1,4 +1,3 @@
-import propTypes from "prop-types"
 import React, { useContext } from "react"
 
 import ErrorMsg from "../components/Error.jsx"
@@ -9,12 +8,10 @@ import PageTitle from "../components/PageTitle.jsx"
 import TodoForm from "../components/Todo/TodoForm.jsx"
 import TodoList from "../components/Todo/TodoList.jsx"
 import { TodoContext } from "../contexts/TodoContext.jsx"
-import useTodo from "../hooks/useTodo.js"
 
 //Página da lista de tarefas, utilizada em AppRoutes.jsx
 export default function Todo() {
-    const { todoList, error, refreshTodo } = useContext(TodoContext)
-    const { methods } = useTodo(refreshTodo)
+    const { todoList, error } = useContext(TodoContext)
 
     if (error)
         return (
@@ -38,18 +35,9 @@ export default function Todo() {
                 <>
                     <PageTitle title="Tarefas" small="Cadastro" />
                     <TodoForm />
-                    <TodoList
-                        tasks={todoList}
-                        removeTask={methods.removeTask}
-                        markTask={methods.updateTask}
-                    />
+                    <TodoList tasks={todoList} />
                 </>
             )}
         </>
     )
-}
-Todo.propTypes = {
-    error: propTypes.bool,
-    data: propTypes.array,
-    refreshData: propTypes.func
 }

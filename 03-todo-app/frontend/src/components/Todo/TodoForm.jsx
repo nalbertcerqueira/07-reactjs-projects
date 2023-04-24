@@ -1,16 +1,43 @@
 import React, { useContext } from "react"
 
+import { FormContext } from "../../contexts/FormContext.jsx"
 import { TodoContext } from "../../contexts/TodoContext.jsx"
-import useTodo from "../../hooks/useTodo.js"
+import useTodoApi from "../../hooks/useTodoApi.js"
+
 import Button from "../Button.jsx"
 import { FilterTag } from "../FilterTag.jsx"
 import { PlusIcon, SearchIcon } from "../Icons.jsx"
 
 //Formulário utilizado em Todo.jsx
 export default function TodoForm() {
-    const { refreshTodo } = useContext(TodoContext)
-    const { taskInput, isInputValid, filterTag, methods } = useTodo(refreshTodo)
+    const { taskInput, isInputValid, filterTag, methods } = useContext(FormContext)
+    const { setTodoList } = useContext(TodoContext)
+    const { post, get } = useTodoApi()
     const inputBorder = isInputValid ? "" : "form-container__input--invalid"
+
+    function addTask(event) {
+        event.preventDefault()
+        if (taskInput === "") return methods.setIsInputValid(false)
+        else methods.setIsInputValid(true)
+
+        post(taskInput, async () => {
+            methods.resetForm()
+            const todoList = await get()
+            setTodoList(todoList)
+        })
+    }
+
+    async function filterTasks() {
+        methods.showFilterTag()
+        const todoList = await get(taskInput)
+        setTodoList(todoList)
+    }
+
+    async function closeFilter() {
+        methods.closeFilterTag()
+        const todoList = await get()
+        setTodoList(todoList)
+    }
 
     return (
         <section className="form-container">
@@ -25,7 +52,7 @@ export default function TodoForm() {
                 <div className="flex gap-3">
                     <Button
                         tag="Nova Tarefa"
-                        onClick={methods.addTask}
+                        onClick={addTask}
                         color="blue"
                         type="submit"
                         className="btn btn--submit"
@@ -34,7 +61,7 @@ export default function TodoForm() {
                     </Button>
                     <Button
                         tag="Filtrar"
-                        onClick={methods.filterTasks}
+                        onClick={filterTasks}
                         color="cyan"
                         type="button"
                         className="btn btn--search"
@@ -48,9 +75,7 @@ export default function TodoForm() {
                     A tarefa não pode está vazia.
                 </span>
             )}
-            {filterTag && (
-                <FilterTag closeFilter={methods.removeFilter} filter={filterTag} />
-            )}
+            {filterTag && <FilterTag closeFilter={closeFilter} filter={filterTag} />}
         </section>
     )
 }

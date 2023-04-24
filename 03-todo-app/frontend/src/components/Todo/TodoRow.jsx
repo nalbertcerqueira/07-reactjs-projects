@@ -1,21 +1,24 @@
 import propTypes from "prop-types"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import Button from "../Button"
 import { DoneIcon, TrashIcon, UndoIcon } from "../Icons"
 
 //Componente utilizado em TodoList.jsx
 export default function TodoRow({ task, markTask, removeTask }) {
+    const timerRef = useRef(null)
     const [willRemove, setWillRemove] = useState(false)
-    const taskDoneMarker = task.done ? "todo-container__marker--done" : ""
     const taksDone = task.done ? "todo-container__task--done" : ""
+    const taskDoneMarker = task.done ? "todo-container__marker--done" : ""
 
-    //Removendo de fato a tarefa após finalizar a animação
-    useEffect(() => {
-        let timer
-        if (willRemove) timer = setTimeout(() => removeTask(task.id), 900)
-        return () => clearTimeout(timer)
-    }, [willRemove])
+    //Limpando o timer após a remoção do componente no DOM
+    useEffect(() => clearTimeout(timerRef.current), [])
+
+    function handleRemove() {
+        setWillRemove(true)
+        clearTimeout(timerRef.current)
+        timerRef.current = setTimeout(() => removeTask(task.id), 900)
+    }
 
     return (
         <tr className={`relative ${willRemove ? "animate-slide" : ""}`}>
@@ -27,7 +30,7 @@ export default function TodoRow({ task, markTask, removeTask }) {
                 <Button
                     tag="Excluir tarefa"
                     hide={!task.done}
-                    onClick={() => setWillRemove(true)}
+                    onClick={handleRemove}
                     className="btn btn--delete mr-3"
                     type="button"
                 >
