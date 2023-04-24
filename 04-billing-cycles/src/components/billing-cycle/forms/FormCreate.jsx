@@ -38,7 +38,6 @@ export default function FormCreate(props) {
         const debts = formatBillingCycleISO(formState.debts)
         const { id, name, month, year } = formState
         await props.onSubmit({ id, name, month, year, credits, debts })
-
         formActions.resetForm()
         tabsActions.resetTabs()
     }
@@ -106,8 +105,13 @@ export default function FormCreate(props) {
                 <DebtList fieldLegend="Débitos" debts={formState.debts} />
             </div>
             <div className="mt-6 flex gap-3 items-center">
-                <Buttton onClick={submitForm} className="create-form-button" type="submit">
-                    Enviar
+                <Buttton
+                    disabled={props.isSubmiting}
+                    onClick={submitForm}
+                    className="create-form-button"
+                    type="submit"
+                >
+                    {props.isSubmiting ? "Enviando" : "Enviar"}
                 </Buttton>
                 <Buttton
                     onClick={formActions.clearErrors}
@@ -122,5 +126,6 @@ export default function FormCreate(props) {
     )
 }
 FormCreate.propTypes = {
-    onSubmit: propTypes.func
+    onSubmit: propTypes.func,
+    isSubmiting: propTypes.bool
 }

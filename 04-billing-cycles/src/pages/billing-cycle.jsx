@@ -46,7 +46,7 @@ export default function BillingCycle({ username, email }) {
     const { setUser } = useContext(UserContext)
     const { modalDelete } = useContext(ModalContext)
     const { methods } = useContext(BillingCyclesContext)
-    const apiMethods = useApi(methods.setBillingCycleList)
+    const { isSending, apiMethods } = useApi(methods.setBillingCycleList)
 
     useEffect(() => {
         let ignore = false
@@ -90,7 +90,7 @@ export default function BillingCycle({ username, email }) {
                             <BillingCycleList />
                         </TabContent>
                         <TabContent id="tabCreate">
-                            <FormCreate onSubmit={apiMethods.post} />
+                            <FormCreate isSubmiting={isSending} onSubmit={apiMethods.post} />
                         </TabContent>
                         <TabContent id="tabUpdate">
                             <FormUpdate onSubmit={apiMethods.put} />

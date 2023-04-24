@@ -1,8 +1,11 @@
+import { useState } from "react"
 import { toastEmmitter } from "../utils/client"
 import { baseApiUrl, defaultFailMessage } from "../utils/constants"
 
 //Hook utilizado para espor o acesso à CRUD de ciclo de pagamentos
 export default function useApi(setter) {
+    const [isSending, setIsSending] = useState(false)
+
     //Função base utilizada nos métodos abaixo
     async function submit(method, data, messages) {
         const toastId = Math.floor(Math.random() * 1000)
@@ -45,8 +48,11 @@ export default function useApi(setter) {
             })
     }
     async function post(data) {
+        if (isSending) return
+        setIsSending(() => true)
         await submit("POST", data, { success: "Dados cadastrados com sucesso!" })
         await get()
+        setIsSending(() => false)
     }
     async function put(data) {
         await submit("PUT", data, { success: "Dados alterados com sucesso!" })
@@ -57,5 +63,5 @@ export default function useApi(setter) {
         })
     }
 
-    return { get, post, put, deletee }
+    return { isSending, apiMethods: { get, post, put, deletee } }
 }
