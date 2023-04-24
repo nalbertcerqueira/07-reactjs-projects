@@ -61,7 +61,6 @@ export default function useTodoApi() {
                     throw new Error(data.message)
                 }
                 callback()
-                // refreshData(filterTag ? taskInput : "")
             })
             .catch((error) => {
                 console.log(error)
