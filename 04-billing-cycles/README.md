@@ -21,7 +21,7 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma série de cré
 
 <br>
 
-<img width="1100px" src="https://user-images.githubusercontent.com/105606295/222833255-0989288a-cab4-42e7-9d3c-04b64c971032.png" alt="application dashbord"/>
+<img width="1100px" src="https://user-images.githubusercontent.com/105606295/222833255-0989288a-cab4-42e7-9d3c-04b64c971032.png" alt="application dashboard"/>
 
 > **Note**
 > O projeto faz uso do gerenciamento nativo de APIs do NextJS para alcançar a persistência de dados através de arquivos .json atuando como _fake database_ , e dessa forma armazenando as informações de cada usuário.
@@ -65,7 +65,7 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma série de cré
 
 ```r
 1. Clone este repositório;
-2. Com o terminal aberto, navege até o diretório deste projeto;
+2. Com o terminal aberto, navegue até o diretório deste projeto;
 3. Baixe as dependências deste projeto com npm install;
 4. Altere a chave privada (AUTH_SECRET) em .env.local na raiz do projeto para uma chave de seu gosto;
 4. Inicie a aplicação com npm run dev;
