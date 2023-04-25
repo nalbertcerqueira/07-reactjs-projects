@@ -14,7 +14,7 @@
 
 /*Lista de tarefas*/
 .todo-container {
-    @apply px-2 sm:px-0 mt-8 max-h-70-screen overflow-x-hidden animate-display;
+    @apply px-2 sm:px-0 mt-9 max-h-[55vh] overflow-x-hidden animate-display;
 }
 
 .todo-container__thead-row {

@@ -31,8 +31,8 @@ module.exports = {
                     }
                 },
                 opacity: {
-                    "0%": { opacity: "0%" },
-                    "100%": { opacity: "100%" }
+                    "0%": { opacity: "0%", visibility: "hidden" },
+                    "100%": { opacity: "100%", visibility: "visible" }
                 }
             },
             animation: {
