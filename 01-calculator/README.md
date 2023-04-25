@@ -8,7 +8,7 @@
 ## 📋 Descrição
 
 Uma simples calculadora desenvolvida com objetivo de masterizar alguns conhecimentos sobre ReactJS, tais como: gerenciamento de estado, props, comunicação entre componentes fluxo unidirecional de informações, e memorização de componentes.
-O design do projeto teve como inspiração o modelo de calculadora utilizado pelo sitema MacOS.
+O design do projeto teve como inspiração o modelo de calculadora utilizado pelo sistema MacOS.
 
 <img width="800px" src="https://user-images.githubusercontent.com/105606295/207495559-8af5be81-9cce-496b-a5e6-eda51d208e02.png">
 
@@ -16,7 +16,7 @@ O design do projeto teve como inspiração o modelo de calculadora utilizado pel
 
 ```r
 1. Clone este repositório;
-2. Com o terminal aberto, navege até o diretório deste projeto;
+2. Com o terminal aberto, navegue até o diretório deste projeto;
 3. Baixe as dependências deste projeto com npm install;
 4. Inicie a aplicação com npm run start (modo desenvolvimento) ou npm run build (modo produção);
 5. Em seu navegador utilize a url http://localhost:3000/ para visualizar o projeto.

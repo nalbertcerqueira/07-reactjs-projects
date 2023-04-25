@@ -12,7 +12,7 @@
 
 Uma lista de tarefas (Todo App) com design minimalista criada com ReactJS, Tailwindcss e ExpressJS. A ideia deste projeto foi criar uma aplicação com gerenciamento de estado em ReactJS, e persistência de dados através de uma API desenvolvida com NodeJS/ExpressJS.
 
-Para alcançar a persistência de dados, a API utiliza um arquivo JSON atuando como uma _fake database_, ao qual a API reescreve as informações durante as chamadas assícronas do lado do cliente.
+Para alcançar a persistência de dados, a API utiliza um arquivo JSON atuando como uma _fake database_, ao qual a API reescreve as informações durante as chamadas assíncronas do lado do cliente.
 
 **Algumas funcionalidades incluem:**
 
@@ -32,7 +32,7 @@ Para alcançar a persistência de dados, a API utiliza um arquivo JSON atuando c
 
 ```r
 1. Clone este repositório;
-2. Com o terminal aberto, navege até o diretório deste projeto;
+2. Com o terminal aberto, navegue até o diretório deste projeto;
 3. Baixe as dependências deste projeto com npm install;
 4. Inicie o frontend e o backend com rpm run dev;
 5. Em seu navegador utilize a url http://localhost:3000/ para visualizar o projeto.
