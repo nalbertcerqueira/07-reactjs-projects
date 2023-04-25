@@ -25,7 +25,7 @@ export default function Banners() {
                 />
                 <Banner
                     imgSrc={accessorieBanner}
-                    imgAlt="a headseat on a suport"
+                    imgAlt="a headset on a support"
                     id="banner-2"
                     bannerTitle="Lançamento de Acessórios"
                     linkIcon={

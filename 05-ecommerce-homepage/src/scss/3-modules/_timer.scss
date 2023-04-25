@@ -14,7 +14,7 @@
         @include mixins.display-flex($direction: column);
         width: 100px;
         height: 100px;
-        background-color: vars.$pimary-color;
+        background-color: vars.$primary-color;
         border-radius: 50%;
         box-shadow: 2px 2px 4px #7e7e7e;
     }

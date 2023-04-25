@@ -17,7 +17,7 @@
     }
 
     &:hover {
-        border-color: vars.$pimary-color;
+        border-color: vars.$primary-color;
     }
 
     &__label {
@@ -27,12 +27,12 @@
         width: fit-content;
         margin-left: auto;
         padding: 0.04rem 0.4rem;
-        border: 1px solid vars.$pimary-color;
-        color: vars.$pimary-color;
+        border: 1px solid vars.$primary-color;
+        color: vars.$primary-color;
         font-size: 0.875rem;
 
         &--solid {
-            background-color: vars.$pimary-color;
+            background-color: vars.$primary-color;
             color: vars.$light-color;
         }
     }
@@ -62,7 +62,7 @@
     }
 
     &__price {
-        color: vars.$pimary-color;
+        color: vars.$primary-color;
         font-weight: 700;
         font-size: 1.3rem;
     }

@@ -65,7 +65,7 @@
 
     &__common-link {
         &:focus-visible .footer__link-content {
-            color: vars.$pimary-color;
+            color: vars.$primary-color;
         }
     }
 
@@ -74,7 +74,7 @@
         transition: 0.25s;
 
         &:hover {
-            color: vars.$pimary-color;
+            color: vars.$primary-color;
         }
     }
 
@@ -98,7 +98,7 @@
         transition: 0.24s;
 
         &:hover {
-            color: vars.$pimary-color;
+            color: vars.$primary-color;
         }
     }
 

@@ -42,7 +42,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-    background: linear-gradient(vars.$pimary-color, darken(vars.$pimary-color, 10%));
+    background: linear-gradient(vars.$primary-color, darken(vars.$primary-color, 10%));
     border: 2px solid vars.$section-bg-color;
     border-radius: 2rem;
 }
