@@ -6,6 +6,14 @@ import { Context as MenuContext } from "../../../contexts/MenuContext"
 export default function HeaderBottom() {
     //Utilizando o contexto para criar o menu toggle no modo mobile
     const { isOpen, toggleMenuState } = useContext(MenuContext)
+    const navLinks = [
+        "Home",
+        "Promoções",
+        "Notebooks",
+        "Celulares",
+        "Câmeras",
+        "Acessórios"
+    ]
 
     return (
         <div className={`header-bottom ${isOpen ? "header-bottom--visible" : ""}`}>
@@ -16,36 +24,13 @@ export default function HeaderBottom() {
                     }`}
                 >
                     <ul className="header-bottom__link-list">
-                        <li>
-                            <a className="header-bottom__navlink" href="#">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a className="header-bottom__navlink" href="#">
-                                Promoções
-                            </a>
-                        </li>
-                        <li>
-                            <a className="header-bottom__navlink" href="#">
-                                Notebooks
-                            </a>
-                        </li>
-                        <li>
-                            <a className="header-bottom__navlink" href="#">
-                                Celulares
-                            </a>
-                        </li>
-                        <li>
-                            <a className="header-bottom__navlink" href="#">
-                                Câmeras
-                            </a>
-                        </li>
-                        <li>
-                            <a className="header-bottom__navlink" href="#">
-                                Acessórios
-                            </a>
-                        </li>
+                        {navLinks.map((linkName) => (
+                            <li key={linkName}>
+                                <a className="header-bottom__navlink" href="#">
+                                    {linkName}
+                                </a>
+                            </li>
+                        ))}
                     </ul>
                     <button
                         onClick={toggleMenuState}
