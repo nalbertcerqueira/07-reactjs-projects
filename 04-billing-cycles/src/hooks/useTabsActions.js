@@ -1,4 +1,4 @@
-//Expondo os métodos para maipular as abas em billing-cycle.jsx
+//Expondo os métodos para manipular as abas em billing-cycle.jsx
 export default function useTabsActions(dispatch) {
     //Settando as abas visíveis e navegando até uma delas
     function setAndNavigateToTab(visibleTabs, tabToNavigate) {
@@ -7,7 +7,7 @@ export default function useTabsActions(dispatch) {
             payload: { visibleTabs, currentTab: tabToNavigate }
         })
     }
-    //Navendo até uma aba específica
+    //Navegando até uma aba específica
     function changeCurrentTab(tabToNavigate) {
         dispatch({
             type: "SET_CURRENT_TAB",

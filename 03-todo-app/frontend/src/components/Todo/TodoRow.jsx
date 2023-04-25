@@ -8,7 +8,7 @@ import { DoneIcon, TrashIcon, UndoIcon } from "../Icons"
 export default function TodoRow({ task, markTask, removeTask }) {
     const timerRef = useRef(null)
     const [willRemove, setWillRemove] = useState(false)
-    const taksDone = task.done ? "todo-container__task--done" : ""
+    const taskDone = task.done ? "todo-container__task--done" : ""
     const taskDoneMarker = task.done ? "todo-container__marker--done" : ""
 
     //Limpando o timer após a remoção do componente no DOM
@@ -22,7 +22,7 @@ export default function TodoRow({ task, markTask, removeTask }) {
 
     return (
         <tr className={`relative ${willRemove ? "animate-slide" : ""}`}>
-            <td className={`todo-container__task ${taksDone}`}>
+            <td className={`todo-container__task ${taskDone}`}>
                 <span className={`todo-container__marker ${taskDoneMarker}`}></span>
                 {task.taskDescription}
             </td>

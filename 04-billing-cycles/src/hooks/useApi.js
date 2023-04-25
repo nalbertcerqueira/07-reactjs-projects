@@ -2,7 +2,7 @@ import { useState } from "react"
 import { toastEmmitter } from "../utils/client"
 import { baseApiUrl, defaultFailMessage } from "../utils/constants"
 
-//Hook utilizado para espor o acesso à CRUD de ciclo de pagamentos
+//Hook utilizado para expor o acesso à CRUD de ciclo de pagamentos
 export default function useApi(setter) {
     const [isSending, setIsSending] = useState(false)
 

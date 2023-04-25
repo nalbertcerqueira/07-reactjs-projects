@@ -3,7 +3,7 @@ import { createContext, useState } from "react"
 
 export const DashboardContext = createContext(null)
 
-//Contexto utilizado para menter o resumo de créditos, débitos e saldo
+//Contexto utilizado para manter o resumo de créditos, débitos e saldo
 export default function DashboardProvider({ children }) {
     const [dashboard, setDashboard] = useState({ data: null, isLoading: true, error: false })
 

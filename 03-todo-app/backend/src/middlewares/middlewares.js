@@ -20,7 +20,7 @@ module.exports.cookieHandler = async function (req, res, next) {
         }
     }
 
-    //Caso não exista, é nescessário ler o arquivo data.json para criar os dados
+    //Caso não exista, é necessário ler o arquivo data.json para criar os dados
     //do novo usuário com um novo cookie gerado
     try {
         data = JSON.parse(await readFile(filePath, { encoding: "utf-8" }))
@@ -59,7 +59,7 @@ module.exports.cookieHandler = async function (req, res, next) {
             .json({ status: 500, message: "Error 500: Server internal error" })
     }
 }
-//Middlware responsável por habilitar o CORS
+//Middleware responsável por habilitar o CORS
 module.exports.enableCORS = function () {
     return (req, res, next) => {
         const whitelist = process.env.ALLOWED_ORIGINS.split(" ")

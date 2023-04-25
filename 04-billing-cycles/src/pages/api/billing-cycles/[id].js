@@ -47,7 +47,7 @@ async function handleGET(req, res) {
     //Buscando o os dados com base no usuário
     const foundUser = data[email]
 
-    //Buscando o ciclo de pagamentos com baseno ID informado
+    //Buscando o ciclo de pagamentos com baseado ID informado
     const foundBilling = foundUser.billings.find((billing) => billing.id === id)
     if (!foundBilling) {
         const error = new Error(`the content with id: ${id} was not found`)
@@ -70,7 +70,7 @@ async function handlePUT(req, res) {
     const { id } = req.query
     let data = {}
 
-    //Lendo o arquvio data.json
+    //Lendo o arquivo data.json
     try {
         data = JSON.parse(await readFile(dataPath, { encoding: "utf-8" })).data
     } catch (error) {
@@ -160,7 +160,7 @@ async function handleDELETE(req, res) {
     //Excluindo o ciclo de pagamentos
     foundUser.billings = foundUser.billings.filter((billing) => billing.id !== id)
 
-    //Reescrevendo o arquivo data.json e enviando uma respota ao client
+    //Reescrevendo o arquivo data.json e enviando uma resposta ao client
     try {
         await writeFile(dataPath, JSON.stringify({ data }), { encoding: "utf-8" })
         return res

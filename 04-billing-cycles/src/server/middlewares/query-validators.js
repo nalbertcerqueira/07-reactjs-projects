@@ -1,6 +1,6 @@
 import { query, validationResult } from "express-validator"
 
-//Validando as queries para consulta do sumuário
+//Validando as queries para consulta do sumário
 export async function validateSummaryQuery(req, res, handler) {
     const validations = [
         query("sort_by").isIn(["year", "month"]).optional(),

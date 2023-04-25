@@ -6,7 +6,7 @@ import { TabsContext } from "@/src/contexts/providers/TabsContext"
 import useFormActions from "@/src/hooks/useFormActions"
 import useTabsActions from "@/src/hooks/useTabsActions"
 
-import Buttton from "@/src/components/common/Button"
+import Button from "@/src/components/common/Button"
 import Input from "@/src/components/common/Input"
 import ValidationMsg from "@/src/components/common/ValidationMsg"
 import CreditList from "../credit-list/CreditList"
@@ -58,7 +58,7 @@ export default function FormCreate(props) {
                     {!formState.validations.name && (
                         <ValidationMsg
                             className="mt-1"
-                            message="O nome deve ter no minímo 4 caracteres."
+                            message="O nome deve ter no mínimo 4 caracteres."
                         />
                     )}
                 </div>
@@ -105,22 +105,22 @@ export default function FormCreate(props) {
                 <DebtList fieldLegend="Débitos" debts={formState.debts} />
             </div>
             <div className="mt-6 flex gap-3 items-center">
-                <Buttton
+                <Button
                     disabled={props.isSubmiting}
                     onClick={submitForm}
                     className="create-form-button"
                     type="submit"
                 >
                     {props.isSubmiting ? "Enviando" : "Enviar"}
-                </Buttton>
-                <Buttton
+                </Button>
+                <Button
                     onClick={formActions.clearErrors}
                     className="animate-[show_0.1s_forwards] clear-form-button"
                     type="button"
                     isFormValid={isFormValid}
                 >
                     Limpar
-                </Buttton>
+                </Button>
             </div>
         </form>
     )

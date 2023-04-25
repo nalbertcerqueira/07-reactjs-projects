@@ -1,6 +1,6 @@
 import { useContext } from "react"
 
-import Buttton from "../../common/Button"
+import Button from "../../common/Button"
 import Input from "../../common/Input"
 import CreditList from "../credit-list/CreditList"
 import DebtList from "../debt-list/DebtList"
@@ -67,7 +67,7 @@ export default function FormDelete() {
                     <DebtList debts={formState.debts} fieldLegend="Débitos" readOnly />
                 </div>
                 <div className=" mt-6 flex gap-3 items-center">
-                    <Buttton
+                    <Button
                         onClick={async (event) => {
                             event.preventDefault()
                             modalDelete.changeState("open")
@@ -76,8 +76,8 @@ export default function FormDelete() {
                         type="submit"
                     >
                         Excluir
-                    </Buttton>
-                    <Buttton
+                    </Button>
+                    <Button
                         onClick={() => {
                             formActions.resetForm()
                             tabsActions.resetTabs()
@@ -86,7 +86,7 @@ export default function FormDelete() {
                         type="button"
                     >
                         Cancelar
-                    </Buttton>
+                    </Button>
                 </div>
             </form>
         </>

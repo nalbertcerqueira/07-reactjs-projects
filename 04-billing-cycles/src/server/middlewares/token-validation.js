@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 import { join } from "path"
 import { cookieParser } from "../utils/api"
 
-//Middlware utilizado para validar se o token presente enviado pelo usuário
+//Middleware utilizado para validar se o token presente enviado pelo usuário
 //é válido ou não
 export async function jwtValidation(req) {
     const prettyCookies = cookieParser(req.headers.cookie)
@@ -55,7 +55,7 @@ export async function jwtValidation(req) {
         }
     }
 
-    return { status: 200, message: "Token validated with succcess!", username, email }
+    return { status: 200, message: "Token validated with success!", username, email }
 }
 
 //Validando o cookie/JWT enviado pelo usuário para as rotas PROTEGIDAS

@@ -73,7 +73,7 @@ async function handlePOST(req, res) {
             .status(200)
             .json({ status: 200, message: "Ciclo de pagamento cadastrado com sucesso!" })
     } catch (error) {
-        return res.status(500).jons({
+        return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
             errors: [{ msg: error.message }]

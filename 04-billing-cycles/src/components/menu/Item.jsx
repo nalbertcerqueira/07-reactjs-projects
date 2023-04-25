@@ -1,7 +1,7 @@
 import Link from "next/link"
 import propTypes from "prop-types"
 
-//Componente utitilizado em Menu.jsx e MenuTree.jsx
+//Componente utilizado em Menu.jsx e MenuTree.jsx
 export default function Item({ tabIndex, className, path, icon, label }) {
     const tab = tabIndex || 0
 

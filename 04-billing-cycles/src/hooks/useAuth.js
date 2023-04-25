@@ -3,7 +3,7 @@ import { toast } from "react-toastify"
 import { baseApiUrl, basePath } from "../utils/constants"
 
 const errorsInitialState = { username: "", email: "", password: "", confirmPassword: "" }
-const userInitialStatate = { username: "", email: "", password: "", confirmPassword: "" }
+const userInitialState = { username: "", email: "", password: "", confirmPassword: "" }
 const flagsInitialState = {
     username: true,
     email: true,
@@ -25,7 +25,7 @@ const toastMsgs = {
 
 //Hook utilizado nas páginas login.jsx e signup.jsx
 export default function useAuth() {
-    const [user, setUser] = useState(userInitialStatate)
+    const [user, setUser] = useState(userInitialState)
     const [isSubmiting, setIsSubmiting] = useState(false)
     const [flags, setFlags] = useState(flagsInitialState)
     const [errorMsgs, setErrorMsgs] = useState(errorsInitialState)
@@ -52,7 +52,7 @@ export default function useAuth() {
     }
     //Resetando o formulário ao seu estado inicial
     function resetForm() {
-        setUser(userInitialStatate)
+        setUser(userInitialState)
         setFlags(flagsInitialState)
         setErrorMsgs(errorsInitialState)
     }

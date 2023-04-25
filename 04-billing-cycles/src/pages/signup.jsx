@@ -27,8 +27,8 @@ export function getServerSideProps({ req }) {
         })
 }
 
-Singup.PageTemplate = AuthTemplate
-export default function Singup() {
+Signup.PageTemplate = AuthTemplate
+export default function Signup() {
     const { user, flags, isSubmiting, errorMsgs, methods } = useAuth()
 
     return (

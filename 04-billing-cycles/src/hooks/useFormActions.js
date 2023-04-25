@@ -1,6 +1,6 @@
 import { formatBillingCyclePTBR } from "../utils/client"
 
-//Hook utilizado para espor os métodos dos formulários FormCreate,
+//Hook utilizado para expor os métodos dos formulários FormCreate,
 //FormUpdate e FormDelete.jsx
 export default function useFormActions(dispatch) {
     //Controlando os inputs do formulário

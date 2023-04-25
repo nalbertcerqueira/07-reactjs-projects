@@ -1,6 +1,6 @@
 import { toast } from "react-toastify"
 
-//Emitindo um toast em caso de suscesso ou falha
+//Emitindo um toast em caso de sucesso ou falha
 export function toastEmmitter({ message, success, id }) {
     if (success) {
         return toast.success(message, { toastId: id || "success", autoClose: 3000 })
@@ -22,7 +22,7 @@ export function convertCurrency(value, locale = "pt-br", currency = "BRL") {
 }
 
 //Formatando um valor de crédito ou débito para number
-export function fomartValueISO(value) {
+export function formatValueISO(value) {
     return parseFloat(value.replace(/[.,]/g, "") / 100)
 }
 //Formatando um valor de crédito ou débito para R$
@@ -35,14 +35,14 @@ export function formatValuePTBR(value) {
 export function formatBillingCycleISO(data) {
     const dataCopy = copyData(data)
     dataCopy.map((object) => {
-        object.value = fomartValueISO(object.value)
+        object.value = formatValueISO(object.value)
     })
     return dataCopy
 }
 
 //Formatando todos os valores de créditos ou débitos para R$
-export function formatBillingCyclePTBR(billingCyle) {
-    const dataCopy = copyData(billingCyle)
+export function formatBillingCyclePTBR(billingCycle) {
+    const dataCopy = copyData(billingCycle)
 
     dataCopy.credits.map((credit) => {
         credit.value = formatValuePTBR(credit.value)
@@ -58,11 +58,11 @@ export function formatBillingCyclePTBR(billingCyle) {
 export function calculateSummary({ credits, debts }) {
     const creditsISO = formatBillingCycleISO(credits)
     const debtsISO = formatBillingCycleISO(debts)
-    const crediSum = creditsISO.reduce((acc, credit) => (acc += credit.value), 0)
+    const creditSum = creditsISO.reduce((acc, credit) => (acc += credit.value), 0)
     const debtSum = debtsISO.reduce((acc, debt) => (acc += debt.value), 0)
     return {
-        credit: crediSum,
+        credit: creditSum,
         debt: debtSum,
-        balance: crediSum - debtSum
+        balance: creditSum - debtSum
     }
 }

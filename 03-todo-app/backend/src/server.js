@@ -16,7 +16,7 @@ server.use(enableCORS())
 server.use(cookieHandler)
 server.use("/todo/api", apiRoutes)
 
-//Iniciando o serivdor na porta definida em .env
+//Iniciando o servidor na porta definida em .env
 server.listen(process.env.SERVER_PORT, () => {
     console.log(`Server is running on port ${process.env.SERVER_PORT}`)
 })
