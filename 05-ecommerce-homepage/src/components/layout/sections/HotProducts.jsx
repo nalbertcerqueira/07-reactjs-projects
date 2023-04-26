@@ -20,7 +20,7 @@ export default function HotProducts() {
                         price={124.9}
                         category="categoria"
                         srcImg={Prod5}
-                        productAlt="product description"
+                        productAlt="descrição do produto"
                         starRating={4}
                         label="HOT"
                         labelSolid={false}
@@ -30,7 +30,7 @@ export default function HotProducts() {
                         price={124.9}
                         category="categoria"
                         srcImg={Prod6}
-                        productAlt="product description"
+                        productAlt="descrição do produto"
                         starRating={5}
                         label="HOT"
                         labelSolid={false}
@@ -40,7 +40,7 @@ export default function HotProducts() {
                         price={124.9}
                         category="categoria"
                         srcImg={Prod7}
-                        productAlt="product description"
+                        productAlt="descrição do produto"
                         starRating={4}
                         label="HOT"
                         labelSolid={false}
@@ -50,7 +50,7 @@ export default function HotProducts() {
                         price={124.9}
                         category="categoria"
                         srcImg={Prod8}
-                        productAlt="product description"
+                        productAlt="descrição do produto"
                         starRating={5}
                         label="HOT"
                         labelSolid={false}

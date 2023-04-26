@@ -18,7 +18,7 @@ export default function NewProducts() {
                         price={124.9}
                         category="categoria"
                         srcImg={Prod1}
-                        productAlt="product description"
+                        productAlt="descrição do produto"
                         starRating={5}
                         label="NEW"
                         labelSolid={true}
@@ -28,7 +28,7 @@ export default function NewProducts() {
                         price={124.9}
                         category="categoria"
                         srcImg={Prod2}
-                        productAlt="product description"
+                        productAlt="descrição do produto"
                         starRating={4}
                         label="NEW"
                         labelSolid={true}
@@ -38,7 +38,7 @@ export default function NewProducts() {
                         price={124.9}
                         category="categoria"
                         srcImg={Prod3}
-                        productAlt="product description"
+                        productAlt="descrição do produto"
                         starRating={5}
                         label="NEW"
                         labelSolid={true}
@@ -48,7 +48,7 @@ export default function NewProducts() {
                         price={124.9}
                         category="categoria"
                         srcImg={Prod4}
-                        productAlt="product description"
+                        productAlt="descrição do produto"
                         starRating={4}
                         label="NEW"
                         labelSolid={true}

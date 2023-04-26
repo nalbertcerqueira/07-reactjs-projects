@@ -13,7 +13,7 @@ export default function Banners() {
             <div className="banners__inner">
                 <Banner
                     imgSrc={notebookBanner}
-                    imgAlt="an open notebook on a table"
+                    imgAlt="notebook aberto em uma mesa"
                     id="banner-1"
                     bannerTitle="Promoção de Notebooks"
                     linkIcon={
@@ -25,7 +25,7 @@ export default function Banners() {
                 />
                 <Banner
                     imgSrc={accessorieBanner}
-                    imgAlt="a headset on a support"
+                    imgAlt="headset em um suporte"
                     id="banner-2"
                     bannerTitle="Lançamento de Acessórios"
                     linkIcon={
@@ -37,7 +37,7 @@ export default function Banners() {
                 />
                 <Banner
                     imgSrc={cameraBanner}
-                    imgAlt="a professional camera"
+                    imgAlt="câmera profissional"
                     id="banner-3"
                     bannerTitle="Câmeras Potentes"
                     linkIcon={
