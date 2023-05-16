@@ -2,10 +2,10 @@ import React from "react"
 
 import Product from "../../Product"
 
-import Prod5 from "/img/prod-5.jpg"
-import Prod6 from "/img/prod-6.jpg"
-import Prod7 from "/img/prod-7.jpg"
-import Prod8 from "/img/prod-8.jpg"
+import Prod5 from "/img/prod-5.webp"
+import Prod6 from "/img/prod-6.webp"
+import Prod7 from "/img/prod-7.webp"
+import Prod8 from "/img/prod-8.webp"
 
 //Componente utilizado em App.jsx
 export default function HotProducts() {

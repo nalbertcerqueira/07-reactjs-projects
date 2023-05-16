@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
 import Banner from "../../Banner"
-import notebookBanner from "/img/banner-1.jpg"
-import accessorieBanner from "/img/banner-2.jpg"
-import cameraBanner from "/img/banner-3.jpg"
+import notebookBanner from "/img/banner-1.webp"
+import accessorieBanner from "/img/banner-2.webp"
+import cameraBanner from "/img/banner-3.webp"
 
 //Componente utilizado em App.jsx
 export default function Banners() {

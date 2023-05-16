@@ -68,7 +68,7 @@
     &__inner-container {
         @extend %inner-container-center;
         @include mixins.display-flex($direction: column, $gap: 1.5rem);
-        background-image: url("/img/deal_headset.png");
+        background-image: url("/img/deal_headset.webp");
         background-repeat: no-repeat;
         background-position-x: right;
         background-position-y: 2rem;

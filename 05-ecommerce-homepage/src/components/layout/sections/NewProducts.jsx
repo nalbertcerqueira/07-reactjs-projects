@@ -1,9 +1,9 @@
 import React from "react"
 import Product from "../../Product"
-import Prod1 from "/img/prod-1.jpg"
-import Prod2 from "/img/prod-2.jpg"
-import Prod3 from "/img/prod-3.jpg"
-import Prod4 from "/img/prod-4.jpg"
+import Prod1 from "/img/prod-1.webp"
+import Prod2 from "/img/prod-2.webp"
+import Prod3 from "/img/prod-3.webp"
+import Prod4 from "/img/prod-4.webp"
 
 //Componente utilizado em App.jsx
 export default function NewProducts() {

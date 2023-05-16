@@ -19,7 +19,12 @@ export default function Product(props) {
             >
                 {props.label}
             </span>
-            <img className="product__img" src={props.srcImg} alt={props.productAlt} />
+            <img
+                loading="lazy"
+                className="product__img"
+                src={props.srcImg}
+                alt={props.productAlt}
+            />
             <div className="product__info">
                 <p className="product__category">{props.category}</p>
                 <h2 className="product__name">{props.name}</h2>
