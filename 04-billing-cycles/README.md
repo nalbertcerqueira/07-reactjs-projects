@@ -17,7 +17,7 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma série de cré
 -   Login e cadastro de usuários;
 -   Criação, edição e exclusão de ciclos de pagamentos;
 -   Visualização de todos os ciclos de pagamentos;
--   Resumo contendo o consolidado geral de créditos, débitos e o saldo resultado.
+-   Resumo contendo o consolidado geral de créditos, débitos e o saldo resultante.
 
 <br>
 
