@@ -67,7 +67,7 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma série de cré
 1. Clone este repositório;
 2. Com o terminal aberto, navegue até o diretório deste projeto;
 3. Baixe as dependências deste projeto com npm install;
-4. Altere a chave privada (AUTH_SECRET) em .env.local na raiz do projeto para uma chave de seu gosto;
+4. Altere a chave privada (AUTH_SECRET) em .env.local na raiz do projeto para uma chave de sua preferência;
 4. Inicie a aplicação com npm run dev;
 5. Navegue até http://localhost:3000/ para visualizar o projeto.
 ```
