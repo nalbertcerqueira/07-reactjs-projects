@@ -1,6 +1,7 @@
 //Importando dependências e funções
 const express = require("express")
 const { resolve } = require("path")
+const helmet = require("helmet")
 const apiRoutes = require("./routes/api.js")
 const { enableCORS, cookieHandler } = require("./middlewares/middlewares.js")
 
@@ -9,6 +10,7 @@ const server = express()
 
 //Aplicando middlewares
 server.set("trust proxy", true)
+server.use(helmet())
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
 
