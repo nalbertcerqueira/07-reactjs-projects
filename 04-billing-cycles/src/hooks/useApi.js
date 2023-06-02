@@ -12,7 +12,7 @@ export default function useApi(setter) {
         const id = data.id || ""
         const msg = messages?.success || "Operação realizada com sucesso!"
 
-        return fetch(`${baseApiUrl}/api/billing-cycles/${id}`, {
+        return fetch(`${baseApiUrl}/api/billing-cycles${id ? "/" + id : ""}`, {
             method,
             body: JSON.stringify(data || {}),
             headers: { "Content-Type": "application/json" }
