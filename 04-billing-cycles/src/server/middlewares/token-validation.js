@@ -14,8 +14,8 @@ export async function jwtValidation(req) {
     if (!prettyCookies || !prettyCookies?.session_id) {
         const error = new Error("missing token/cookie in request")
         return {
-            status: 400,
-            message: "Error 400: bad request",
+            status: 401,
+            message: "Error 401: Unauthorized, token is missing",
             errors: [{ msg: error.message }]
         }
     }
