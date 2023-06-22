@@ -4,7 +4,7 @@ export default function handler(req, res) {
         case "GET":
             return handleGET(req, res)
         default:
-            return res.status(404).send("Error 405: Method not allowed")
+            return res.status(405).send("Error 405: Method not allowed")
     }
 }
 
