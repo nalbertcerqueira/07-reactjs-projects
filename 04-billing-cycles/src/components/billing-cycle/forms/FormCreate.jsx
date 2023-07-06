@@ -34,9 +34,12 @@ export default function FormCreate(props) {
                 message: "Por favor, corrija os erros do formulário antes de enviá-lo."
             })
         }
+        const { id, name } = formState
         const credits = formatBillingCycleISO(formState.credits)
         const debts = formatBillingCycleISO(formState.debts)
-        const { id, name, month, year } = formState
+        const month = parseInt(formState.month)
+        const year = parseInt(formState.year)
+
         await props.onSubmit({ id, name, month, year, credits, debts })
         formActions.resetForm()
         tabsActions.resetTabs()
@@ -73,10 +76,7 @@ export default function FormCreate(props) {
                         onChange={formActions.handleFieldChange}
                     />
                     {!formState.validations.month && (
-                        <ValidationMsg
-                            className="mt-1"
-                            message="Apenas valores entre 1 e 12."
-                        />
+                        <ValidationMsg className="mt-1" message="Apenas valores entre 1 e 12." />
                     )}
                 </div>
                 <div className="w-full md:w-2/4">
