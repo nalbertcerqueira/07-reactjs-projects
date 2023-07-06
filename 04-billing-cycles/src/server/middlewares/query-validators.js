@@ -1,41 +1,31 @@
-import { query, validationResult } from "express-validator"
+import { paginationQuerySchema, summaryQuerySchema } from "../schemas/yup/search-params"
 
 //Validando as queries para consulta do sumário
 export async function validateSummaryQuery(req, res, handler) {
-    const validations = [
-        query("sort_by").isIn(["year", "month"]).optional(),
-        query("value").isInt().toInt().optional()
-    ]
-
-    await Promise.all(validations.map((validation) => validation.run(req)))
-    const result = validationResult(req)
-
-    if (!result.isEmpty()) {
-        return res.status(500).json({
-            status: 500,
-            message: "Error 400: bad request",
-            errors: result.errors
-        })
-    } else {
+    console.log(req.query)
+    try {
+        await summaryQuerySchema.validate(req.query, { abortEarly: false })
         return handler(req, res)
+    } catch (error) {
+        return res.json({
+            status: 400,
+            message: "Error 400: bad request",
+            errors: error.errors
+        })
     }
 }
 
 //Validando as queries referentes à paginação
 export async function validatePaginationQuery(req, res, handler) {
-    const validations = [
-        query("page").isInt().toInt().optional(),
-        query("limit").isInt({ min: 2, max: 10 }).toInt().optional()
-    ]
-
-    await Promise.all(validations.map((validation) => validation.run(req)))
-    const result = validationResult(req)
-
-    if (!result.isEmpty()) {
-        return res
-            .status(400)
-            .json({ status: 400, message: "Error 400: bad request", errors: result.errors })
-    } else {
+    console.log(req.query)
+    try {
+        await paginationQuerySchema.validate(req.query, { abortEarly: false })
         return handler(req, res)
+    } catch (error) {
+        return res.status(400).json({
+            status: 400,
+            message: "Error 400: bad request",
+            errors: error.errors
+        })
     }
 }
