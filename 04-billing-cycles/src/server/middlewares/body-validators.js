@@ -1,4 +1,5 @@
 // import { NextApiRequest } from "next"
+import { NextResponse } from "next/server"
 import { billingCycleYupSchema } from "../schemas/yup/billing-cycle"
 import { userLoginSchema, userSignupSchema } from "../schemas/yup/user"
 
@@ -6,34 +7,36 @@ import { userLoginSchema, userSignupSchema } from "../schemas/yup/user"
 //de ciclos de pagamentos
 export async function validateBillingCycle(req, res, handler) {
     try {
-        await billingCycleYupSchema.validate(req.body, { abortEarly: false })
-        return handler(req, res)
+        await billingCycleYupSchema.validate(await req.json(), { abortEarly: false })
+        return handler ? handler(req, res) : res
     } catch (error) {
-        return res.status(400).json({
+        const errorResponse = {
             status: 400,
             message: "Error 400: bad request",
             errors: error.errors
-        })
+        }
+        return new NextResponse(JSON.stringify(errorResponse), { status: 400 })
     }
 }
 
 //Validando o corpo de requisição durante o login ou registro do usuário
 export async function validateSigninSignup(req, res, handler) {
-    const pathname = req.url
+    const { pathname } = req.nextUrl
 
     try {
-        if (pathname.match(/\/api\/login/)) {
-            await userLoginSchema.validate(req.body, { abortEarly: false })
-            return handler(req, res)
+        if (pathname === "/api/login") {
+            await userLoginSchema.validate(await req.json(), { abortEarly: false })
+            return handler ? await handler(req, res) : res
         }
 
-        await userSignupSchema.validate(req.body, { abortEarly: false })
-        return handler(req, res)
+        await userSignupSchema.validate(await req.json(), { abortEarly: false })
+        return handler ? await handler(req, res) : res
     } catch (error) {
-        return res.status(400).json({
+        const errorResponse = {
             status: 400,
             message: "Error 400: bad request",
             errors: error.errors
-        })
+        }
+        return new NextResponse(JSON.stringify(errorResponse), { status: 400 })
     }
 }

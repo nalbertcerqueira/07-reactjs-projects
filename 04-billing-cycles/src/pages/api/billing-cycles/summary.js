@@ -1,30 +1,23 @@
 import { readFile } from "fs/promises"
-import jwt from "jsonwebtoken"
+import { decodeJwt } from "jose"
 import { join } from "path"
-
-import { validateSummaryQuery } from "../../../server/middlewares/query-validators"
-import { jwtValidationProtectedRoute } from "../../../server/middlewares/token-validation"
-import { cookieParser } from "../../../server/utils/api"
 
 /* Rotas protegidas por JWT */
 export default function handler(req, res) {
     switch (req.method) {
         case "GET":
-            return jwtValidationProtectedRoute(req, res, () =>
-                validateSummaryQuery(req, res, handleGET)
-            )
+            return handleGET(req, res)
         default:
-            return res
-                .status(405)
-                .json({ status: 405, message: "Error 405: method not allowed" })
+            return res.status(405).json({ status: 405, message: "Error 405: method not allowed" })
     }
 }
 
 //Enviando o consolidado de créditos e débitos do usuário
 async function handleGET(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
-    const { session_id } = cookieParser(req.headers.cookie)
-    const { email } = jwt.decode(session_id)
+    const { session_id } = req.cookies
+    const jwtPayload = decodeJwt(session_id)
+    const { email } = jwtPayload
     const { sort_by, value } = req.query
     const summary = {}
     let data = {}
@@ -36,7 +29,7 @@ async function handleGET(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 

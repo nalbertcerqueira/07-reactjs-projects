@@ -1,27 +1,18 @@
 import { readFile, writeFile } from "fs/promises"
-import jwt from "jsonwebtoken"
+import { decodeJwt } from "jose"
 import { join } from "path"
 
-import { validateBillingCycle } from "@/src/server/middlewares/body-validators"
-import { validatePaginationQuery } from "@/src/server/middlewares/query-validators"
-import { cookieParser, generateHash, setTransactionsIds } from "@/src/server/utils/api"
-import { jwtValidationProtectedRoute } from "../../../server/middlewares/token-validation"
+import { generateHash, setTransactionsIds } from "@/src/server/utils/api"
 
 /* Rotas protegidas por JWT */
 export default function handler(req, res) {
     switch (req.method) {
         case "GET":
-            return jwtValidationProtectedRoute(req, res, () =>
-                validatePaginationQuery(req, res, handleGET)
-            )
+            return handleGET(req, res)
         case "POST":
-            return jwtValidationProtectedRoute(req, res, () =>
-                validateBillingCycle(req, res, handlePOST)
-            )
+            return handlePOST(req, res)
         default:
-            return res
-                .status(405)
-                .send({ status: 405, message: "Error 405: method not allowed" })
+            return res.status(405).send({ status: 405, message: "Error 405: method not allowed" })
     }
 }
 
@@ -29,8 +20,9 @@ export default function handler(req, res) {
 async function handlePOST(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const body = JSON.parse(JSON.stringify(req.body))
-    const { session_id } = cookieParser(req.headers.cookie)
-    const { email } = jwt.decode(session_id)
+    const { session_id } = req.cookies
+    const jwtPayload = decodeJwt(session_id)
+    const { email } = jwtPayload
     let data = {}
 
     //Lendo o arquivo data.json
@@ -40,7 +32,7 @@ async function handlePOST(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 
@@ -76,7 +68,7 @@ async function handlePOST(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 }
@@ -84,8 +76,9 @@ async function handlePOST(req, res) {
 //Enviando todos os dados de ciclos de pagamentos do usuário
 async function handleGET(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
-    const { session_id } = cookieParser(req.headers.cookie)
-    const { email } = jwt.decode(session_id)
+    const { session_id } = req.cookies
+    const jwtPayload = decodeJwt(session_id)
+    const { email } = jwtPayload
     const { page, limit } = req.query
     let data = {}
 
@@ -96,7 +89,7 @@ async function handleGET(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [error]
+            errors: [error.message]
         })
     }
 

@@ -1,35 +1,29 @@
 import { readFile, writeFile } from "fs/promises"
-import jwt from "jsonwebtoken"
+import { decodeJwt } from "jose"
 import { join } from "path"
 
 import { setTransactionsIds } from "@/src/server/utils/api"
-import { validateBillingCycle } from "../../../server/middlewares/body-validators"
-import { jwtValidationProtectedRoute } from "../../../server/middlewares/token-validation"
-import { cookieParser } from "../../../server/utils/api"
 
 /* Rotas protegidas por JWT */
 export default function handler(req, res) {
     switch (req.method) {
         case "GET":
-            return jwtValidationProtectedRoute(req, res, handleGET)
+            return handleGET(req, res)
         case "DELETE":
-            return jwtValidationProtectedRoute(req, res, handleDELETE)
+            return handleDELETE(req, res)
         case "PUT":
-            return jwtValidationProtectedRoute(req, res, () =>
-                validateBillingCycle(req, res, handlePUT)
-            )
+            return handlePUT(req, res)
         default:
-            return res
-                .status(405)
-                .send({ status: 405, message: "Error 405: method not allowed" })
+            return res.status(405).send({ status: 405, message: "Error 405: method not allowed" })
     }
 }
 
 //Consumo de dados de um ciclo de pagamentos com base em seu ID
 async function handleGET(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
-    const { session_id } = cookieParser(req.headers.cookie)
-    const { email } = jwt.decode(session_id)
+    const { session_id } = req.cookies
+    const jwtPayload = decodeJwt(session_id)
+    const { email } = jwtPayload
     const { id } = req.query
     let data = {}
 
@@ -40,7 +34,7 @@ async function handleGET(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 
@@ -50,11 +44,10 @@ async function handleGET(req, res) {
     //Buscando o ciclo de pagamentos com baseado ID informado
     const foundBilling = foundUser.billings.find((billing) => billing.id === id)
     if (!foundBilling) {
-        const error = new Error(`the content with id: ${id} was not found`)
         return res.status(404).json({
             status: 404,
             message: "Error 404: content not found",
-            errors: [{ msg: error.message }]
+            errors: [`ciclo de pagamento com id ${id} não foi encontrado.`]
         })
     }
 
@@ -65,8 +58,9 @@ async function handleGET(req, res) {
 async function handlePUT(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
     const body = JSON.parse(JSON.stringify(req.body))
-    const { session_id } = cookieParser(req.headers.cookie)
-    const { email } = jwt.decode(session_id)
+    const { session_id } = req.cookies
+    const jwtPayload = decodeJwt(session_id)
+    const { email } = jwtPayload
     const { id } = req.query
     let data = {}
 
@@ -77,7 +71,7 @@ async function handlePUT(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 
@@ -87,11 +81,10 @@ async function handlePUT(req, res) {
     //Buscando o ciclo de pagamentos com base no ID informado
     const foundBillingIndex = foundUser.billings.findIndex((billing) => billing.id === id)
     if (foundBillingIndex < 0) {
-        const error = new Error(`the content with id: ${id} was not found`)
         return res.status(404).json({
             status: 404,
             message: "Error 404: content no found",
-            errors: [{ msg: error.message }]
+            errors: [`ciclo de pagamento com id ${id} não foi encontrado.`]
         })
     }
 
@@ -119,7 +112,7 @@ async function handlePUT(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 }
@@ -127,8 +120,9 @@ async function handlePUT(req, res) {
 //Removendo um ciclo de pagamentos através do ID informado
 async function handleDELETE(req, res) {
     const dataPath = join(process.cwd(), "data/data.json")
-    const { session_id } = cookieParser(req.headers.cookie)
-    const { email } = jwt.decode(session_id)
+    const { session_id } = req.cookies
+    const jwtPayload = decodeJwt(session_id)
+    const { email } = jwtPayload
     const { id } = req.query
     let data = {}
 
@@ -139,7 +133,7 @@ async function handleDELETE(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 
@@ -149,11 +143,10 @@ async function handleDELETE(req, res) {
     //Buscando o ciclo de pagamentos com base no ID informado
     const foundBilling = foundUser.billings.find((billing) => billing.id === id)
     if (!foundBilling) {
-        const error = new Error(`the content with id: ${id} was not found`)
         return res.status(404).json({
             status: 404,
             message: "Error 404: content not found",
-            errors: [{ msg: error.message }]
+            errors: [`ciclo de pagamento com id ${id} não foi encontrado.`]
         })
     }
 
@@ -170,7 +163,7 @@ async function handleDELETE(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 }

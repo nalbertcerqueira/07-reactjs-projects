@@ -18,5 +18,5 @@ function handleGET(req, res) {
             process.env.COOKIE_SECURE ? "Secure" : ""
         };`
     )
-    res.status(200).json({ status: 200, message: "Logout bem sucedido." })
+    res.status(200).json({ status: 200, message: "logout bem sucedido." })
 }

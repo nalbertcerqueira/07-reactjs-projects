@@ -1,13 +1,12 @@
 import bcrypt from "bcrypt"
 import { readFile, writeFile } from "fs/promises"
-import { resolve } from "path"
-import { validateSigninSignup } from "../../server/middlewares/body-validators"
+import { join } from "path"
 
 /* Rotas públicas */
 export default function handler(req, res) {
     switch (req.method) {
         case "POST":
-            return validateSigninSignup(req, res, handlePOST)
+            return handlePOST(req, res)
         default:
             return res.status(405).send("Error 405: Method not allowed")
     }
@@ -16,8 +15,8 @@ export default function handler(req, res) {
 //Rota para cadastro de usuários
 async function handlePOST(req, res) {
     const { username, email, password, confirmPassword } = req.body
-    const usersDBPath = resolve(__dirname, "../../../../data/users.json")
-    const billingCycleDBPath = resolve(__dirname, "../../../../data/data.json")
+    const usersDBPath = join(process.cwd(), "data/users.json")
+    const billingCycleDBPath = join(process.cwd(), "data/data.json")
     let usersDB = []
     let billingCycleDB = []
 
@@ -29,30 +28,25 @@ async function handlePOST(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 
     //Verificando se as senhas fornecidas no cadastro são iguais
     if (password !== confirmPassword) {
-        const error = new Error("Passwords dont match")
         return res.status(400).json({
             status: 400,
             message: "Error 400: bad request",
-            errors: [{ msg: error.message }]
+            errors: ["as senhas fornecidas não coincidem."]
         })
     }
 
     //Verificando se o email fornecido já possui cadastro no sistema
-    try {
-        if (usersDB.users[email.replace(/ /g, "")]) {
-            throw Error("This email is already registered")
-        }
-    } catch (error) {
+    if (usersDB.users[email.trim()]) {
         return res.status(409).json({
             status: 409,
             message: "Error 409: conflict",
-            errors: [{ msg: error.message }]
+            errors: ["o email fornecido já possui um cadastro em nosso sistema."]
         })
     }
 
@@ -67,7 +61,7 @@ async function handlePOST(req, res) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 
@@ -82,12 +76,12 @@ async function handlePOST(req, res) {
         })
         return res
             .status(200)
-            .json({ status: 200, message: "New user registered with success!" })
+            .json({ status: 200, message: "novo usuário registrado com sucesso!" })
     } catch (error) {
         return res.status(500).json({
             status: 500,
             message: "Error 500: server internal error",
-            errors: [{ msg: error.message }]
+            errors: [error.message]
         })
     }
 }
