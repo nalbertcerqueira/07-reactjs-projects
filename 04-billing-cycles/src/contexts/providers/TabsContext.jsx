@@ -9,9 +9,7 @@ export default function TabsProvider({ children }) {
     const [tabsState, tabsDispatch] = useReducer(tabsReducer, tabsInitialState)
 
     return (
-        <TabsContext.Provider value={{ tabsState, tabsDispatch }}>
-            {children}
-        </TabsContext.Provider>
+        <TabsContext.Provider value={{ tabsState, tabsDispatch }}>{children}</TabsContext.Provider>
     )
 }
 TabsProvider.propTypes = {

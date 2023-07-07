@@ -11,11 +11,7 @@ export default function MenuProvider({ children }) {
         setMenuState((prevState) => (prevState === "open" ? "closed" : "open"))
     }
 
-    return (
-        <MenuContext.Provider value={{ menu, changeMenuState }}>
-            {children}
-        </MenuContext.Provider>
-    )
+    return <MenuContext.Provider value={{ menu, changeMenuState }}>{children}</MenuContext.Provider>
 }
 MenuProvider.propTypes = {
     children: propTypes.node

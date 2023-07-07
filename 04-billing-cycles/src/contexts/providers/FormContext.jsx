@@ -9,9 +9,7 @@ export default function FormProvider({ children }) {
     const [formState, formDispatch] = useReducer(formReducer, formInitialState)
 
     return (
-        <FormContext.Provider value={{ formState, formDispatch }}>
-            {children}
-        </FormContext.Provider>
+        <FormContext.Provider value={{ formState, formDispatch }}>{children}</FormContext.Provider>
     )
 }
 FormProvider.propTypes = {
