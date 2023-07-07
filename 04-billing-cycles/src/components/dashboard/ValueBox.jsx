@@ -10,11 +10,7 @@ export default function ValueBox(props) {
         >
             <div className="p-3 relative min-w-80">
                 <div className={`text-white relative z-10 ${props.margin || "mb-5"}`}>
-                    <h3
-                        className={`${
-                            props.valueStyle || "text-3xl font-bold mb-3 break-all"
-                        }`}
-                    >
+                    <h3 className={`${props.valueStyle || "text-3xl font-bold mb-3 break-all"}`}>
                         {props.value}
                     </h3>
                     <p className="text-base">{props.text}</p>

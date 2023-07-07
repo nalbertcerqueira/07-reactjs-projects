@@ -54,9 +54,7 @@ export default function DebtList({ fieldLegend, debts, readOnly }) {
             <table className="w-full">
                 <thead>
                     <tr className="border-b-2 border-zinc-300">
-                        <th className="text-left font-medium pb-3 px-2 whitespace-nowrap">
-                            Nome
-                        </th>
+                        <th className="text-left font-medium pb-3 px-2 whitespace-nowrap">Nome</th>
                         <th className="text-left font-medium pb-3 px-2 whitespace-nowrap">
                             Valor (R$)
                         </th>

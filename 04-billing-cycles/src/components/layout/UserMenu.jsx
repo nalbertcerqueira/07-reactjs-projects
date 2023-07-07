@@ -20,11 +20,7 @@ export default function UserMenu() {
                     className="shrink-0 block h-9 w-9 rounded-full overflow-hidden border-2
                     border-white/30"
                 >
-                    <Image
-                        className="h-full w-full"
-                        src={profileImg}
-                        alt="user profile picture"
-                    />
+                    <Image className="h-full w-full" src={profileImg} alt="user profile picture" />
                 </span>
                 <div className="overflow-hidden max-w-[124px]">
                     <p className="text-white text-sm text-ellipsis overflow-hidden whitespace-nowrap">
@@ -35,11 +31,7 @@ export default function UserMenu() {
             <div className={`drop-down ${menu ? "open" : ""}`}>
                 <section className="p-3">
                     <span className="mb-3 block m-auto w-24 h-24 overflow-hidden rounded-full">
-                        <Image
-                            className="h-full"
-                            src={profileImg}
-                            alt="user profile picture"
-                        />
+                        <Image className="h-full" src={profileImg} alt="user profile picture" />
                     </span>
                     <div className="text-white text-center break-words">
                         <p>{username}</p>

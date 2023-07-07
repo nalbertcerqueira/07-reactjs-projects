@@ -26,9 +26,7 @@ export default function BillingCycleList() {
             <div className="flex items-center justify-end gap-2">
                 <Button
                     onClick={() => {
-                        const currentCycle = billingCyclesList.filter(
-                            (cycle) => cycle.id === id
-                        )[0]
+                        const currentCycle = billingCyclesList.filter((cycle) => cycle.id === id)[0]
                         methods.setCurrentId(id)
                         formActions.setAllFields(currentCycle)
                         tabsActions.setAndNavigateToTab(["tabUpdate"], "tabUpdate")
@@ -40,9 +38,7 @@ export default function BillingCycleList() {
                 </Button>
                 <Button
                     onClick={() => {
-                        const currentCycle = billingCyclesList.filter(
-                            (cycle) => cycle.id === id
-                        )[0]
+                        const currentCycle = billingCyclesList.filter((cycle) => cycle.id === id)[0]
                         methods.setCurrentId(id)
                         formActions.setAllFields(currentCycle)
                         tabsActions.setAndNavigateToTab(["tabDelete"], "tabDelete")

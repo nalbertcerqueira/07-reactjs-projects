@@ -51,11 +51,7 @@ export default function ModalDelete({ onSubmit }) {
                     </p>
                 </div>
                 <div className="justify-end gap-3 flex text-base">
-                    <Button
-                        type="button"
-                        onClick={confirmModal}
-                        className="delete-form-button"
-                    >
+                    <Button type="button" onClick={confirmModal} className="delete-form-button">
                         Excluir
                     </Button>
                     <Button

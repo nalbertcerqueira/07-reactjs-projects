@@ -72,10 +72,7 @@ export default function FormUpdate(props) {
                         onChange={formActions.handleFieldChange}
                     />
                     {!formState.validations.month && (
-                        <ValidationMsg
-                            className="mt-1"
-                            message="Apenas valores entre 1 e 12."
-                        />
+                        <ValidationMsg className="mt-1" message="Apenas valores entre 1 e 12." />
                     )}
                 </div>
                 <div className="w-full md:w-2/4">

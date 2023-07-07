@@ -8,9 +8,7 @@ export default function PageHeader({ title, small }) {
                 items-end gap-2`}
             >
                 <span>{title}</span>
-                <span className="text-lg font-normal text-zinc-500 whitespace-nowrap">
-                    {small}
-                </span>
+                <span className="text-lg font-normal text-zinc-500 whitespace-nowrap">{small}</span>
             </h1>
         </section>
     )

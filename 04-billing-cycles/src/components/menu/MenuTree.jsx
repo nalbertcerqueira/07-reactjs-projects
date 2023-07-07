@@ -23,9 +23,7 @@ export default function MenuTree({ children, className, icon, label }) {
                 <span className="ml-auto">
                     <LeftIcon
                         stroke="icons"
-                        className={`transition-all duration-200 ${
-                            treeActive ? "-rotate-90" : ""
-                        }`}
+                        className={`transition-all duration-200 ${treeActive ? "-rotate-90" : ""}`}
                     />
                 </span>
             </button>
