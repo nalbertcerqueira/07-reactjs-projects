@@ -1,5 +1,4 @@
 import Link from "next/link"
-
 import AuthTemplate from "../components/AuthTemplate"
 import Button from "../components/common/Button"
 import DefaultHead from "../components/common/DefaultHead"
@@ -7,24 +6,7 @@ import Input from "../components/common/Input"
 import ValidationMsg from "../components/common/ValidationMsg"
 import EmailIcon from "../components/icons/login-signup/EmailIcon"
 import PasswordIcon from "../components/icons/login-signup/PasswordIcon"
-
 import useAuth from "../hooks/useAuth"
-
-//Validando o token do usuário antes de exibir a aplicação
-export async function getServerSideProps({ req }) {
-    return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth-validation`, {
-        method: "GET",
-        headers: { Cookie: req.headers.cookie }
-    })
-        .then(async (response) => {
-            if (response.ok) return { redirect: { destination: "/", permanent: false } }
-            else return { props: {} }
-        })
-        .catch((error) => {
-            console.log(error.message)
-            return { props: {} }
-        })
-}
 
 Login.PageTemplate = AuthTemplate
 export default function Login() {

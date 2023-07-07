@@ -1,8 +1,7 @@
-import propTypes from "prop-types"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 
+import { BillingCyclesContext } from "../contexts/providers/BillingCyclesContext"
 import { ModalContext } from "../contexts/providers/ModalContext"
-import { UserContext } from "../contexts/providers/UserContext"
 
 import AppTemplate from "../components/AppTemplate"
 import BillingCycleList from "../components/billing-cycle/BillingCycleList"
@@ -22,39 +21,12 @@ import AddIcon from "../components/icons/bylling-cycle/AddIcon"
 import DeleteIcon from "../components/icons/bylling-cycle/DeleteIcon"
 import EditIcon from "../components/icons/bylling-cycle/EditIcon"
 import ListIcon from "../components/icons/bylling-cycle/ListIcon"
-import { BillingCyclesContext } from "../contexts/providers/BillingCyclesContext"
-
-//Validando o token do usuário antes de exibir a aplicação
-export async function getServerSideProps({ req }) {
-    return await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth-validation`, {
-        method: "GET",
-        headers: { Cookie: req.headers.cookie }
-    })
-        .then(async (response) => {
-            const { username, email } = await response.json()
-            if (!response.ok) throw new Error("Error")
-            else return { props: { username, email } }
-        })
-        .catch((error) => {
-            console.log(error.message)
-            return { redirect: { destination: "/login", permanent: false } }
-        })
-}
 
 BillingCycle.PageTemplate = AppTemplate
-export default function BillingCycle({ username, email }) {
-    const { setUser } = useContext(UserContext)
+export default function BillingCycle() {
     const { modalDelete } = useContext(ModalContext)
     const { methods } = useContext(BillingCyclesContext)
     const { isSending, apiMethods } = useApi(methods.setBillingCycleList)
-
-    useEffect(() => {
-        let ignore = false
-        if (!ignore) setUser({ username, email })
-        return () => {
-            ignore = true
-        }
-    }, [setUser, email, username])
 
     return (
         <>
@@ -106,8 +78,4 @@ export default function BillingCycle({ username, email }) {
             </If>
         </>
     )
-}
-BillingCycle.propTypes = {
-    username: propTypes.string,
-    email: propTypes.string
 }

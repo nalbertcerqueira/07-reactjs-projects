@@ -1,5 +1,4 @@
 import Link from "next/link"
-
 import AuthTemplate from "../components/AuthTemplate"
 import Button from "../components/common/Button"
 import DefaultHead from "../components/common/DefaultHead"
@@ -8,24 +7,7 @@ import ValidationMsg from "../components/common/ValidationMsg"
 import EmailIcon from "../components/icons/login-signup/EmailIcon"
 import PasswordIcon from "../components/icons/login-signup/PasswordIcon"
 import UserIcon from "../components/icons/login-signup/UserIcon"
-
 import useAuth from "../hooks/useAuth"
-
-//Validando o token do usuário antes de exibir a aplicação
-export function getServerSideProps({ req }) {
-    return fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth-validation`, {
-        method: "GET",
-        headers: { Cookie: req.headers.cookie }
-    })
-        .then(async (response) => {
-            if (response.ok) return { redirect: { destination: "/", permanent: false } }
-            else return { props: {} }
-        })
-        .catch((error) => {
-            console.log(error.message)
-            return { props: {} }
-        })
-}
 
 Signup.PageTemplate = AuthTemplate
 export default function Signup() {
@@ -111,10 +93,7 @@ export default function Signup() {
                     />
                     {!flags.passConfirm && (
                         <div>
-                            <ValidationMsg
-                                className="mt-1"
-                                message={errorMsgs.confirmPassword}
-                            />
+                            <ValidationMsg className="mt-1" message={errorMsgs.confirmPassword} />
                         </div>
                     )}
                 </div>
