@@ -1,3 +1,5 @@
+import { SignJWT, jwtVerify } from "jose"
+
 //Função responsável por gerar um ID para os ciclos de pagamento
 export function generateHash(idLength) {
     const charactersList = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -7,21 +9,6 @@ export function generateHash(idLength) {
         id = id.concat(charactersList[random])
     }
     return id
-}
-
-//"Parseando" os cookies da requisição, e retornando um objeto JS
-export function cookieParser(rawCookies) {
-    if (typeof rawCookies !== "string") return undefined
-    const prettyCookies = rawCookies
-        .replace(/ /g, "")
-        .replace(/&/g, ";")
-        .split(";")
-        .map((cookie) => cookie.split("="))
-        .reduce((acc, value) => {
-            acc[value[0]] = value[1]
-            return acc
-        }, {})
-    return prettyCookies
 }
 
 //Atribuindo um id a cada transação, sendo elas créditos ou débitos
@@ -41,4 +28,20 @@ export function setTransactionsIds(dataTransactions) {
         transaction.id = newId
     }
     return data
+}
+
+//Gerador de JWTs
+export async function generateJWT(payload, secret, duration) {
+    const iat = Math.floor(Date.now() / 1000)
+    return new SignJWT({ ...payload })
+        .setProtectedHeader({ alg: "HS256", typ: "JWT" })
+        .setExpirationTime(iat + duration)
+        .setIssuedAt(iat)
+        .setNotBefore(iat)
+        .sign(new TextEncoder().encode(secret))
+}
+
+//Verificador de JWTs
+export async function verifyJWT(jwt, secret) {
+    return jwtVerify(jwt, new TextEncoder().encode(secret))
 }
