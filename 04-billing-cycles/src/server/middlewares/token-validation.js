@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server"
 import { verifyJWT } from "../utils/api"
 
-// import { readFile } from "fs/promises"
-// import { join } from "path"
-
 //Middleware utilizado para validar se o token presente enviado pelo usuário
 //é válido ou não
 export async function validateToken(req, res, handler) {
     const sessionId = req.cookies.get("session_id")?.value
-    // const usersDBPath = join(process.cwd(), "data/users.json")
-    // let usersDB
 
     //Caso não exista um session_id cookie, a solicitação é finalizada
     if (!sessionId) {
@@ -32,30 +27,6 @@ export async function validateToken(req, res, handler) {
         }
         return new NextResponse(JSON.stringify(errorResponse), { status: 498 })
     }
-
-    // try {
-    //     usersDB = JSON.parse(await readFile(usersDBPath, { encoding: "utf-8" }))
-    // } catch (error) {
-    //     const errorResponse = {
-    //         status: 500,
-    //         message: "Error 500: server internal error",
-    //         errors: [error.message]
-    //     }
-    //     return new NextResponse(JSON.stringify(errorResponse), { status: 500 })
-    // }
-
-    // //Verificando se o email fornecido pelo JWT realmente existe na DB
-    // const payload = jose.decodeJwt(sessionId)
-    // const { email } = payload
-    // const foundUser = usersDB.users[email]
-    // if (!foundUser) {
-    //     const errorResponse = {
-    //         status: 404,
-    //         message: "Error 404: user not found",
-    //         errors: ["user provided in JWT was not found"]
-    //     }
-    //     return new NextResponse(JSON.stringify(errorResponse), { status: 404 })
-    // }
 
     return handler ? handler(req, res) : res
 }
