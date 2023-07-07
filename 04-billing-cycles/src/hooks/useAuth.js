@@ -36,8 +36,7 @@ export default function useAuth() {
         const newFlags = {
             username: username.length >= 4 ? true : false,
             email: email.match(/\S+@\S+\.\S+/) ? true : false,
-            confirmPassword:
-                confirmPassword === password && confirmPassword !== "" ? true : false,
+            confirmPassword: confirmPassword === password && confirmPassword !== "" ? true : false,
             password: password.length >= 6 && password.match(/^(?=.*[a-zA-Z])(?=.*\d).+$/)
         }
         setErrorMsgs({
@@ -111,7 +110,7 @@ export default function useAuth() {
         } else if (status === 200) {
             toast.success("Login bem sucedido!")
             setErrorMsgs(errorsInitialState)
-            return location.assign(basePath)
+            return setTimeout(() => location.assign(basePath), 1500)
         }
         return
     }
