@@ -31,7 +31,7 @@ export async function validateToken(req, res, handler) {
     return handler ? handler(req, res) : res
 }
 
-//Validando o cookie/JWT enviado pelo usuário para as rotas PROTEGIDAS
+//Validando o cookie/JWT enviado pelo usuário para as rotas protegidas
 export async function authenticateAndRedirect(req, res) {
     const pathname = req.nextUrl.pathname
     const authRoutes = ["/login", "/signup"]
