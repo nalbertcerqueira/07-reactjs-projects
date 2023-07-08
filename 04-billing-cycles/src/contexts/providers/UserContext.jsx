@@ -1,3 +1,4 @@
+import { baseApiUrl } from "@/src/utils/constants"
 import propTypes from "prop-types"
 import { createContext, useEffect, useState } from "react"
 
@@ -13,7 +14,7 @@ export default function UserProvider({ children }) {
     }, [])
 
     function fetchUser() {
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`)
+        fetch(`${baseApiUrl}/api/users`)
             .then(async (res) => {
                 const user = await res.json()
                 setUser(user)
