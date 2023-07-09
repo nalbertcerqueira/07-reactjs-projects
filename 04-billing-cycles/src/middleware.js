@@ -16,17 +16,17 @@ export default async function mainMiddleware(req) {
         case pathname === "/api/billing-cycles" && method === "POST":
             return await validateToken(req, res, validateBillingCycle)
 
-        case pathname.startsWith("/api/billing-cycles") && ["GET", "DELETE"].includes(method):
-            return await validateToken(req, res)
-
-        case pathname.startsWith("/api/billing-cycles") && method === "PUT":
-            return await validateToken(req, res, validateBillingCycle)
-
         case pathname === "/api/billing-cycles/summary" && method === "GET":
             return await validateToken(req, res, validateSummaryQuery)
 
         case pathname === "/api/billing-cycles/total" && method === "GET":
             return await validateToken(req, res)
+
+        case pathname.startsWith("/api/billing-cycles") && ["GET", "DELETE"].includes(method):
+            return await validateToken(req, res)
+
+        case pathname.startsWith("/api/billing-cycles") && method === "PUT":
+            return await validateToken(req, res, validateBillingCycle)
 
         //Rotas de login e cadastro (API)
         case ["/api/login", "/api/signup"].includes(pathname) && method === "POST":
