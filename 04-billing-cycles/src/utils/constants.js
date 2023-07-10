@@ -1,6 +1,6 @@
 export const defaultCurrency = "R$"
 
-export const baseApiUrl = process.env.NEXT_PUBLIC_BASE_URL
+export const baseApiUrl = process.env.NEXT_PUBLIC_BASE_URL || ""
 
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH
 
