@@ -34,13 +34,11 @@ export default function FormCreate(props) {
                 message: "Por favor, corrija os erros do formulário antes de enviá-lo."
             })
         }
-        const { id, name } = formState
+        const { _id, name, month, year } = formState
         const credits = formatBillingCycleISO(formState.credits)
         const debts = formatBillingCycleISO(formState.debts)
-        const month = parseInt(formState.month)
-        const year = parseInt(formState.year)
 
-        await props.onSubmit({ id, name, month, year, credits, debts })
+        await props.onSubmit({ _id, name, month, year, credits, debts })
         formActions.resetForm()
         tabsActions.resetTabs()
     }

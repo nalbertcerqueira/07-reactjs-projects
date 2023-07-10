@@ -22,7 +22,7 @@ export default function ModalDelete({ onSubmit }) {
     const tabsActions = useTabsActions(tabsDispatch)
 
     async function confirmModal() {
-        const currentCycle = billingCyclesList.filter((cycle) => cycle.id === currentId)[0]
+        const currentCycle = billingCyclesList.filter((cycle) => cycle._id === currentId)[0]
         await onSubmit(currentCycle)
 
         modalDelete.changeState("hidden")

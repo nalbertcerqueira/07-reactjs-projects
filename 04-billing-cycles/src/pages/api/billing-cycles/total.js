@@ -1,6 +1,5 @@
-import { readFile } from "fs/promises"
+import { mongoClient } from "@/configs/db-config"
 import { decodeJwt } from "jose"
-import { join } from "path"
 
 /* Rotas protegidas por JWT */
 export default function handler(req, res) {
@@ -10,17 +9,17 @@ export default function handler(req, res) {
     return res.status(405).send({ status: 405, message: "Error 405: method not allowed" })
 }
 
-//Enviando o total de ciclos de pagamentos do usuário ao client
+//Obtendo o total de ciclos de pagamentos do usuário
 async function handleGET(req, res) {
-    const dataPath = join(process.cwd(), "data/data.json")
+    await mongoClient.connect()
+
     const { session_id } = req.cookies
-    const jwtPayload = decodeJwt(session_id)
-    const { email } = jwtPayload
+    const { id: userId } = decodeJwt(session_id)
+    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
 
     try {
-        const data = JSON.parse(await readFile(dataPath, { encoding: "utf-8" })).data
-        const foundUser = data[email]
-        return res.status(200).json({ billingCount: foundUser.billings.length })
+        const count = await billingCycleCollection.countDocuments({ userId: userId })
+        return res.status(200).json({ billingCount: count })
     } catch (error) {
         return res.status(500).json({
             status: 500,

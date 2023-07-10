@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "files": [
-    "data",
+    "configs",
     "public",
     "src",
-    ".env.local",
     "LICENSE",
     "postcss.config.js",
     "README.md",
@@ -16,14 +15,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prod": "pm2 start ecosystem.config.js && pm2 save"
+    "lint": "next lint"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "cookie": "^0.5.0",
     "jose": "^4.14.4",
+    "mongodb": "^5.7.0",
     "next": "13.1.6",
-    "pm2": "^5.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-toastify": "^9.1.3",

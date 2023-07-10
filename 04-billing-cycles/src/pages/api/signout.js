@@ -1,3 +1,6 @@
+import { cookieOptions } from "@/src/server/utils/api"
+import cookie from "cookie"
+
 /* Rotas públicas */
 export default function handler(req, res) {
     switch (req.method) {
@@ -10,13 +13,8 @@ export default function handler(req, res) {
 
 //Rota de logout
 function handleGET(req, res) {
-    res.setHeader(
-        "Set-Cookie",
-        `session_id=0; SameSite=${process.env.COOKIE_SAME_SITE}; Path=${
-            process.env.COOKIE_PATH
-        }; HttpOnly; Max-Age=0; Domain=${process.env.COOKIE_DOMAIN}; ${
-            process.env.COOKIE_SECURE ? "Secure" : ""
-        };`
-    )
+    res.setHeader("Set-Cookie", [
+        cookie.serialize("session_id", "", { ...cookieOptions, maxAge: 0 })
+    ])
     res.status(200).json({ status: 200, message: "logout bem sucedido." })
 }

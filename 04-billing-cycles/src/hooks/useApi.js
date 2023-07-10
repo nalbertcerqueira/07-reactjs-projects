@@ -9,7 +9,7 @@ export default function useApi(setter) {
     //Função base utilizada nos métodos abaixo
     async function submit(method, data, messages) {
         const toastId = Math.floor(Math.random() * 1000)
-        const id = data.id || ""
+        const id = data._id || ""
         const msg = messages?.success || "Operação realizada com sucesso!"
 
         return fetch(`${baseApiUrl}/api/billing-cycles${id ? "/" + id : ""}`, {
@@ -31,7 +31,7 @@ export default function useApi(setter) {
                 })
             })
     }
-    //Métodos da CRUD
+    //Métodos da CRUD de ciclo de pagamentos
     async function get(page, limit) {
         const queryString = page && limit ? `?page=${page}&limit=${limit}` : ""
         const url = `${baseApiUrl}/api/billing-cycles${queryString}`
@@ -55,7 +55,10 @@ export default function useApi(setter) {
         setIsSending(() => false)
     }
     async function put(data) {
+        if (isSending) return
+        setIsSending(() => true)
         await submit("PUT", data, { success: "Dados alterados com sucesso!" })
+        setIsSending(() => false)
     }
     async function deletee(data) {
         await submit("DELETE", data, {

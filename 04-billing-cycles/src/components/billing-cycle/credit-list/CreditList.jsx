@@ -18,8 +18,8 @@ export default function CreditList({ fieldLegend, credits, readOnly = false }) {
         return credits.map((credit, index) => {
             return (
                 <CreditRow
-                    key={credit?.id || index}
-                    id={credit?.id || index}
+                    key={credit?._id || index}
+                    id={credit?._id || index}
                     readOnly={readOnly}
                     name={credit.name}
                     value={credit.value}

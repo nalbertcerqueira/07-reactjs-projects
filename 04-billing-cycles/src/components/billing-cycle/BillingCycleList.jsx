@@ -26,7 +26,9 @@ export default function BillingCycleList() {
             <div className="flex items-center justify-end gap-2">
                 <Button
                     onClick={() => {
-                        const currentCycle = billingCyclesList.filter((cycle) => cycle.id === id)[0]
+                        const currentCycle = billingCyclesList.filter(
+                            (cycle) => cycle._id === id
+                        )[0]
                         methods.setCurrentId(id)
                         formActions.setAllFields(currentCycle)
                         tabsActions.setAndNavigateToTab(["tabUpdate"], "tabUpdate")
@@ -38,7 +40,9 @@ export default function BillingCycleList() {
                 </Button>
                 <Button
                     onClick={() => {
-                        const currentCycle = billingCyclesList.filter((cycle) => cycle.id === id)[0]
+                        const currentCycle = billingCyclesList.filter(
+                            (cycle) => cycle._id === id
+                        )[0]
                         methods.setCurrentId(id)
                         formActions.setAllFields(currentCycle)
                         tabsActions.setAndNavigateToTab(["tabDelete"], "tabDelete")
@@ -57,11 +61,11 @@ export default function BillingCycleList() {
         if (list.length === 0) return null
         return list.map((value) => {
             return (
-                <tr key={value.id} className="border-t border-zinc-300">
+                <tr key={value._id} className="border-t border-zinc-300">
                     <td className="text-left py-3 px-2">{value.name}</td>
                     <td className="text-center py-3 px-2">{value.month}</td>
                     <td className="text-center py-3 px-2">{value.year}</td>
-                    <td className="text-right py-3 px-2">{renderActions(value.id)}</td>
+                    <td className="text-right py-3 px-2">{renderActions(value._id)}</td>
                 </tr>
             )
         })

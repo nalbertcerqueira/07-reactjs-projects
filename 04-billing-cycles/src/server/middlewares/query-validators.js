@@ -4,6 +4,7 @@ import { paginationQuerySchema, summaryQuerySchema } from "../schemas/yup/search
 //Validando as queries para consulta do sumário
 export async function validateSummaryQuery(req, res, handler) {
     const query = Object.fromEntries(req.nextUrl.searchParams.entries())
+
     try {
         await summaryQuerySchema.validate(query, { abortEarly: false })
         return handler ? await handler(req, res) : res
@@ -20,6 +21,7 @@ export async function validateSummaryQuery(req, res, handler) {
 //Validando as queries referentes à paginação
 export async function validatePageQuery(req, res, handler) {
     const query = Object.fromEntries(req.nextUrl.searchParams.entries())
+
     try {
         await paginationQuerySchema.validate(query, { abortEarly: false })
         return handler ? await handler(req, res) : res

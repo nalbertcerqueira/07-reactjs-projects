@@ -1,8 +1,8 @@
-import { readFile } from "fs/promises"
+import { mongoClient } from "@/configs/db-config"
 import { decodeJwt } from "jose"
-import { join } from "path"
+import { ObjectId } from "mongodb"
 
-export default function hanlder(req, res) {
+export default function handler(req, res) {
     switch (req.method) {
         case "GET":
             return handleGET(req, res)
@@ -11,32 +11,32 @@ export default function hanlder(req, res) {
     }
 }
 
-//Rota de validação do token JWT
+//Rota para buscar os dados do usuário
 async function handleGET(req, res) {
-    const usersDBPath = join(process.cwd(), "data/users.json")
-    const { session_id } = req.cookies
-    const jwtPayload = decodeJwt(session_id)
-    const { email } = jwtPayload
-    let usersDB = []
+    await mongoClient.connect()
 
-    //Lendo os arquivos data.json e users.json ou retornando um erro em caso de falha
+    const userCollection = mongoClient.db.collection("users")
+    const { session_id } = req.cookies
+    const { id } = decodeJwt(session_id)
+    let _id
+
+    //Validando o id do usuário no JWT
     try {
-        usersDB = JSON.parse(await readFile(usersDBPath, { encoding: "utf-8" }))
+        _id = new ObjectId(id)
     } catch (error) {
-        return res.status(500).json({
-            status: 500,
-            message: "Error 500: server internal error",
+        return res.status(400).json({
+            status: 400,
+            message: "Error 400: bad request",
             errors: [error.message]
         })
     }
 
-    const foundUser = usersDB.users[email.trim()]
-
+    const foundUser = await userCollection.findOne({ _id })
     if (!foundUser) {
         return res.status(404).json({
             status: 404,
             message: "Error 404: user not found",
-            errors: [`usuário com id ${email} não foi encontrado.`]
+            errors: [`usuário com id: ${id} não foi encontrado.`]
         })
     }
 

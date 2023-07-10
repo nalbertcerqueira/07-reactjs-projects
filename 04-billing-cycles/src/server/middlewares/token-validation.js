@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import { verifyJWT } from "../utils/api"
 
-//Middleware utilizado para validar se o token presente enviado pelo usuário
+//Middleware utilizado para validar se o token enviado pelo usuário
 //é válido ou não
 export async function validateToken(req, res, handler) {
     const sessionId = req.cookies.get("session_id")?.value
@@ -11,7 +11,7 @@ export async function validateToken(req, res, handler) {
         const errorResponse = {
             status: 401,
             message: "Error 401: Unauthorized, token is missing",
-            errors: ["é nescessário o uso de um token para acessar este conteúdo."]
+            errors: ["é necessário o uso de um token para acessar este conteúdo."]
         }
         return new NextResponse(JSON.stringify(errorResponse), { status: 401 })
     }

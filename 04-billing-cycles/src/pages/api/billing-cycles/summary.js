@@ -1,6 +1,5 @@
-import { readFile } from "fs/promises"
+import { mongoClient } from "@/configs/db-config"
 import { decodeJwt } from "jose"
-import { join } from "path"
 
 /* Rotas protegidas por JWT */
 export default function handler(req, res) {
@@ -14,17 +13,45 @@ export default function handler(req, res) {
 
 //Enviando o consolidado de créditos e débitos do usuário
 async function handleGET(req, res) {
-    const dataPath = join(process.cwd(), "data/data.json")
-    const { session_id } = req.cookies
-    const jwtPayload = decodeJwt(session_id)
-    const { email } = jwtPayload
-    const { sort_by, value } = req.query
-    const summary = {}
-    let data = {}
+    await mongoClient.connect()
 
-    //Lendo o arquivo data.json
+    const { sort_by, value } = req.query
+    const { session_id } = req.cookies
+    const { id: userId } = decodeJwt(session_id)
+    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
+
+    //Pipeline para obtenção do somatório de créditos e somatório de débitos
+    //de um usuário.
+    const pipeline = [
+        {
+            $match:
+                sort_by && value
+                    ? { userId: userId, [sort_by]: parseInt(value) }
+                    : { userId: userId }
+        },
+        {
+            $project: {
+                credits: { $sum: "$credits.value" },
+                debts: { $sum: "$debts.value" },
+                _id: 0
+            }
+        },
+        {
+            $group: {
+                _id: {},
+                credits: { $sum: "$credits" },
+                debts: { $sum: "$debts" }
+            }
+        },
+        {
+            $project: { _id: 0 }
+        }
+    ]
+
     try {
-        data = JSON.parse(await readFile(dataPath, { encoding: "utf-8" })).data
+        const result = await billingCycleCollection.aggregate(pipeline).toArray()
+        const summary = { credits: result[0]?.credits || 0, debts: result[0]?.debts || 0 }
+        return res.status(200).json({ summary })
     } catch (error) {
         return res.status(500).json({
             status: 500,
@@ -32,43 +59,4 @@ async function handleGET(req, res) {
             errors: [error.message]
         })
     }
-
-    //Buscando o usuário com base no email fornecido
-    const foundUser = data[email]
-
-    //Filtrando os resultados com base nas queries strings informadas na url
-    const filteredBillings =
-        sort_by && value
-            ? foundUser.billings.filter((billing) => billing[sort_by] === value)
-            : foundUser.billings
-
-    summary.credits = filteredBillings
-        .reduce((acc, billing) => {
-            acc.push(...billing.credits)
-            return acc
-        }, [])
-        .reduce((acc, credit) => {
-            acc += credit.value
-            return acc
-        }, 0)
-        .toFixed(2)
-
-    summary.debts = filteredBillings
-        .reduce((acc, billing) => {
-            acc.push(...billing.debts)
-            return acc
-        }, [])
-        .reduce((acc, debts) => {
-            acc += debts.value
-            return acc
-        }, 0)
-        .toFixed(2)
-
-    //Enviando o consolidado de débitos e créditos ao client
-    return res.status(200).json({
-        summary: {
-            credits: parseFloat(summary.credits),
-            debts: parseFloat(summary.debts)
-        }
-    })
 }

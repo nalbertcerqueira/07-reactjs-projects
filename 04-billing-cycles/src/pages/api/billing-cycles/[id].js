@@ -1,8 +1,7 @@
-import { readFile, writeFile } from "fs/promises"
+import { mongoClient } from "@/configs/db-config"
+import { BillingCycle } from "@/src/server/schemas/db/billing-cycle"
 import { decodeJwt } from "jose"
-import { join } from "path"
-
-import { setTransactionsIds } from "@/src/server/utils/api"
+import { ObjectId } from "mongodb"
 
 /* Rotas protegidas por JWT */
 export default function handler(req, res) {
@@ -18,36 +17,34 @@ export default function handler(req, res) {
     }
 }
 
-//Consumo de dados de um ciclo de pagamentos com base em seu ID
+//Buscando um ciclo de pagamentos com base em seu ID
 async function handleGET(req, res) {
-    const dataPath = join(process.cwd(), "data/data.json")
-    const { session_id } = req.cookies
-    const jwtPayload = decodeJwt(session_id)
-    const { email } = jwtPayload
-    const { id } = req.query
-    let data = {}
+    await mongoClient.connect()
 
-    //Lendo o arquivo data.json
+    const { session_id } = req.cookies
+    const { id: userId } = decodeJwt(session_id)
+    const { id: billingCycleId } = req.query
+    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
+
+    //Validando o id do ciclo de pagamentos
     try {
-        data = JSON.parse(await readFile(dataPath, { encoding: "utf-8" })).data
+        new ObjectId(billingCycleId)
     } catch (error) {
-        return res.status(500).json({
-            status: 500,
-            message: "Error 500: server internal error",
-            errors: [error.message]
+        return res.status(404).json({
+            status: 404,
+            message: "Error 404: content not found",
+            errors: [`ciclo de pagamento com id: ${billingCycleId} não foi encontrado.`]
         })
     }
 
-    //Buscando o os dados com base no usuário
-    const foundUser = data[email]
-
-    //Buscando o ciclo de pagamentos com baseado ID informado
-    const foundBilling = foundUser.billings.find((billing) => billing.id === id)
+    //Buscando o ciclo de pagamentos no banco de dados
+    const query = { _id: new ObjectId(billingCycleId), userId: userId }
+    const foundBilling = await billingCycleCollection.findOne(query)
     if (!foundBilling) {
         return res.status(404).json({
             status: 404,
             message: "Error 404: content not found",
-            errors: [`ciclo de pagamento com id ${id} não foi encontrado.`]
+            errors: [`ciclo de pagamento com id: ${billingCycleId} não foi encontrado.`]
         })
     }
 
@@ -56,109 +53,80 @@ async function handleGET(req, res) {
 
 //Alterando os dados de um ciclo de pagamentos com base no ID
 async function handlePUT(req, res) {
-    const dataPath = join(process.cwd(), "data/data.json")
-    const body = JSON.parse(JSON.stringify(req.body))
+    await mongoClient.connect()
+
     const { session_id } = req.cookies
-    const jwtPayload = decodeJwt(session_id)
-    const { email } = jwtPayload
-    const { id } = req.query
-    let data = {}
+    const { id: userId } = decodeJwt(session_id)
+    const { id: billingCycleId } = req.query
+    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
 
-    //Lendo o arquivo data.json
+    //Validando o id do ciclo de pagamentos
     try {
-        data = JSON.parse(await readFile(dataPath, { encoding: "utf-8" })).data
+        new ObjectId(billingCycleId)
     } catch (error) {
-        return res.status(500).json({
-            status: 500,
-            message: "Error 500: server internal error",
-            errors: [error.message]
-        })
-    }
-
-    //Buscando o usuário correspondente ao email informado
-    const foundUser = data[email]
-
-    //Buscando o ciclo de pagamentos com base no ID informado
-    const foundBillingIndex = foundUser.billings.findIndex((billing) => billing.id === id)
-    if (foundBillingIndex < 0) {
         return res.status(404).json({
             status: 404,
-            message: "Error 404: content no found",
-            errors: [`ciclo de pagamento com id ${id} não foi encontrado.`]
+            message: "Error 404: content not found",
+            errors: [`ciclo de pagamento com id: ${billingCycleId} não foi encontrado.`]
         })
     }
 
-    //Criando um id para cada nova transação criada pelo usuário
-    ;["credits", "debts"].forEach((type) => {
-        if (body[type]) {
-            body[type] = [...setTransactionsIds(body[type])]
-            for (let transaction of body[type]) {
-                transaction.value = parseFloat(transaction.value)
-            }
-        } else {
-            body[type] = []
-        }
-    })
-
-    foundUser.billings[foundBillingIndex] = { id, ...body }
-
-    //Reescrevendo o arquivo data.json e enviando uma resposta ao client
+    //Buscando o ciclo de pagamento para fazer a atualização do dados
+    const filter = { _id: new ObjectId(billingCycleId), userId: userId }
+    const updateQuery = { $set: new BillingCycle({ userId: userId, ...req.body }) }
     try {
-        await writeFile(dataPath, JSON.stringify({ data }), { encoding: "utf-8" })
-        return res
-            .status(200)
-            .json({ status: 200, message: "Ciclo de pagamento atualizado com sucesso!" })
+        const result = await billingCycleCollection.findOneAndUpdate(filter, updateQuery)
+        if (!result.lastErrorObject.updatedExisting) {
+            return res.status(404).json({
+                status: 404,
+                message: "Error 404: content no found",
+                errors: [`ciclo de pagamento com id ${billingCycleId} não foi encontrado.`]
+            })
+        }
     } catch (error) {
-        return res.status(500).json({
+        return res.status(404).json({
             status: 500,
             message: "Error 500: server internal error",
             errors: [error.message]
         })
     }
+
+    return res
+        .status(200)
+        .json({ status: 200, message: "Ciclo de pagamento atualizado com sucesso!" })
 }
 
 //Removendo um ciclo de pagamentos através do ID informado
 async function handleDELETE(req, res) {
-    const dataPath = join(process.cwd(), "data/data.json")
+    await mongoClient.connect()
+
     const { session_id } = req.cookies
-    const jwtPayload = decodeJwt(session_id)
-    const { email } = jwtPayload
-    const { id } = req.query
-    let data = {}
+    const { id: userId } = decodeJwt(session_id)
+    const { id: billingCycleId } = req.query
+    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
 
-    //Lendo o arquivo data.json
+    //Validando o id do ciclo de pagamentos
     try {
-        data = JSON.parse(await readFile(dataPath, { encoding: "utf-8" })).data
+        new ObjectId(billingCycleId)
     } catch (error) {
-        return res.status(500).json({
-            status: 500,
-            message: "Error 500: server internal error",
-            errors: [error.message]
-        })
-    }
-
-    //Buscando os dados do usuário com base no email informado
-    const foundUser = data[email]
-
-    //Buscando o ciclo de pagamentos com base no ID informado
-    const foundBilling = foundUser.billings.find((billing) => billing.id === id)
-    if (!foundBilling) {
         return res.status(404).json({
             status: 404,
             message: "Error 404: content not found",
-            errors: [`ciclo de pagamento com id ${id} não foi encontrado.`]
+            errors: [`ciclo de pagamento com id: ${billingCycleId} não foi encontrado.`]
         })
     }
 
-    //Excluindo o ciclo de pagamentos
-    foundUser.billings = foundUser.billings.filter((billing) => billing.id !== id)
-
-    //Reescrevendo o arquivo data.json e enviando uma resposta ao client
+    //Removendo o ciclo de pagamentos do banco de dados
+    const query = { _id: new ObjectId(billingCycleId), userId: userId }
     try {
-        await writeFile(dataPath, JSON.stringify({ data }), { encoding: "utf-8" })
-        return res
-            .status(200)
-            .json({ status: 200, message: "Ciclo de pagamento removido com sucesso!" })
+        const result = await billingCycleCollection.findOneAndDelete(query)
+        if (!result.value) {
+            return res.status(404).json({
+                status: 404,
+                message: "Error 404: content not found",
+                errors: [`ciclo de pagamento com id: ${billingCycleId} não foi encontrado.`]
+            })
+        }
     } catch (error) {
         return res.status(500).json({
             status: 500,
@@ -166,4 +134,8 @@ async function handleDELETE(req, res) {
             errors: [error.message]
         })
     }
+
+    return res
+        .status(200)
+        .json({ status: 200, message: "Ciclo de pagamento removido com sucesso!" })
 }

@@ -65,7 +65,7 @@ export default function BillingCycle() {
                             <FormCreate isSubmiting={isSending} onSubmit={apiMethods.post} />
                         </TabContent>
                         <TabContent id="tabUpdate">
-                            <FormUpdate onSubmit={apiMethods.put} />
+                            <FormUpdate isSubmiting={isSending} onSubmit={apiMethods.put} />
                         </TabContent>
                         <TabContent id="tabDelete">
                             <FormDelete />

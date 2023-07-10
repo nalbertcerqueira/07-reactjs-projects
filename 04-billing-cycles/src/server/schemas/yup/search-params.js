@@ -3,7 +3,7 @@ import { number, object, setLocale, string } from "yup"
 
 setLocale(localeConfig)
 
-//Schema de validação dos parâmetros de páginação utilizado na
+//Schema de validação dos parâmetros de paginação utilizado na
 //rota GET /api/billing-cycles
 export const paginationQuerySchema = object({
     page: number().min(1).optional(),

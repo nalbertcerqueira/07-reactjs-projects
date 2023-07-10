@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { baseApiUrl } from "../utils/constants"
 
-//Buscando o resumo de créditos, débitos
+//Buscando o resumo de créditos e débitos
 export default function useFetchDashboard(setter) {
     useEffect(() => {
         refreshDashboard(setter)

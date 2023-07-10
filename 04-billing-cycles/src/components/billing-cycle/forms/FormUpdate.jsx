@@ -34,8 +34,8 @@ export default function FormUpdate(props) {
         }
         const credits = formatBillingCycleISO(formState.credits)
         const debts = formatBillingCycleISO(formState.debts)
-        const { id, name, month, year } = formState
-        await props.onSubmit({ id, name, month, year, credits, debts })
+        const { _id, name, month, year } = formState
+        await props.onSubmit({ _id, name, month, year, credits, debts })
 
         tabsActions.resetTabs()
         formActions.resetForm()
@@ -101,8 +101,13 @@ export default function FormUpdate(props) {
                 <DebtList debts={formState.debts} fieldLegend="Débitos" />
             </div>
             <div className="mt-6 flex gap-3 items-center">
-                <Button onClick={submitForm} className="create-form-button" type="submit">
-                    Salvar
+                <Button
+                    disabled={props.isSubmiting}
+                    onClick={submitForm}
+                    className="create-form-button"
+                    type="submit"
+                >
+                    {props.isSubmiting ? "Salvando..." : "Salvar"}
                 </Button>
                 <Button
                     className="clear-form-button"
@@ -119,5 +124,6 @@ export default function FormUpdate(props) {
     )
 }
 FormUpdate.propTypes = {
-    onSubmit: propTypes.func
+    onSubmit: propTypes.func,
+    isSubmiting: propTypes.bool
 }

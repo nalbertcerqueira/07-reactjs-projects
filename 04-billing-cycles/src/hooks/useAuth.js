@@ -18,6 +18,7 @@ const defaultErrorsMsgs = {
 }
 const toastMsgs = {
     200: "Parabéns! O seu cadastro foi realizado! Agora é só seguir com seu login.",
+    400: "Por favor, corrija os campos do formulário para prosseguir com o cadastro.",
     500: "Desculpe, ocorreu um erro interno no servidor.",
     409: "Desculpe, o usuário informado ja possui um cadastro em nosso sistema.",
     inputValidationFailed: "Por favor, corrija os erros do formulário antes de enviá-lo."
@@ -32,12 +33,14 @@ export default function useAuth() {
 
     //Validando os inputs durante o processo de cadastro/login do usuário
     function validateInputs() {
+        const emailRegex = /^[a-zA-Z0-9._%+-]{4,}@[a-zA-Z0-9.-]{2,}\.[a-zA-Z0-9]{2,}$/
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).+$/
         const { username, email, password, confirmPassword } = user
         const newFlags = {
             username: username.length >= 4 ? true : false,
-            email: email.match(/\S+@\S+\.\S+/) ? true : false,
+            email: email.match(emailRegex) ? true : false,
             confirmPassword: confirmPassword === password && confirmPassword !== "" ? true : false,
-            password: password.length >= 6 && password.match(/^(?=.*[a-zA-Z])(?=.*\d).+$/)
+            password: password.length >= 6 && password.match(passwordRegex)
         }
         setErrorMsgs({
             username: newFlags.username ? "" : defaultErrorsMsgs.username,
@@ -87,7 +90,7 @@ export default function useAuth() {
         setIsSubmiting(true)
 
         const { email, password } = user
-        const status = await submit({ email, password }, "api/login")
+        const status = await submit({ email: email.toLowerCase(), password }, "api/login")
 
         if (status >= 400 && status < 500) {
             resetForm()
@@ -116,6 +119,11 @@ export default function useAuth() {
     }
     //Efetuando o registro do usuário
     async function signup(event) {
+        const trimUser = {
+            ...user,
+            username: user.username.trim(),
+            email: user.email.trim().toLowerCase()
+        }
         event.preventDefault()
 
         if (!validateInputs()) {
@@ -123,7 +131,7 @@ export default function useAuth() {
         }
 
         setIsSubmiting(true)
-        const status = await submit(user, "api/signup")
+        const status = await submit(trimUser, "api/signup")
         switch (status) {
             case 200:
                 toast.success(toastMsgs[200])
@@ -135,6 +143,7 @@ export default function useAuth() {
                     ...errorsInitialState,
                     confirmPassword: "As senhas não conferem."
                 })
+                toast.error(toastMsgs[400], { toastId: "signup-failed-400" })
                 break
 
             case 500:
@@ -148,7 +157,7 @@ export default function useAuth() {
                     ...errorsInitialState,
                     email: "Este email ja possui um registro em nosso sistema."
                 })
-                toast.error(toastMsgs[409], { toastId: "sign-failed-409" })
+                toast.error(toastMsgs[409], { toastId: "signup-failed-409" })
                 break
             default:
                 break

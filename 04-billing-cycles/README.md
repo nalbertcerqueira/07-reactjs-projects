@@ -3,6 +3,7 @@
 ![JavaScript badge](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 ![NextJS badge](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![Tailwind badge](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![MongoDB badge](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
 # <img src="https://user-images.githubusercontent.com/105606295/221874628-e371951e-5a17-4570-8ecc-dfac851f8f86.png" width="40px" height="40px" alt="internet banking icon"><img> App - Ciclo de Pagamentos
 
@@ -24,7 +25,9 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma série de cré
 <img width="1100px" src="https://user-images.githubusercontent.com/105606295/222833255-0989288a-cab4-42e7-9d3c-04b64c971032.png" alt="application dashboard"/>
 
 > **Note**
-> O projeto faz uso do gerenciamento nativo de APIs do NextJS para alcançar a persistência de dados através de arquivos .json atuando como _fake database_ , e dessa forma armazenando as informações de cada usuário.
+>
+> -   O projeto faz uso do banco de dados em nuvem da MongoDB para persistir as informações de cada usuário.
+> -   Os esquemas de banco de dados utilizados na aplicação foram definidos no próprio banco através do MongoDB Compass.
 
 <br>
 
@@ -32,30 +35,30 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma série de cré
 
 <table>
 <tr>
-<th>Rotas públicas</th>
 <th>Rotas protegidas por JWT </th>
+<th>Rotas públicas</th>
 </tr>
 <tr>
 <td>
 
-| Rota (Método)             | Funcionalidade              |
-| ------------------------- | --------------------------- |
-| api/login (POST)          | Efetua o login do usuário   |
-| api/signup (POST)         | Cadastra um novo usuário    |
-| api/signout (GET)         | Encerra a sessão do usuário |
-| api/auth-validation (GET) | Valida o JWT do usuário     |
+| Rota (Método)                    | Funcionalidade               |
+| -------------------------------- | ---------------------------- |
+| api/billing-cycles (GET)         | Consulta todos os ciclos     |
+| api/billing-cycles/1 (GET)       | Consulta o ciclo de ID=1     |
+| api/billing-cycles (POST)        | Cria um novo ciclo           |
+| api/billing-cycles/1 (PUT)       | Altera o ciclo de ID=1       |
+| api/billing-cycles/1 (DELETE)    | Apaga o ciclo de ID=1        |
+| api/billing-cycles/summary (GET) | Obtém o consolidado geral    |
+| api/users (GET)                  | Obtém informações do usuário |
 
 </td>
 <td>
 
-| Rota (Método)                    | Funcionalidade            |
-| -------------------------------- | ------------------------- |
-| api/billing-cycles (GET)         | Consulta todos os ciclos  |
-| api/billing-cycles/1 (GET)       | Consulta o ciclo de ID=1  |
-| api/billing-cycles (POST)        | Cria um novo ciclo        |
-| api/billing-cycles/1 (PUT)       | Altera o ciclo de ID=1    |
-| api/billing-cycles/1 (DELETE)    | Apaga o ciclo de ID=1     |
-| api/billing-cycles/summary (GET) | Obtém o consolidado geral |
+| Rota (Método)     | Funcionalidade              |
+| ----------------- | --------------------------- |
+| api/login (POST)  | Efetua o login do usuário   |
+| api/signup (POST) | Cadastra um novo usuário    |
+| api/signout (GET) | Encerra a sessão do usuário |
 
 </td>
 </tr>
@@ -67,18 +70,27 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma série de cré
 1. Clone este repositório;
 2. Com o terminal aberto, navegue até o diretório deste projeto;
 3. Baixe as dependências deste projeto com npm install;
+4. Crie um arquivo .env.local na raiz do projeto contendo as variáveis de ambiente presentes em .env.sample com valores de sua preferência.
 4. Altere a chave privada (AUTH_SECRET) em .env.local na raiz do projeto para uma chave de sua preferência;
 4. Inicie a aplicação com npm run dev;
 5. Navegue até http://localhost:3000/ para visualizar o projeto.
 ```
 
-## 💻 Stack utilizada
+## 🚀 Stack do projeto
 
 -   HTML
 -   CSS
 -   JavaScript
 -   NextJS
 -   TailwindCSS
+-   MongoDB
+
+## 📚 Outras libs
+
+-   Bcrypt
+-   Jose
+-   React toastify
+-   Yup
 
 ## 💵 Licença
 

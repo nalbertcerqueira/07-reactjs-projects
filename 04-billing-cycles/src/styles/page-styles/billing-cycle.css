@@ -1,4 +1,4 @@
-/*Início - Página de cíclo de pagamentos*/
+/*Início - Página de ciclo de pagamentos*/
 .tabs-header {
     @apply flex text-zinc-800 bg-white border-b border-b-zinc-300;
 }
@@ -55,4 +55,4 @@
     disabled:focus:border-zinc-300 disabled:focus-visible:outline-none
     disabled:text-zinc-600 disabled:bg-slate-100;
 }
-/*Fim - Página de cíclo de pagamentos*/
+/*Fim - Página de ciclo de pagamentos*/

@@ -39,7 +39,7 @@ function creditDebtReducer(state, { type, payload }) {
             const { type: transactionType, index, isCopy } = payload
 
             const newLine = isCopy
-                ? { ...state[transactionType][index], id: "" }
+                ? { ...state[transactionType][index], _id: "" }
                 : formInitialState[transactionType][0]
 
             const firstHalf = state[transactionType].slice(0, index + 1).concat(newLine)

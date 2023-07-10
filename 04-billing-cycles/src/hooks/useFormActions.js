@@ -12,7 +12,7 @@ export default function useFormActions(dispatch) {
         if (fieldName === "month" || fieldName === "year") {
             dispatch({
                 type: "SET_FIELD",
-                payload: { fieldName, fieldValue: maskedValue || "" }
+                payload: { fieldName, fieldValue: parseInt(maskedValue) || "" }
             })
         } else {
             dispatch({ type: "SET_FIELD", payload: { fieldName, fieldValue } })

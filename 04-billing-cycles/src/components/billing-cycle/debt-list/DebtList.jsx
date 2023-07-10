@@ -18,8 +18,8 @@ export default function DebtList({ fieldLegend, debts, readOnly }) {
         return debts.map((debt, index) => {
             return (
                 <DebtRow
-                    key={debt?.id || index}
-                    id={debt?.id || index}
+                    key={debt?._id || index}
+                    id={debt?._id || index}
                     readOnly={readOnly}
                     name={debt.name}
                     value={debt.value}
