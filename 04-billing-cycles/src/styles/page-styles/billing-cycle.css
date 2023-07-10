@@ -37,7 +37,11 @@
 }
 
 .tab-content {
-    @apply text-lg text-zinc-800 hidden;
+    @apply text-lg text-zinc-800 hidden max-h-[58vh] overflow-y-scroll;
+}
+
+.tab-content.form-content {
+    @apply max-h-[80vh];
 }
 
 .tab-content.active {
