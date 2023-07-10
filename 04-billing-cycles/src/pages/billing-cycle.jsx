@@ -61,13 +61,13 @@ export default function BillingCycle() {
                         <TabContent id="tabList">
                             <BillingCycleList />
                         </TabContent>
-                        <TabContent id="tabCreate">
+                        <TabContent id="tabCreate" className="form-content">
                             <FormCreate isSubmiting={isSending} onSubmit={apiMethods.post} />
                         </TabContent>
-                        <TabContent id="tabUpdate">
+                        <TabContent id="tabUpdate" className="form-content">
                             <FormUpdate isSubmiting={isSending} onSubmit={apiMethods.put} />
                         </TabContent>
-                        <TabContent id="tabDelete">
+                        <TabContent id="tabDelete" className="form-content">
                             <FormDelete />
                         </TabContent>
                     </div>
