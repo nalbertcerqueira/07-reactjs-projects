@@ -28,7 +28,7 @@ export async function validateToken(req, res, handler) {
         return new NextResponse(JSON.stringify(errorResponse), { status: 498 })
     }
 
-    return handler ? handler(req, res) : res
+    return handler ? await handler(req, res) : res
 }
 
 //Validando o cookie/JWT enviado pelo usuário para as rotas protegidas
