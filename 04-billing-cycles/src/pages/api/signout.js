@@ -12,7 +12,6 @@ export default function handler(req, res) {
 
 //Rota de logout
 function handleGET(req, res) {
-    req.cookies
-    res.setHeader("Set-Cookie", [cookie.serialize("session_id", null, { maxAge: 0 })])
+    res.setHeader("Set-Cookie", cookie.serialize("session_id", null, { maxAge: 0, path: "/" }))
     return res.status(200).json({ status: 200, message: "logout bem sucedido." })
 }
