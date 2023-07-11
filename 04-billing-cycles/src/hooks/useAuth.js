@@ -166,7 +166,7 @@ export default function useAuth() {
     }
     //Deslogando o usuário da aplicação
     async function logout() {
-        return fetch(`${baseApiUrl}/api/signout`)
+        return fetch(`${baseApiUrl}/api/signout`, { method: "POST" })
             .then(async (response) => {
                 const data = await response.json()
                 console.log(data)
