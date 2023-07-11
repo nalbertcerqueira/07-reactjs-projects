@@ -8,7 +8,7 @@ import { userLoginSchema, userSignupSchema } from "../schemas/yup/user"
 export async function validateBillingCycle(req, res, handler) {
     try {
         await billingCycleYupSchema.validate(await req.json(), { abortEarly: false })
-        return handler ? handler(req, res) : res
+        return handler ? await handler(req, res) : res
     } catch (error) {
         const errorResponse = {
             status: 400,
