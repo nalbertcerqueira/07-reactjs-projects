@@ -1,4 +1,3 @@
-import { cookieOptions } from "@/src/server/utils/api"
 import cookie from "cookie"
 
 /* Rotas públicas */
@@ -13,8 +12,7 @@ export default function handler(req, res) {
 
 //Rota de logout
 function handleGET(req, res) {
-    res.setHeader("Set-Cookie", [
-        cookie.serialize("session_id", "", { ...cookieOptions, maxAge: 0 })
-    ])
+    req.cookies
+    res.setHeader("Set-Cookie", [cookie.serialize("session_id", null, { maxAge: 0 })])
     return res.status(200).json({ status: 200, message: "logout bem sucedido." })
 }

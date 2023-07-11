@@ -170,11 +170,12 @@ export default function useAuth() {
             .then(async (response) => {
                 const data = await response.json()
                 console.log(data)
-                location.reload()
             })
             .catch((error) => {
                 console.log(error.message)
-                location.reload()
+            })
+            .finally(() => {
+                setTimeout(() => location.reload())
             })
     }
 
