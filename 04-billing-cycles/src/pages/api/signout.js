@@ -16,5 +16,5 @@ function handleGET(req, res) {
     res.setHeader("Set-Cookie", [
         cookie.serialize("session_id", "", { ...cookieOptions, maxAge: 0 })
     ])
-    res.status(200).json({ status: 200, message: "logout bem sucedido." })
+    return res.status(200).json({ status: 200, message: "logout bem sucedido." })
 }
