@@ -1,4 +1,4 @@
-//Definindo uma mensagem padrão para alguns tipos de validação.
+//Definindo uma mensagem padrão para alguns tipos de validações.
 export const localeConfig = {
     string: { min: "${path} deve conter no mínimo ${min} caracteres." },
     array: { min: "${path} precisa ser um array com no mínimo 1 item." },
