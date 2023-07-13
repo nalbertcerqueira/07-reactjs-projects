@@ -8,11 +8,6 @@ export function toastEmmitter({ message, success, id }) {
         return toast.error(message, { toastId: id || "failed", autoClose: 3000 })
     }
 }
-//Copiando um objeto de forma profunda
-export function copyData(data) {
-    return JSON.parse(JSON.stringify(data))
-}
-
 //Convertendo valores monetários para R$
 export function convertCurrency(value, locale = "pt-br", currency = "BRL") {
     return value.toLocaleString(locale, {
@@ -33,7 +28,7 @@ export function formatValuePTBR(value) {
 
 //Formatando todos os valores de créditos ou débitos para number
 export function formatBillingCycleISO(data) {
-    const dataCopy = copyData(data)
+    const dataCopy = structuredClone(data)
     dataCopy.map((object) => {
         object.value = formatValueISO(object.value)
     })
@@ -42,7 +37,7 @@ export function formatBillingCycleISO(data) {
 
 //Formatando todos os valores de créditos ou débitos para R$
 export function formatBillingCyclePTBR(billingCycle) {
-    const dataCopy = copyData(billingCycle)
+    const dataCopy = structuredClone(billingCycle)
 
     dataCopy.credits.map((credit) => {
         credit.value = formatValuePTBR(credit.value)
