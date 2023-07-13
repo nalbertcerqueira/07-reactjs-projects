@@ -41,6 +41,7 @@ html {
 .delete-form-button {
     @apply block bg-red-600 border border-zinc-300 text-white px-4 py-2
     rounded-md hover:bg-red-500 focus-visible:bg-red-500 active:bg-red-600
+    disabled:cursor-default disabled:pointer-events-none disabled:bg-red-600/30
     active:border-zinc-500 transition duration-100 shrink-0 shadow-zinc-300
     shadow-md;
 }
