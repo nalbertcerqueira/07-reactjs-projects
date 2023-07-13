@@ -42,7 +42,7 @@ export default function FormUpdate(props) {
     }
 
     return (
-        <form className="text-base min-w-[480px]">
+        <form onSubmit={submitForm} className="text-base min-w-[480px]">
             <div className="flex flex-col md:flex-row gap-3">
                 <div className="w-full">
                     <Input
@@ -101,12 +101,7 @@ export default function FormUpdate(props) {
                 <DebtList debts={formState.debts} fieldLegend="Débitos" />
             </div>
             <div className="mt-6 flex gap-3 items-center">
-                <Button
-                    disabled={props.isSubmiting}
-                    onClick={submitForm}
-                    className="create-form-button"
-                    type="submit"
-                >
+                <Button disabled={props.isSubmiting} className="create-form-button" type="submit">
                     {props.isSubmiting ? "Salvando..." : "Salvar"}
                 </Button>
                 <Button
