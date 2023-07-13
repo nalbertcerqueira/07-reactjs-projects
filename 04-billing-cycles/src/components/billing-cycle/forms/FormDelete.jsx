@@ -1,3 +1,4 @@
+import propTypes from "prop-types"
 import { useContext } from "react"
 
 import Button from "../../common/Button"
@@ -14,7 +15,7 @@ import useTabsActions from "@/src/hooks/useTabsActions"
 
 //Componente utilizado para a exclusão de um ciclo de pagamentos
 //em billing-cycle.jsx
-export default function FormDelete() {
+export default function FormDelete(props) {
     const { modalDelete } = useContext(ModalContext)
     const { tabsDispatch } = useContext(TabsContext)
     const { formState, formDispatch } = useContext(FormContext)
@@ -23,7 +24,13 @@ export default function FormDelete() {
 
     return (
         <>
-            <form className="text-base min-w-[480px]">
+            <form
+                className="text-base min-w-[480px]"
+                onSubmit={(event) => {
+                    event.preventDefault()
+                    modalDelete.changeState("open")
+                }}
+            >
                 <div className="flex flex-col md:flex-row gap-3">
                     <div className="w-full">
                         <Input
@@ -68,14 +75,11 @@ export default function FormDelete() {
                 </div>
                 <div className=" mt-6 flex gap-3 items-center">
                     <Button
-                        onClick={async (event) => {
-                            event.preventDefault()
-                            modalDelete.changeState("open")
-                        }}
+                        disabled={props.isSubmiting}
                         className="delete-form-button"
                         type="submit"
                     >
-                        Excluir
+                        {props.isSubmiting ? "Excluindo..." : "Excluir"}
                     </Button>
                     <Button
                         onClick={() => {
@@ -91,4 +95,7 @@ export default function FormDelete() {
             </form>
         </>
     )
+}
+FormDelete.propTypes = {
+    isSubmiting: propTypes.bool
 }

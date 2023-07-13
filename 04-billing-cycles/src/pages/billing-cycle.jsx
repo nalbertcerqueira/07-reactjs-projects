@@ -68,13 +68,13 @@ export default function BillingCycle() {
                             <FormUpdate isSubmiting={isSending} onSubmit={apiMethods.put} />
                         </TabContent>
                         <TabContent id="tabDelete" className="form-content">
-                            <FormDelete />
+                            <FormDelete isSubmiting={isSending} />
                         </TabContent>
                     </div>
                 </div>
             </PageContent>
             <If condition={modalDelete.state !== "hidden"}>
-                <ModalDelete onSubmit={apiMethods.deletee} />
+                <ModalDelete isSubmiting={isSending} onSubmit={apiMethods.deletee} />
             </If>
         </>
     )

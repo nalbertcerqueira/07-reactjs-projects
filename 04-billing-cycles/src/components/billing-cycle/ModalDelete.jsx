@@ -13,7 +13,7 @@ import WarningIcon from "../icons/modal/WarningIcon"
 
 //Componente utilizado na página billing-cycle.jsx durante a
 //exclusão de um ciclo de pagamentos
-export default function ModalDelete({ onSubmit }) {
+export default function ModalDelete({ onSubmit, isSubmiting }) {
     const { billingCyclesList, currentId } = useContext(BillingCyclesContext)
     const { modalDelete } = useContext(ModalContext)
     const { formDispatch } = useContext(FormContext)
@@ -51,8 +51,13 @@ export default function ModalDelete({ onSubmit }) {
                     </p>
                 </div>
                 <div className="justify-end gap-3 flex text-base">
-                    <Button type="button" onClick={confirmModal} className="delete-form-button">
-                        Excluir
+                    <Button
+                        disabled={isSubmiting}
+                        type="button"
+                        onClick={confirmModal}
+                        className="delete-form-button"
+                    >
+                        {isSubmiting ? "Excluindo..." : "Excluir"}
                     </Button>
                     <Button
                         type="button"
@@ -67,5 +72,6 @@ export default function ModalDelete({ onSubmit }) {
     )
 }
 ModalDelete.propTypes = {
-    onSubmit: propTypes.func
+    onSubmit: propTypes.func,
+    isSubmiting: propTypes.bool
 }
