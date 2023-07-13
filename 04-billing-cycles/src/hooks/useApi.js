@@ -61,9 +61,12 @@ export default function useApi(setter) {
         setIsSending(() => false)
     }
     async function deletee(data) {
+        if (isSending) return
+        setIsSending(() => true)
         await submit("DELETE", data, {
             success: "Ciclo de pagamentos removido com sucesso!"
         })
+        setIsSending(() => false)
     }
 
     return { isSending, apiMethods: { get, post, put, deletee } }
