@@ -61,3 +61,27 @@ export function calculateSummary({ credits, debts }) {
         balance: creditSum - debtSum
     }
 }
+
+//Criando um cache para dados vindos de consultas à APIs
+export function queryCache() {
+    const cache = {
+        data: {}
+    }
+
+    const getItem = async (itemId, query) => {
+        const item = cache.data[itemId]
+
+        if (item) {
+            return item
+        }
+
+        cache.data[itemId] = query()
+        return cache.data[itemId]
+    }
+
+    const removeItem = (itemId) => {
+        delete cache.data[itemId]
+    }
+
+    return { getItem, removeItem }
+}
