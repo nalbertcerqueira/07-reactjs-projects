@@ -6,7 +6,7 @@ import { baseApiUrl, defaultFailMessage } from "../utils/constants"
 export default function useApi(setter) {
     const [isSending, setIsSending] = useState(false)
 
-    //Função base utilizada nos métodos abaixo
+    //Funções utilizadas na CRUD de ciclo de pagamentos
     async function submit(method, data, messages) {
         const toastId = Math.floor(Math.random() * 1000)
         const id = data._id || ""
@@ -31,6 +31,14 @@ export default function useApi(setter) {
                 })
             })
     }
+    async function requestAndUpdate(data, method, successMsg) {
+        if (isSending) return
+        setIsSending(() => true)
+        await submit(method, data, { success: successMsg })
+        await get()
+        setIsSending(() => false)
+    }
+
     //Métodos da CRUD de ciclo de pagamentos
     async function get(page, limit) {
         const queryString = page && limit ? `?page=${page}&limit=${limit}` : ""
@@ -48,25 +56,13 @@ export default function useApi(setter) {
             })
     }
     async function post(data) {
-        if (isSending) return
-        setIsSending(() => true)
-        await submit("POST", data, { success: "Dados cadastrados com sucesso!" })
-        await get()
-        setIsSending(() => false)
+        await requestAndUpdate(data, "POST", "Dados cadastrados com sucesso!")
     }
     async function put(data) {
-        if (isSending) return
-        setIsSending(() => true)
-        await submit("PUT", data, { success: "Dados alterados com sucesso!" })
-        setIsSending(() => false)
+        await requestAndUpdate(data, "PUT", "Dados alterados com sucesso!")
     }
     async function deletee(data) {
-        if (isSending) return
-        setIsSending(() => true)
-        await submit("DELETE", data, {
-            success: "Ciclo de pagamentos removido com sucesso!"
-        })
-        setIsSending(() => false)
+        await requestAndUpdate(data, "DELETE", "Ciclo de pagamentos removido com sucesso!")
     }
 
     return { isSending, apiMethods: { get, post, put, deletee } }
