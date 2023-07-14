@@ -18,8 +18,10 @@ export function convertCurrency(value, locale = "pt-br", currency = "BRL") {
 
 //Formatando um valor de crédito ou débito para number
 export function formatValueISO(value) {
-    return parseFloat(value.replace(/[.,]/g, "") / 100)
+    const valueAsFloat = parseInt(value.replace(/[.,]/g, "")) / 100
+    return valueAsFloat
 }
+
 //Formatando um valor de crédito ou débito para R$
 export function formatValuePTBR(value) {
     const options = { minimumFractionDigits: 2 }
@@ -28,11 +30,10 @@ export function formatValuePTBR(value) {
 
 //Formatando todos os valores de créditos ou débitos para number
 export function formatBillingCycleISO(data) {
-    const dataCopy = structuredClone(data)
-    dataCopy.map((object) => {
-        object.value = formatValueISO(object.value)
-    })
-    return dataCopy
+    return data.map((transaction) => ({
+        ...transaction,
+        value: formatValueISO(transaction.value)
+    }))
 }
 
 //Formatando todos os valores de créditos ou débitos para R$
