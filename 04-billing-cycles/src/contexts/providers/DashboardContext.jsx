@@ -1,11 +1,13 @@
+import { queryCache } from "@/src/utils/client"
 import propTypes from "prop-types"
 import { createContext, useState } from "react"
 
 export const DashboardContext = createContext(null)
+const clientCache = queryCache()
 
-//Contexto utilizado para manter o resumo de créditos, débitos e saldo
+//Contexto utilizado para fornecer o resumo de créditos, débitos e saldo
 export default function DashboardProvider({ children }) {
-    const [dashboard, setDashboard] = useState({ data: null, isLoading: true, error: false })
+    const [dashboard, setDashboard] = useState({ data: {}, isLoading: true, error: false })
 
     return (
         <DashboardContext.Provider
@@ -13,7 +15,9 @@ export default function DashboardProvider({ children }) {
                 data: dashboard.data,
                 isLoading: dashboard.isLoading,
                 error: dashboard.error,
-                setDashboard
+                setDashboard,
+                clearSummaryCache: clientCache.removeItem,
+                getItemFromCache: clientCache.getItem
             }}
         >
             {children}

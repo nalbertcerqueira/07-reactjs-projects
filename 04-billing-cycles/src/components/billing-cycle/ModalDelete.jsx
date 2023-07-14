@@ -1,4 +1,5 @@
 import { BillingCyclesContext } from "@/src/contexts/providers/BillingCyclesContext"
+import { DashboardContext } from "@/src/contexts/providers/DashboardContext"
 import { FormContext } from "@/src/contexts/providers/FormContext"
 import { TabsContext } from "@/src/contexts/providers/TabsContext"
 import useFormActions from "@/src/hooks/useFormActions"
@@ -14,10 +15,12 @@ import WarningIcon from "../icons/modal/WarningIcon"
 //Componente utilizado na página billing-cycle.jsx durante a
 //exclusão de um ciclo de pagamentos
 export default function ModalDelete({ onSubmit, isSubmiting }) {
-    const { billingCyclesList, currentId } = useContext(BillingCyclesContext)
+    const { billingCyclesList, currentId, methods } = useContext(BillingCyclesContext)
+    const { clearSummaryCache } = useContext(DashboardContext)
     const { modalDelete } = useContext(ModalContext)
     const { formDispatch } = useContext(FormContext)
     const { tabsDispatch } = useContext(TabsContext)
+    const { clearBillingCycleCache } = methods
     const formActions = useFormActions(formDispatch)
     const tabsActions = useTabsActions(tabsDispatch)
 
@@ -28,6 +31,8 @@ export default function ModalDelete({ onSubmit, isSubmiting }) {
         modalDelete.changeState("hidden")
         tabsActions.resetTabs()
         formActions.resetForm()
+        clearSummaryCache("summary")
+        clearBillingCycleCache("billingCycleList")
     }
 
     return (

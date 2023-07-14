@@ -81,7 +81,7 @@ export default function useFormActions(dispatch) {
     function resetForm() {
         dispatch({ type: "RESET_FORM" })
     }
-    //Preenchendo todos os campos do formulário com base em data
+    //Preenchendo todos os campos do formulário com base nos dados recebidos
     function setAllFields(data) {
         dispatch({ type: "SET_ALL_FIELDS", payload: formatBillingCyclePTBR(data) })
     }

@@ -1,6 +1,7 @@
 import propTypes from "prop-types"
 import { useContext } from "react"
 
+import { DashboardContext } from "@/src/contexts/providers/DashboardContext"
 import { FormContext } from "@/src/contexts/providers/FormContext"
 import { TabsContext } from "@/src/contexts/providers/TabsContext"
 import useFormActions from "@/src/hooks/useFormActions"
@@ -13,6 +14,7 @@ import CreditList from "../credit-list/CreditList"
 import DebtList from "../debt-list/DebtList"
 import ValuesSummary from "./ValuesSummary"
 
+import { BillingCyclesContext } from "@/src/contexts/providers/BillingCyclesContext"
 import { formatBillingCycleISO, toastEmmitter } from "@/src/utils/client"
 
 //Componente utilizado para o cadastro de um novo ciclo de pagamentos
@@ -20,6 +22,9 @@ import { formatBillingCycleISO, toastEmmitter } from "@/src/utils/client"
 export default function FormCreate(props) {
     const { formState, formDispatch } = useContext(FormContext)
     const { tabsDispatch } = useContext(TabsContext)
+    const { clearSummaryCache } = useContext(DashboardContext)
+    const { methods } = useContext(BillingCyclesContext)
+    const { clearBillingCycleCache } = methods
     const formActions = useFormActions(formDispatch)
     const tabsActions = useTabsActions(tabsDispatch)
 
@@ -37,10 +42,12 @@ export default function FormCreate(props) {
         const { _id, name, month, year } = formState
         const credits = formatBillingCycleISO(formState.credits)
         const debts = formatBillingCycleISO(formState.debts)
-
         await props.onSubmit({ _id, name, month, year, credits, debts })
+
         formActions.resetForm()
         tabsActions.resetTabs()
+        clearSummaryCache("summary")
+        clearBillingCycleCache("billingCycleList")
     }
 
     return (

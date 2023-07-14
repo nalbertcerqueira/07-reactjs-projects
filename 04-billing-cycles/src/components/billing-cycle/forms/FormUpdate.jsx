@@ -1,6 +1,8 @@
 import propTypes from "prop-types"
 import { useContext } from "react"
 
+import { BillingCyclesContext } from "@/src/contexts/providers/BillingCyclesContext"
+import { DashboardContext } from "@/src/contexts/providers/DashboardContext"
 import { FormContext } from "@/src/contexts/providers/FormContext"
 import { TabsContext } from "@/src/contexts/providers/TabsContext"
 import useFormActions from "@/src/hooks/useFormActions"
@@ -18,8 +20,11 @@ import { formatBillingCycleISO, toastEmmitter } from "@/src/utils/client"
 //Componente utilizado para editar um ciclo de pagamentos
 //em billing-cycle.jsx
 export default function FormUpdate(props) {
+    const { clearSummaryCache } = useContext(DashboardContext)
     const { formState, formDispatch } = useContext(FormContext)
     const { tabsDispatch } = useContext(TabsContext)
+    const { methods } = useContext(BillingCyclesContext)
+    const { clearBillingCycleCache } = methods
     const formActions = useFormActions(formDispatch)
     const tabsActions = useTabsActions(tabsDispatch)
 
@@ -39,6 +44,8 @@ export default function FormUpdate(props) {
 
         tabsActions.resetTabs()
         formActions.resetForm()
+        clearSummaryCache("summary")
+        clearBillingCycleCache("billingCycleList")
     }
 
     return (

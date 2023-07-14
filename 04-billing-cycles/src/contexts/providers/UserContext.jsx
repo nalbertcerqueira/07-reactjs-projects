@@ -3,7 +3,6 @@ import propTypes from "prop-types"
 import { createContext, useEffect, useState } from "react"
 
 //Contexto utilizado em UserMenu.jsx para exibir o email e username do usuário
-
 export const UserContext = createContext(null)
 
 export default function UserProvider({ children }) {

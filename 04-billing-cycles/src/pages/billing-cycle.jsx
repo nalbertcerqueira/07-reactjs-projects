@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 
 import { BillingCyclesContext } from "../contexts/providers/BillingCyclesContext"
 import { ModalContext } from "../contexts/providers/ModalContext"
@@ -21,12 +21,35 @@ import AddIcon from "../components/icons/bylling-cycle/AddIcon"
 import DeleteIcon from "../components/icons/bylling-cycle/DeleteIcon"
 import EditIcon from "../components/icons/bylling-cycle/EditIcon"
 import ListIcon from "../components/icons/bylling-cycle/ListIcon"
+import { baseApiUrl } from "../utils/constants"
+
+async function fetchBillingCycleList() {
+    const res = await fetch(`${baseApiUrl}/api/billing-cycles`)
+    const data = await res.json()
+    if (!res.ok) {
+        throw new Error(JSON.stringify(data))
+    }
+    return data
+}
 
 BillingCycle.PageTemplate = AppTemplate
 export default function BillingCycle() {
     const { modalDelete } = useContext(ModalContext)
     const { methods } = useContext(BillingCyclesContext)
-    const { isSending, apiMethods } = useApi(methods.setBillingCycleList)
+    const { getItemFromCache, setBillingCycleList } = methods
+    const { isSending, apiMethods } = useApi(setBillingCycleList)
+
+    //Buscando a lista de ciclos da pagamentos no cache ou através de uma chamada de API
+    useEffect(() => {
+        getItemFromCache("billingCycleList", fetchBillingCycleList)
+            .then((data) => {
+                if (data) setBillingCycleList(data)
+            })
+            .catch((error) => {
+                console.log(error)
+                console.log(error.message)
+            })
+    }, [getItemFromCache, setBillingCycleList])
 
     return (
         <>

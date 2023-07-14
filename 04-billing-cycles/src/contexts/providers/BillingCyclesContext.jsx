@@ -1,9 +1,11 @@
+import { queryCache } from "@/src/utils/client"
 import propTypes from "prop-types"
 import { createContext, useState } from "react"
 
 export const BillingCyclesContext = createContext(null)
+const clientCache = queryCache()
 
-//Contexto responsável por manter o array de ciclos de pagamentos
+//Contexto utilizado para fornecer o array de ciclos de pagamentos
 export default function BillingCyclesProvider({ children }) {
     const [billingCyclesList, setBillingCycleList] = useState([])
     const [currentId, setCurrentId] = useState("")
@@ -13,7 +15,12 @@ export default function BillingCyclesProvider({ children }) {
             value={{
                 billingCyclesList,
                 currentId,
-                methods: { setBillingCycleList, setCurrentId }
+                methods: {
+                    setBillingCycleList,
+                    setCurrentId,
+                    clearBillingCycleCache: clientCache.removeItem,
+                    getItemFromCache: clientCache.getItem
+                }
             }}
         >
             {children}
