@@ -21,6 +21,7 @@ export default function CreditRow(props) {
                     type="text"
                     name="name"
                     placeholder="Informe o nome"
+                    autoComplete="off"
                     readOnly={props.readOnly}
                     value={props.name}
                     onChange={props.handleChange}
