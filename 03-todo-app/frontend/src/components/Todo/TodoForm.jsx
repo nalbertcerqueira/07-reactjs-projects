@@ -45,6 +45,8 @@ export default function TodoForm() {
                 <input
                     className={`form-container__input ${inputBorder}`}
                     type="text"
+                    name="description"
+                    id="description"
                     placeholder="Adicione uma tarefa"
                     onChange={methods.handleTaskInput}
                     value={taskInput}
