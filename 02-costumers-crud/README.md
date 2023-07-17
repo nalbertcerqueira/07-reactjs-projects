@@ -15,15 +15,6 @@ A CRUD foi desenvolvida em NextJS e TailwindCSS e permite a persistência de dad
    <img style="m" width="800px" src="https://user-images.githubusercontent.com/105606295/213928229-eb245c2f-00db-4300-b9af-816fca2904c3.png">
 </center>
 
-**O projeto conta com validações de envio de formulário tanto do lado do cliente, como do lado do servidor, como visto no screenshot abaixo:**
-
-<center>
-    <img
-        width="700px"
-        src="https://user-images.githubusercontent.com/105606295/214349812-7e702a4b-da0d-460b-88e5-7010215da051.png"
-    />
-</center>
-
 ## 🎮 Iniciando o projeto
 
 ```r
