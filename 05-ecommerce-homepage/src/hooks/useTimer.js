@@ -27,7 +27,7 @@ export default function useTimer(duration) {
                 min: Math.floor(hoursRest / (60 * 1000)),
                 sec: Math.floor(minutesRest / 1000)
             })
-        }, 800)
+        }, 1000)
     }
 
     return time
