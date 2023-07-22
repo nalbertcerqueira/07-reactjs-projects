@@ -5,7 +5,7 @@ import Timer from "../../Timer"
 export default function Deal() {
     //Terceira sessão (promoção atual) de <main></main>
     return (
-        <div className="deal">
+        <section className="deal">
             <div className="deal__inner-container">
                 <Timer duration={7 * 24 * 3600 * 1000} />
                 <h2 className="deal__title">promoção de fone gamer</h2>
@@ -16,6 +16,6 @@ export default function Deal() {
                     COMPRAR AGORA
                 </a>
             </div>
-        </div>
+        </section>
     )
 }
