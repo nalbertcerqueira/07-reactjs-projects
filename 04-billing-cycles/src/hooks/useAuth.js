@@ -113,7 +113,7 @@ export default function useAuth() {
         } else if (status === 200) {
             toast.success("Login bem sucedido!")
             setErrorMsgs(errorsInitialState)
-            return setTimeout(() => location.assign(basePath), 1500)
+            return setTimeout(() => location.assign(basePath), 1000)
         }
         return
     }
