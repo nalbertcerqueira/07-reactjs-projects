@@ -8,6 +8,16 @@ export function toastEmmitter({ message, success, id }) {
         return toast.error(message, { toastId: id || "failed", autoClose: 3000 })
     }
 }
+
+//Agrupando os erros vindos da API em uma única mensagem
+export function gatherErrors(errors) {
+    return errors
+        .reduce((acc, error) => {
+            return (acc += error[0].toUpperCase() + error.slice(1)) + " "
+        }, "")
+        .trim()
+}
+
 //Convertendo valores monetários para R$
 export function convertCurrency(value, locale = "pt-br", currency = "BRL") {
     return value.toLocaleString(locale, {
