@@ -51,5 +51,5 @@ async function handlePOST(req, res) {
 
     res.setHeader("Set-Cookie", [cookie.serialize("session_id", token, { ...cookieOptions })])
 
-    return res.status(200).json({ status: 200, message: "login bem sucedido!", jwt: token })
+    return res.status(200).json({ status: 200, message: "login bem sucedido!" })
 }
