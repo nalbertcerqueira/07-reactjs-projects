@@ -1,9 +1,11 @@
 import { useState } from "react"
-import { toastEmmitter } from "../utils/client"
+import { gatherErrors, toastEmmitter } from "../utils/client"
 import { baseApiUrl, defaultFailMessage } from "../utils/constants"
+import useAuth from "./useAuth"
 
 //Hook utilizado para expor o acesso à CRUD de ciclo de pagamentos
 export default function useApi(setter) {
+    const { methods: authMethods } = useAuth()
     const [isSending, setIsSending] = useState(false)
 
     //Funções utilizadas na CRUD de ciclo de pagamentos
@@ -17,16 +19,27 @@ export default function useApi(setter) {
             body: JSON.stringify(data || {}),
             headers: { "Content-Type": "application/json" }
         })
-            .then(async (response) => {
-                const data = await response.json()
-                if (!response.ok) throw new Error(JSON.stringify(data))
-                else toastEmmitter({ message: msg, success: true, id: toastId })
+            .then(async (res) => {
+                const data = await res.json()
+                if (res.status === 401) {
+                    setTimeout(async () => {
+                        await authMethods.logout()
+                        location.reload()
+                    }, 2000)
+                    throw new Error(defaultFailMessage)
+                }
+
+                if (!res.ok) {
+                    const errorMessage = gatherErrors(data.errors)
+                    throw new Error(errorMessage)
+                }
+
+                toastEmmitter({ message: msg, success: true, id: toastId })
             })
             .catch((error) => {
-                console.log(error)
                 console.log(error.message)
                 toastEmmitter({
-                    message: messages?.fail || defaultFailMessage,
+                    message: messages?.fail || error.message,
                     id: toastId
                 })
             })
@@ -45,13 +58,15 @@ export default function useApi(setter) {
         const url = `${baseApiUrl}/api/billing-cycles${queryString}`
 
         return fetch(url)
-            .then(async (response) => {
-                const data = await response.json()
-                if (!response.ok) throw new Error(data?.message || "Server internal error")
+            .then(async (res) => {
+                const data = await res.json()
+                if (!res.ok) {
+                    const errorMessage = gatherErrors(data.errors)
+                    throw new Error(errorMessage)
+                }
                 return setter(data)
             })
             .catch((error) => {
-                console.log(error)
                 console.log(error.message)
             })
     }
