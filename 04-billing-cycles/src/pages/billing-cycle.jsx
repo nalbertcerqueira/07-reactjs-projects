@@ -46,7 +46,6 @@ export default function BillingCycle() {
                 if (data) setBillingCycleList(data)
             })
             .catch((error) => {
-                console.log(error)
                 console.log(error.message)
             })
     }, [getItemFromCache, setBillingCycleList])
@@ -80,7 +79,7 @@ export default function BillingCycle() {
                             icon={<DeleteIcon className="tab-header-icon" />}
                         />
                     </ul>
-                    <div className="py-3 px-4 tabs-content">
+                    <div className="p-4 tabs-content">
                         <TabContent id="tabList">
                             <BillingCycleList />
                         </TabContent>

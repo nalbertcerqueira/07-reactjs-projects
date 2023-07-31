@@ -41,7 +41,6 @@ export default function Dashboard() {
             })
             .catch((error) => {
                 setDashboard((prevState) => ({ ...prevState, isLoading: false, error: true }))
-                console.log(error)
                 console.log(error.message)
             })
     }, [getItemFromCache, setDashboard])
