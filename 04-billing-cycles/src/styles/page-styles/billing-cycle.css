@@ -41,7 +41,7 @@
 }
 
 .tab-content.form-content {
-    @apply max-h-[80vh];
+    @apply max-h-[80vh] px-[0.125rem];
 }
 
 .tab-content.active {
