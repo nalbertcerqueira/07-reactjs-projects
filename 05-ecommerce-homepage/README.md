@@ -28,6 +28,6 @@ O projeto teve com objetivo, consolidar conhecimentos acerca do pre-processador 
 -   ReactJS
 -   SASS
 
-## 💵 Licença
+## 📝 Licença
 
-**O uso de todos os arquivos deste projeto é limitado apenas para fins de estudos.**
+MIT License © [LICENSE](./LICENSE)
