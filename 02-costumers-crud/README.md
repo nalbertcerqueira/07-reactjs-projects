@@ -33,6 +33,6 @@ A CRUD foi desenvolvida em NextJS e TailwindCSS e permite a persistência de dad
 -   NextJS
 -   TailwindCSS
 
-## 💵 Licença
+## 📝 Licença
 
-**O uso de todos os arquivos deste projeto é limitado apenas para fins de estudos.**
+MIT License © [LICENSE](./LICENSE)
