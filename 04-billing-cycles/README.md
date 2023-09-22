@@ -91,6 +91,6 @@ Dentro da aplicação, um ciclo de pagamentos é definido por uma série de cré
 -   React toastify
 -   Yup
 
-## 💵 Licença
+## 📝 Licença
 
-**O uso de todos os arquivos deste projeto é limitado apenas para fins de estudos.**
+MIT License © [LICENSE](./LICENSE)
