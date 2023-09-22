@@ -29,6 +29,6 @@ O design do projeto teve como inspiração o modelo de calculadora utilizado pel
 -   JavaScript
 -   ReactJS
 
-## 💵 Licença
+## 📝 Licença
 
-**O uso de todos os arquivos deste projeto é limitado apenas para fins de estudos.**
+MIT License © [LICENSE](./LICENSE)
