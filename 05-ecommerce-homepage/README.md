@@ -8,7 +8,7 @@
 
 ## 📋 Descrição
 
-Um Modelo de Homepage para E-commerce desenvolvida principalmente com ReactJS e SASS.
+Uma Homepage para E-commerce desenvolvida principalmente com ReactJS e SASS.
 O projeto teve com objetivo, consolidar conhecimentos acerca do pre-processador SASS, como também, conceitos relacionados à metodologia BEM e SMACSS para padronização do CSS.
 
 <img width="850px" src="https://user-images.githubusercontent.com/105606295/230748440-35deedeb-298a-454b-9de1-4ea084843b83.png">
