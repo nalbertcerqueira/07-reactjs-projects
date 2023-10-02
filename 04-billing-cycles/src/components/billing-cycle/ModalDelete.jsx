@@ -36,18 +36,20 @@ export default function ModalDelete({ onSubmit, isSubmiting }) {
     }
 
     return (
-        <div className="modal-overlay">
+        <div role="alert" className="modal-overlay">
             <div className="modal">
                 <div>
                     <WarningIcon className="m-auto" />
                 </div>
                 <div>
-                    <span
+                    <button
+                        type="button"
+                        aria-label="fechar modal"
                         className="absolute top-4 right-4 cursor-pointer"
                         onClick={() => modalDelete.changeState("hidden")}
                     >
                         <CloseIcon />
-                    </span>
+                    </button>
                 </div>
                 <div className="mb-6 text-center text-zinc-700">
                     <h2 className="font-medium mb-2 text-lg">Atenção!</h2>
@@ -57,6 +59,7 @@ export default function ModalDelete({ onSubmit, isSubmiting }) {
                 </div>
                 <div className="justify-end gap-3 flex text-base">
                     <Button
+                        ariaLabel="confirmar exclusão"
                         disabled={isSubmiting}
                         type="button"
                         onClick={confirmModal}
@@ -65,6 +68,7 @@ export default function ModalDelete({ onSubmit, isSubmiting }) {
                         {isSubmiting ? "Excluindo..." : "Excluir"}
                     </Button>
                     <Button
+                        ariaLabel="cancelar exclusão"
                         type="button"
                         onClick={() => modalDelete.changeState("hidden")}
                         className="clear-form-button m-0"
