@@ -7,6 +7,8 @@ export default function UserIcon({ className, stroke }) {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
                 strokeWidth={1.5}
                 className={`${stroke || "w-6 h-6"}`}
             >

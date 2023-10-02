@@ -6,6 +6,8 @@ export default function WarningIcon(props) {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
             strokeWidth={1}
             className={`w-14 h-14 stroke-red-500 ${props.className}`}
         >

@@ -6,6 +6,8 @@ export default function BankIcon({ stroke, className }) {
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
+                aria-hidden="true"
+                focusable="false"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 className={`${stroke || "w-6 h-6"}`}
