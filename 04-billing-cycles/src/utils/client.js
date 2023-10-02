@@ -5,7 +5,7 @@ export function toastEmmitter({ message, success, id }) {
     if (success) {
         return toast.success(message, { toastId: id || "success", autoClose: 3000 })
     } else {
-        return toast.error(message, { toastId: id || "failed", autoClose: 3000 })
+        return toast.error(message, { toastId: id || "failed", autoClose: 3000, role: "none" })
     }
 }
 
