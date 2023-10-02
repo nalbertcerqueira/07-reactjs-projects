@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { toast } from "react-toastify"
 import { baseApiUrl, basePath } from "../utils/constants"
+import { toastEmmitter } from "../utils/client"
 
 const errorsInitialState = { username: "", email: "", password: "", confirmPassword: "" }
 const userInitialState = { username: "", email: "", password: "", confirmPassword: "" }
@@ -78,8 +78,10 @@ export default function useAuth() {
             .catch((error) => {
                 resetForm()
                 setIsSubmiting(false)
-                toast.error("Desculpe, ocorreu um erro interno no servidor.", {
-                    toastId: "login-failed-500"
+                toastEmmitter({
+                    message: "Desculpe, ocorreu um erro interno no servidor.",
+                    success: false,
+                    id: "login-failed-500"
                 })
                 console.log(error.message)
             })
@@ -101,17 +103,21 @@ export default function useAuth() {
                 email: "",
                 password: "Email e/ou senha inválido(s)."
             })
-            return toast.error("Email e/ou senha inválidos!", {
-                toastId: "login-failed-400"
+            return toastEmmitter({
+                message: "Email e/ou senha inválidos!",
+                success: false,
+                id: "login-failed-400"
             })
         } else if (status >= 500) {
             setIsSubmiting(false)
             resetForm()
-            return toast.error("Desculpe, ocorreu um erro interno no servidor.", {
-                toastId: "login-failed-500"
+            return toastEmmitter({
+                message: "Desculpe, ocorreu um erro interno no servidor.",
+                success: false,
+                id: "login-failed-500"
             })
         } else if (status === 200) {
-            toast.success("Login bem sucedido!")
+            toastEmmitter({ message: "Login bem sucedido!", success: true })
             setErrorMsgs(errorsInitialState)
             return setTimeout(() => location.assign(basePath), 1000)
         }
@@ -127,37 +133,51 @@ export default function useAuth() {
         event.preventDefault()
 
         if (!validateInputs()) {
-            return toast.error(toastMsgs.inputValidationFailed, { toastId: "submit-failed" })
+            return toastEmmitter({
+                message: toastMsgs.inputValidationFailed,
+                success: false,
+                id: "submit-failed"
+            })
         }
 
         setIsSubmiting(true)
         const status = await submit(trimUser, "api/signup")
         switch (status) {
             case 200:
-                toast.success(toastMsgs[200])
+                toastEmmitter({ message: toastMsgs[200], success: true })
                 return setTimeout(() => location.assign(`${basePath}login`), 2000)
-
             case 400:
                 setFlags({ ...flagsInitialState, confirmPassword: false })
                 setErrorMsgs({
                     ...errorsInitialState,
                     confirmPassword: "As senhas não conferem."
                 })
-                toast.error(toastMsgs[400], { toastId: "signup-failed-400" })
+                toastEmmitter({
+                    message: toastMsgs[400],
+                    success: false,
+                    id: "signup-failed-400"
+                })
                 break
-
             case 500:
-                ;[setFlags(flagsInitialState), setErrorMsgs(errorsInitialState)]
-                toast.error(toastMsgs[500], { toastId: "signup-failed-500" })
+                setFlags(flagsInitialState)
+                setErrorMsgs(errorsInitialState)
+                toastEmmitter({
+                    message: toastMsgs[500],
+                    success: false,
+                    id: "signup-failed-500"
+                })
                 break
-
             case 409:
                 setFlags({ ...flagsInitialState, email: false })
                 setErrorMsgs({
                     ...errorsInitialState,
-                    email: "Este email ja possui um registro em nosso sistema."
+                    email: "Este email já possui um registro em nosso sistema."
                 })
-                toast.error(toastMsgs[409], { toastId: "signup-failed-409" })
+                toastEmmitter({
+                    message: toastMsgs[409],
+                    success: false,
+                    id: "signup-failed-409"
+                })
                 break
             default:
                 break
