@@ -66,7 +66,7 @@ export default function FormCreate(props) {
                     {!formState.validations.name && (
                         <ValidationMsg
                             className="mt-1"
-                            message="O nome deve ter no mínimo 4 caracteres."
+                            message={<span>O nome deve ter no mínimo 4 caracteres.</span>}
                         />
                     )}
                 </div>
@@ -81,7 +81,10 @@ export default function FormCreate(props) {
                         onChange={formActions.handleFieldChange}
                     />
                     {!formState.validations.month && (
-                        <ValidationMsg className="mt-1" message="Apenas valores entre 1 e 12." />
+                        <ValidationMsg
+                            className="mt-1"
+                            message={<span>Apenas valores entre 1 e 12.</span>}
+                        />
                     )}
                 </div>
                 <div className="w-full md:w-2/4">
@@ -97,7 +100,7 @@ export default function FormCreate(props) {
                     {!formState.validations.year && (
                         <ValidationMsg
                             className="mt-1"
-                            message="Apenas valores entre 1970 e 2100."
+                            message={<span>Apenas valores entre 1970 e 2100.</span>}
                         />
                     )}
                 </div>
@@ -114,6 +117,7 @@ export default function FormCreate(props) {
                     {props.isSubmiting ? "Enviando" : "Enviar"}
                 </Button>
                 <Button
+                    ariaLabel="limpar erros"
                     onClick={formActions.clearErrors}
                     className="animate-[show_0.1s_forwards] clear-form-button"
                     type="button"

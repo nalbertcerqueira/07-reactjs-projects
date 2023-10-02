@@ -4,6 +4,7 @@ export default function Button(props) {
     if (props.isFormValid) return null
     return (
         <button
+            aria-label={props.ariaLabel || null}
             disabled={props.disabled}
             className={props.className}
             onClick={props.onClick}
@@ -14,6 +15,7 @@ export default function Button(props) {
     )
 }
 Button.propTypes = {
+    ariaLabel: propTypes.string,
     disabled: propTypes.bool,
     children: propTypes.node,
     onClick: propTypes.func,

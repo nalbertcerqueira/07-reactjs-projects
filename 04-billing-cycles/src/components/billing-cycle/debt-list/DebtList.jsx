@@ -36,8 +36,8 @@ export default function DebtList({ fieldLegend, debts, readOnly }) {
     function renderValidationMsg() {
         return (
             <ValidationMsg className="px-2 mb-3">
-                <div>O nome do débito deve ter no mínimo 4 caracteres.</div>
-                <div>O valor do débito não pode está em branco.</div>
+                <span>O nome do débito deve ter no mínimo 4 caracteres.</span>
+                <span>O valor do débito não pode está em branco.</span>
             </ValidationMsg>
         )
     }

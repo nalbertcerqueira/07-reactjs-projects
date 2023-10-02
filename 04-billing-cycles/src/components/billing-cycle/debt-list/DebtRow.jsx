@@ -58,6 +58,7 @@ export default function DebtRow(props) {
             </td>
             <td className="flex justify-center gap-2 px-2 py-3">
                 <Button
+                    ariaLabel="adicionar novo débito"
                     className="add-button"
                     type="button"
                     onClick={() => {
@@ -67,6 +68,7 @@ export default function DebtRow(props) {
                     <AddIcon className="stroke-white" />
                 </Button>
                 <Button
+                    ariaLabel="adicionar novo débito com base no atual"
                     className="copy-button"
                     type="button"
                     onClick={() => {
@@ -76,6 +78,7 @@ export default function DebtRow(props) {
                     <CopyIcon className="stroke-white" />
                 </Button>
                 <Button
+                    ariaLabel="excluir débito"
                     className="delete-button"
                     type="button"
                     onClick={() => {

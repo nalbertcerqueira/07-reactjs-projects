@@ -25,6 +25,7 @@ export default function BillingCycleList() {
         return (
             <div className="flex items-center justify-end gap-2">
                 <Button
+                    ariaLabel={`editar ciclo de pagamentos: ${currentBillingCycle.name}`}
                     className="update-button"
                     type="button"
                     onClick={() => {
@@ -36,6 +37,7 @@ export default function BillingCycleList() {
                     <EditIcon className="stroke-white w-5 h-5" />
                 </Button>
                 <Button
+                    ariaLabel={`excluir ciclo de pagamentos: ${currentBillingCycle.name}`}
                     className="delete-button"
                     type="button"
                     onClick={() => {

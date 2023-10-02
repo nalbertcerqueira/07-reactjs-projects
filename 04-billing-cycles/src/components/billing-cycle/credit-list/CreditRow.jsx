@@ -44,6 +44,7 @@ export default function CreditRow(props) {
             </td>
             <td className="flex justify-center gap-2 px-2 py-3">
                 <Button
+                    ariaLabel="adicionar novo crédito"
                     disabled={props.readOnly}
                     type="button"
                     className="add-button"
@@ -54,6 +55,7 @@ export default function CreditRow(props) {
                     <AddIcon className="stroke-white" />
                 </Button>
                 <Button
+                    ariaLabel="adicionar novo crédito com base no atual"
                     disabled={props.readOnly}
                     className="copy-button"
                     type="button"
@@ -64,6 +66,7 @@ export default function CreditRow(props) {
                     <CopyIcon className="stroke-white" />
                 </Button>
                 <Button
+                    ariaLabel="excluir crédito"
                     disabled={props.readOnly}
                     className="delete-button"
                     type="button"
