@@ -59,21 +59,25 @@ export default function BillingCycle() {
                 <div className="rounded-md overflow-hidden shadow-base bg-slate-100">
                     <ul className="tabs-header">
                         <TabHeader
+                            ariaLabel="sessão - lista de ciclos de pagamentos"
                             label="Listar"
                             target="tabList"
                             icon={<ListIcon className="tab-header-icon" />}
                         />
                         <TabHeader
+                            ariaLabel="sessão - adicionar novo ciclo de pagamentos"
                             label="Incluir"
                             target="tabCreate"
                             icon={<AddIcon className="tab-header-icon" />}
                         />
                         <TabHeader
+                            ariaLabel="sessão - alterar ciclo de pagamentos"
                             label="Alterar"
                             target="tabUpdate"
                             icon={<EditIcon className="tab-header-icon w-4 h-4" />}
                         />
                         <TabHeader
+                            ariaLabel="sessão - excluir ciclo de pagamentos"
                             label="Excluir"
                             target="tabDelete"
                             icon={<DeleteIcon className="tab-header-icon" />}

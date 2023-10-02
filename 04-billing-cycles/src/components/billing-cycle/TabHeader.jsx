@@ -6,7 +6,7 @@ import useTabsActions from "@/src/hooks/useTabsActions"
 import If from "../common/Conditional"
 
 //Componente utilizado na página billing-cycle.jsx
-export default function TabHeader({ icon, label, className, target }) {
+export default function TabHeader({ icon, label, className, target, ariaLabel }) {
     const { tabsState, tabsDispatch } = useContext(TabsContext)
     const { changeCurrentTab } = useTabsActions(tabsDispatch)
     const tabHeaderActive = tabsState.currentTab === target ? "active" : ""
@@ -15,6 +15,7 @@ export default function TabHeader({ icon, label, className, target }) {
         <If condition={tabsState.visibleTabs.includes(target)}>
             <li className={`tab-header ${className || ""} ${tabHeaderActive}`}>
                 <button
+                    aria-label={ariaLabel || null}
                     onClick={() => changeCurrentTab(target)}
                     data-toggle="tab"
                     data-target={target}
@@ -31,6 +32,7 @@ export default function TabHeader({ icon, label, className, target }) {
 TabHeader.propTypes = {
     icon: propTypes.node,
     label: propTypes.string,
+    ariaLabel: propTypes.string,
     className: propTypes.string,
     target: propTypes.oneOfType([propTypes.string, propTypes.number])
 }
