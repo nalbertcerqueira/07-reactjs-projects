@@ -57,6 +57,7 @@ export default function FormCreate(props) {
                     <Input
                         placeholder="Ciclo de pagamento"
                         value={formState.name}
+                        ariaInvalid={!formState.validations.name}
                         id="name"
                         name="name"
                         type="text"
@@ -73,6 +74,7 @@ export default function FormCreate(props) {
                     <Input
                         placeholder="Mês de ocorrência"
                         value={formState.month}
+                        ariaInvalid={!formState.validations.month}
                         id="month"
                         name="month"
                         type="tel"
@@ -89,6 +91,7 @@ export default function FormCreate(props) {
                     <Input
                         placeholder="Ano de ocorrência"
                         value={formState.year}
+                        ariaInvalid={!formState.validations.year}
                         id="year"
                         name="year"
                         type="tel"

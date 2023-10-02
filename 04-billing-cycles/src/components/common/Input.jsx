@@ -13,6 +13,7 @@ export default function Input(props) {
             )}
             <div className="relative">
                 <input
+                    aria-invalid={props.ariaInvalid}
                     readOnly={props.readOnly || false}
                     placeholder={props.placeholder}
                     onChange={props.onChange}
@@ -39,6 +40,7 @@ Input.propTypes = {
     readOnly: propTypes.bool,
     autoComplete: propTypes.string,
     label: propTypes.string,
+    ariaInvalid: propTypes.bool,
     labelClassName: propTypes.string,
     icon: propTypes.node
 }

@@ -26,6 +26,7 @@ export default function DebtRow(props) {
                     value={props.name}
                     onChange={props.handleChange}
                     id={`${props.id}-debt-name`}
+                    ariaInvalid={!isValueValid}
                     className={`debt ${!isNameValid ? "input-invalid" : ""}`}
                 />
             </td>
@@ -39,6 +40,7 @@ export default function DebtRow(props) {
                     value={props.value}
                     onChange={props.handleChange}
                     id={`${props.id}-debt-value`}
+                    ariaInvalid={!isValueValid}
                     className={`debt ${!isValueValid ? "input-invalid" : ""}`}
                 />
             </td>

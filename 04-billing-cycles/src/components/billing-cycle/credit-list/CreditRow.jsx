@@ -26,6 +26,7 @@ export default function CreditRow(props) {
                     value={props.name}
                     onChange={props.handleChange}
                     id={`${props.id}-credit-name`}
+                    ariaInvalid={!isNameValid}
                     className={`credit ${!isNameValid ? "input-invalid" : ""}`}
                 />
             </td>
@@ -39,6 +40,7 @@ export default function CreditRow(props) {
                     value={props.value}
                     onChange={props.handleChange}
                     id={`${props.id}-credit-value`}
+                    ariaInvalid={!isValueValid}
                     className={`credit ${!isValueValid ? "input-invalid" : ""}`}
                 />
             </td>
