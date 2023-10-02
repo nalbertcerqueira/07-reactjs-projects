@@ -62,10 +62,9 @@ export default function FormUpdate(props) {
                         onChange={formActions.handleFieldChange}
                     />
                     {!formState.validations.name && (
-                        <ValidationMsg
-                            className="mt-1"
-                            message="O nome deve ter no mínimo 4 caracteres."
-                        />
+                        <ValidationMsg className="mt-1">
+                            <span>O nome deve ter no mínimo 4 caracteres.</span>
+                        </ValidationMsg>
                     )}
                 </div>
                 <div className="w-full md:w-2/4">
@@ -79,7 +78,9 @@ export default function FormUpdate(props) {
                         onChange={formActions.handleFieldChange}
                     />
                     {!formState.validations.month && (
-                        <ValidationMsg className="mt-1" message="Apenas valores entre 1 e 12." />
+                        <ValidationMsg className="mt-1">
+                            <span>O mês deve ser um valor entre 1 e 12.</span>
+                        </ValidationMsg>
                     )}
                 </div>
                 <div className="w-full md:w-2/4">
@@ -93,10 +94,9 @@ export default function FormUpdate(props) {
                         onChange={formActions.handleFieldChange}
                     />
                     {!formState.validations.year && (
-                        <ValidationMsg
-                            className="mt-1"
-                            message="Apenas valores entre 1970 e 2100."
-                        />
+                        <ValidationMsg className="mt-1">
+                            <span>O ano deve ser um valor entre 1970 e 2100.</span>
+                        </ValidationMsg>
                     )}
                 </div>
             </div>

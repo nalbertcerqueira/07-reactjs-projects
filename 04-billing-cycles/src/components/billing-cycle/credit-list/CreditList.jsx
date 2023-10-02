@@ -35,8 +35,8 @@ export default function CreditList({ fieldLegend, credits, readOnly = false }) {
     function renderValidationMsg() {
         return (
             <ValidationMsg className="px-2 mb-3">
-                <span>O nome do crédito deve ter no mínimo 4 caracteres.</span>
-                <span>O valor do crédito não pode está em branco.</span>
+                <p>O nome do crédito deve ter no mínimo 4 caracteres.</p>
+                <p>O valor do crédito não pode está em branco.</p>
             </ValidationMsg>
         )
     }
