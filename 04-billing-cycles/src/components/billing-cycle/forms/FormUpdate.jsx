@@ -115,7 +115,6 @@ export default function FormUpdate(props) {
                     {props.isSubmiting ? "Salvando..." : "Salvar"}
                 </Button>
                 <Button
-                    ariaLabel="limpar erros"
                     className="clear-form-button"
                     type="button"
                     onClick={() => {
