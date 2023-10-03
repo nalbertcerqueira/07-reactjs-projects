@@ -14,6 +14,7 @@ export default function MenuTree({ children, className, icon, label }) {
     return (
         <li className={`menu-tree ${treeActive ? "active" : ""}`}>
             <button
+                aria-expanded={treeActive ? "true" : "false"}
                 type="button"
                 onClick={() => setTreeActive((prevState) => (prevState ? false : true))}
                 className={`group/icon link ${className || ""}`}
