@@ -1,5 +1,5 @@
 import propTypes from "prop-types"
-import { Children, cloneElement, useState } from "react"
+import { Children, cloneElement, useId, useState } from "react"
 
 import LeftIcon from "../icons/menu/LeftIcon"
 
@@ -7,6 +7,7 @@ import LeftIcon from "../icons/menu/LeftIcon"
 export default function MenuTree({ children, className, icon, label }) {
     const [treeActive, setTreeActive] = useState(false)
     const tabIndex = treeActive ? 0 : -1
+    const menuId = `${useId()}${label.toLowerCase()}`
     const childrenWithProps = Children.map(children, (child, index) => {
         return cloneElement(child, { tabIndex: tabIndex, key: index }, null)
     })
@@ -15,6 +16,7 @@ export default function MenuTree({ children, className, icon, label }) {
         <li className={`menu-tree ${treeActive ? "active" : ""}`}>
             <button
                 aria-expanded={treeActive ? "true" : "false"}
+                aria-controls={menuId}
                 type="button"
                 onClick={() => setTreeActive((prevState) => (prevState ? false : true))}
                 className={`group/icon link ${className || ""}`}
@@ -28,7 +30,7 @@ export default function MenuTree({ children, className, icon, label }) {
                     />
                 </span>
             </button>
-            <ul>{childrenWithProps}</ul>
+            <ul id={menuId}>{childrenWithProps}</ul>
         </li>
     )
 }
