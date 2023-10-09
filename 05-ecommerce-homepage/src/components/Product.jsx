@@ -24,6 +24,8 @@ export default function Product(props) {
                 className="product__img"
                 src={props.srcImg}
                 alt={props.productAlt}
+                height={props.imgHeight}
+                width={props.imgWidth}
             />
             <div className="product__info">
                 <p className="product__category">{props.category}</p>
@@ -40,6 +42,8 @@ export default function Product(props) {
 Product.propTypes = {
     productAlt: propTypes.string,
     srcImg: propTypes.string,
+    imgHeight: propTypes.number,
+    imgWidth: propTypes.number,
     category: propTypes.string,
     name: propTypes.string,
     price: propTypes.number,
