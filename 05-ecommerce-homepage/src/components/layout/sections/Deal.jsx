@@ -3,7 +3,7 @@ import Timer from "../../Timer"
 
 //Componente utilizado em App.jsx
 export default function Deal() {
-    //Terceira sessão (promoção atual) de <main></main>
+    //Terceira sessão (promoção atual)
     return (
         <section className="deal">
             <div className="deal__inner-container">

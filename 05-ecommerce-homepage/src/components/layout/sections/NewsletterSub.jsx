@@ -3,7 +3,7 @@ import React from "react"
 
 //Componente utilizado em App.jsx
 export default function Newsletter() {
-    //Quinta sessão (assinatura de newsletter) de <main></main>
+    //Quinta sessão (assinatura de newsletter)
     return (
         <section className="newsletter">
             <div className="newsletter__inner">
