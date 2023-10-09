@@ -7,54 +7,69 @@ import Prod6 from "/img/prod-6.webp"
 import Prod7 from "/img/prod-7.webp"
 import Prod8 from "/img/prod-8.webp"
 
+const commonFields = {
+    name: "nome do produto",
+    price: 124.9,
+    category: "categoria",
+    productAlt: "descrição do produto",
+    label: "HOT",
+    labelSolid: false
+}
+
+const products = [
+    {
+        ...commonFields,
+        srcImg: Prod5,
+        imgWidth: 1000,
+        imgHeight: 1000,
+        starRating: 5
+    },
+    {
+        ...commonFields,
+        srcImg: Prod6,
+        imgWidth: 1000,
+        imgHeight: 1000,
+        starRating: 4
+    },
+    {
+        ...commonFields,
+        srcImg: Prod7,
+        imgWidth: 1000,
+        imgHeight: 1000,
+        starRating: 5
+    },
+    {
+        ...commonFields,
+        srcImg: Prod8,
+        imgWidth: 1000,
+        imgHeight: 1000,
+        starRating: 4
+    }
+]
+
 //Componente utilizado em App.jsx
 export default function HotProducts() {
-    //Quarta sessão (produtos mais vendidos) de <main></main>
+    //Quarta sessão (produtos mais vendidos)
     return (
         <section className="products">
             <div className="products__inner">
                 <h2 className="products__title">MAIS VENDIDOS</h2>
                 <div className="products__grid">
-                    <Product
-                        name="nome do produto"
-                        price={124.9}
-                        category="categoria"
-                        srcImg={Prod5}
-                        productAlt="descrição do produto"
-                        starRating={4}
-                        label="HOT"
-                        labelSolid={false}
-                    />
-                    <Product
-                        name="nome do produto"
-                        price={124.9}
-                        category="categoria"
-                        srcImg={Prod6}
-                        productAlt="descrição do produto"
-                        starRating={5}
-                        label="HOT"
-                        labelSolid={false}
-                    />
-                    <Product
-                        name="nome do produto"
-                        price={124.9}
-                        category="categoria"
-                        srcImg={Prod7}
-                        productAlt="descrição do produto"
-                        starRating={4}
-                        label="HOT"
-                        labelSolid={false}
-                    />
-                    <Product
-                        name="nome do produto"
-                        price={124.9}
-                        category="categoria"
-                        srcImg={Prod8}
-                        productAlt="descrição do produto"
-                        starRating={5}
-                        label="HOT"
-                        labelSolid={false}
-                    />
+                    {products.map((product, i) => (
+                        <Product
+                            key={i}
+                            name={product.name}
+                            price={product.price}
+                            category={product.category}
+                            srcImg={product.srcImg}
+                            imgWidth={product.imgWidth}
+                            imgHeight={product.imgHeight}
+                            productAlt={product.productAlt}
+                            starRating={product.starRating}
+                            label={product.label}
+                            labelSolid={product.labelSolid}
+                        />
+                    ))}
                 </div>
             </div>
         </section>
