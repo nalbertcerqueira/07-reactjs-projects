@@ -24,7 +24,7 @@ async function handleGET(req, res) {
     const { session_id } = req.cookies
     const { id: userId } = decodeJwt(session_id)
     const { id: billingCycleId } = req.query
-    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
+    const billingCycleCollection = mongoClient.db.collection("billingCycles")
 
     //Validando o id do ciclo de pagamentos
     try {
@@ -58,7 +58,7 @@ async function handlePUT(req, res) {
     const { session_id } = req.cookies
     const { id: userId } = decodeJwt(session_id)
     const { id: billingCycleId } = req.query
-    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
+    const billingCycleCollection = mongoClient.db.collection("billingCycles")
 
     //Validando o id do ciclo de pagamentos
     try {
@@ -103,7 +103,7 @@ async function handleDELETE(req, res) {
     const { session_id } = req.cookies
     const { id: userId } = decodeJwt(session_id)
     const { id: billingCycleId } = req.query
-    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
+    const billingCycleCollection = mongoClient.db.collection("billingCycles")
 
     //Validando o id do ciclo de pagamentos
     try {

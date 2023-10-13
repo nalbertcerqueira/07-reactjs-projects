@@ -20,7 +20,7 @@ async function handlePOST(req, res) {
 
     const { session_id } = req.cookies
     const { id } = decodeJwt(session_id)
-    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
+    const billingCycleCollection = mongoClient.db.collection("billingCycles")
     const newBillingCycle = new BillingCycle({ userId: id, ...req.body })
 
     try {
@@ -48,7 +48,7 @@ async function handleGET(req, res) {
     const { page, limit } = req.query
     const { session_id } = req.cookies
     const { id } = decodeJwt(session_id)
-    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
+    const billingCycleCollection = mongoClient.db.collection("billingCycles")
 
     //Determinando o índice inicial e final para filtrar os dados
     //com base na paginação

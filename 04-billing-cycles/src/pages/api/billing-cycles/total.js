@@ -15,7 +15,7 @@ async function handleGET(req, res) {
 
     const { session_id } = req.cookies
     const { id: userId } = decodeJwt(session_id)
-    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
+    const billingCycleCollection = mongoClient.db.collection("billingCycles")
 
     try {
         const count = await billingCycleCollection.countDocuments({ userId: userId })

@@ -39,4 +39,4 @@ class DBClient {
     }
 }
 
-export const mongoClient = new DBClient(process.env.DB_URL, "billing-cycle-app")
+export const mongoClient = new DBClient(process.env.DB_URL, "billingCycleApp")

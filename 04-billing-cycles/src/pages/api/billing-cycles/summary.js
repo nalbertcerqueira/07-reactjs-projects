@@ -18,7 +18,7 @@ async function handleGET(req, res) {
     const { sort_by, value } = req.query
     const { session_id } = req.cookies
     const { id: userId } = decodeJwt(session_id)
-    const billingCycleCollection = mongoClient.db.collection("billing-cycles")
+    const billingCycleCollection = mongoClient.db.collection("billingCycles")
 
     //Pipeline para obtenção do somatório de créditos e somatório de débitos
     //de um usuário.
