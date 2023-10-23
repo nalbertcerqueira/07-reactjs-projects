@@ -6,7 +6,7 @@ export class User {
     }
 }
 
-//Esquema utilizado dentro do mongodb cloud, e configurado através do mongoDBCompass.
+//Esquema de validação de dados para a coleção 'users'.
 export const UserDBSchema = {
     $jsonSchema: {
         bsonType: "object",

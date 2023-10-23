@@ -1,4 +1,6 @@
 import { MongoClient } from "mongodb"
+import { UserDBSchema } from "@/src/server/schemas/db/user"
+import { BillingCycleDBSchema } from "@/src/server/schemas/db/billing-cycle"
 
 class DBClient {
     #isConnected = false
@@ -6,6 +8,11 @@ class DBClient {
     constructor(url, dbName) {
         this.client = new MongoClient(url)
         this.db = this.client.db(dbName)
+    }
+
+    clearListeners() {
+        this.client.removeAllListeners("connectionCreated")
+        this.client.removeAllListeners("connectionClosed")
     }
 
     async connect() {
@@ -22,6 +29,7 @@ class DBClient {
         try {
             if (!this.#isConnected) {
                 await this.client.connect()
+                await this.createCollections()
                 this.#isConnected = true
             }
         } catch (error) {
@@ -33,9 +41,15 @@ class DBClient {
         }
     }
 
-    clearListeners() {
-        this.client.removeAllListeners("connectionCreated")
-        this.client.removeAllListeners("connectionClosed")
+    async createCollections() {
+        try {
+            await Promise.all([
+                this.db.createCollection("users", { validator: UserDBSchema }),
+                this.db.createCollection("billingCycles", { validator: BillingCycleDBSchema })
+            ])
+        } catch {
+            null
+        }
     }
 }
 

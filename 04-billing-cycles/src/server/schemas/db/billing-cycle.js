@@ -23,7 +23,7 @@ const debitDBSchema = {
     }
 }
 
-//Esquema utilizado dentro do mongodb cloud, e configurado através do mongoDBCompass.
+//Esquema de validação de dados para a coleção 'billingCycles'.
 export const BillingCycleDBSchema = {
     $jsonSchema: {
         bsonType: "object",
