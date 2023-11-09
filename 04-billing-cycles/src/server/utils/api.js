@@ -13,7 +13,7 @@ export async function generateJWT(payload, secret, duration) {
 
 //Verificador de JWTs
 export async function verifyJWT(jwt, secret) {
-    return jwtVerify(jwt, new TextEncoder().encode(secret))
+    return jwtVerify(jwt, new TextEncoder().encode(secret), { algorithms: ["HS256"] })
 }
 
 export const cookieOptions = {
